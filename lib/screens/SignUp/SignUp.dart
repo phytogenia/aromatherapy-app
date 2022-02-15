@@ -65,21 +65,67 @@ class SignUp extends StatelessWidget {
                 elevation: 15,
                 color: Colors.white,
                 child: Column(
-                  children: [
-                    Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/logo.png')),
-                    )),
-
-                  ],
+                  children: [],
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(40.0),
                 ),
               )),
+
+          Positioned(
+              top: -250,
+              right: 20,
+              left: 20,
+              bottom: 100,
+              child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/logo_login.png')),
+              ))),
+          Positioned(
+              top: -250,
+              right: 20,
+              left: 20,
+              bottom: 100,
+              child: Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/logo_login.png')),
+                  ))),
+
+          Positioned(
+              top: 460,
+              right: 120,
+              left: 120,
+              bottom: 270,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0XFF61BB46), // background
+                  onPrimary: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40.0),
+                  ),
+                  // foreground
+                ),
+                onPressed: () { },
+                child: const Text('Sign in',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              )),
+          Positioned(
+              top: 460,
+              right: 120,
+              left: 120,
+              bottom: 270,
+              child:
+
+          ),
+
+
         ],
       ),
     );
   }
 }
+
+
