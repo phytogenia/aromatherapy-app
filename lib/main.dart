@@ -1,6 +1,7 @@
-import 'package:aromatherapy_vtest_app/routes.dart';
-import 'package:aromatherapy_vtest_app/screens/Splash/splash_screen.dart';
-import 'package:aromatherapy_vtest_app/theme.dart';
+
+import 'package:aromatherapy/routes.dart';
+import 'package:aromatherapy/screens/Splash/splash_screen.dart';
+import 'package:aromatherapy/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

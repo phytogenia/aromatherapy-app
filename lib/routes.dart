@@ -1,4 +1,4 @@
-import 'package:aromatherapy_vtest_app/screens/Splash/splash_screen.dart';
+import 'package:aromatherapy/screens/Splash/splash_screen.dart';
 import 'package:flutter/widgets.dart';
 
 

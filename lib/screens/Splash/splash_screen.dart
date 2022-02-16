@@ -1,9 +1,11 @@
 import 'dart:async';
 
-import 'package:aromatherapy_vtest_app/screens/SignUp/SignUp.dart';
-import 'package:aromatherapy_vtest_app/size_config.dart';
+
+import 'package:aromatherapy/screens/Login/Login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+
+import '../../size_config.dart';
 
 class SplashScreen extends StatelessWidget {
   static String routeName = "/splash";
@@ -30,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ()=>Navigator.pushReplacement(context,
             MaterialPageRoute(builder:
                 (context) =>
-                 SignUp()
+                LoginScreen()
             )
         )
     );

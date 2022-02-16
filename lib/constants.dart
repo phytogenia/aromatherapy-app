@@ -1,4 +1,4 @@
-import 'package:aromatherapy_vtest_app/size_config.dart';
+import 'package:aromatherapy/size_config.dart';
 import 'package:flutter/material.dart';
 
 const kPrimaryColor = Color(0xFFF8C031);
