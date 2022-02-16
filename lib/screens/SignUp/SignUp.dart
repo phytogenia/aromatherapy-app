@@ -112,15 +112,47 @@ class SignUp extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               )),
+
           Positioned(
-              top: 460,
-              right: 120,
-              left: 120,
-              bottom: 270,
-              child:
+              top: 270,
+              right: 80,
+              left: 80,
+              bottom: 480,
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Enter your Email',
+                ),
+              ),),
 
-          ),
+          Positioned(
+            top: 320,
+            right: 80,
+            left: 80,
+            bottom: 430,
+            child: TextFormField(
+              obscureText: true,
+              decoration: const InputDecoration(
+                border: UnderlineInputBorder(),
+                labelText: 'Enter your Password',
+              ),
 
+
+            ),),
+
+          Positioned(
+            top: 400,
+            right: 60,
+            left: 150,
+            bottom: 350,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 15),
+
+              ),
+              onPressed: () {},
+              child: const Text('Forgot your password ?',style: TextStyle(color: Color(0XFF61BB46)),),
+            ),),
 
         ],
       ),
