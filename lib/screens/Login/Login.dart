@@ -249,7 +249,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   // Login method
                                   Navigator.push(
                                       context,
-                                      new MaterialPageRoute(
+                                      MaterialPageRoute(
                                           builder: (context) => Home()));
                                 } else {
                                   // Sigup method

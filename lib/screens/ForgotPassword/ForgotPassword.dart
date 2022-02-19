@@ -1,6 +1,8 @@
 import 'package:aromatherapy/screens/Login/Login.dart';
 import 'package:flutter/material.dart';
 
+import 'ConfirmPhoneNumber.dart';
+
 class FPassword extends StatefulWidget {
   const FPassword({Key? key}) : super(key: key);
 
@@ -108,7 +110,7 @@ class _FPasswordState extends State<FPassword> {
                               onTap: () {
 
                                   // Sigup method
-                                  Navigator.push(context, new MaterialPageRoute(builder: (context)=>LoginScreen()));
+                                  Navigator.push(context, new MaterialPageRoute(builder: (context)=>PhoneConfirmation()));
                                 },
 
                               child: Container(
