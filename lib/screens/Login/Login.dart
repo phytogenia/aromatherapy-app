@@ -1,3 +1,4 @@
+import 'package:aromatherapy/screens/HomeScreen/HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
@@ -12,20 +13,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool isObscure = true;
   int SelectedIndex = 0;
-  final Map<int, Widget> _children = {
-    0: const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Text('Sign in'),
-    ),
-    1: const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Text('Sign up'),
-    ),
-  };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: SafeArea(
         bottom: false,
@@ -236,6 +228,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: TextStyle(
                                     color: Color(0xff61BB46),
                                     fontWeight: FontWeight.bold),
+
+
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -243,14 +237,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               onTap: () {
                                 if (SelectedIndex == 0) {
                                   // Login method
-                                  //Navigator.push(context, new MaterialPageRoute(builder: (context)=>Home()));
+                                  Navigator.push(context, new MaterialPageRoute(builder: (context)=>Home()));
                                 } else {
                                   // Sigup method
                                   //Navigator.push(context, new MaterialPageRoute(builder: (context)=>Home()));
                                 }
                               },
                               child: Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 50),
                                 decoration: const BoxDecoration(
                                     boxShadow: [
