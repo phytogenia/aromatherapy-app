@@ -100,8 +100,13 @@ class _PhoneConfirmationState extends State<PhoneConfirmation> {
                                     width: 50,
                                     padding: EdgeInsets.all(8),
                                     child: TextFormField(
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                      keyboardType: TextInputType.number,
+                                      maxLength: 1,
                                       decoration: const InputDecoration(
                                         focusColor: Colors.green,
+                                        counterText: ''
                                       ),
                                     ),
                                     decoration: BoxDecoration(
@@ -121,8 +126,13 @@ class _PhoneConfirmationState extends State<PhoneConfirmation> {
                                     width: 50,
                                     padding: EdgeInsets.all(8),
                                     child: TextFormField(
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                      maxLength: 1,
+                                      keyboardType: TextInputType.number,
                                       decoration: const InputDecoration(
                                         focusColor: Colors.green,
+                                        counterText: ''
                                       ),
                                     ),
                                     decoration: BoxDecoration(
@@ -142,8 +152,13 @@ class _PhoneConfirmationState extends State<PhoneConfirmation> {
                                     width: 50,
                                     padding: EdgeInsets.all(8),
                                     child: TextFormField(
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                      keyboardType: TextInputType.number,
+                                      maxLength: 1,
                                       decoration: const InputDecoration(
                                         focusColor: Colors.green,
+                                        counterText: ''
                                       ),
                                     ),
                                     decoration: BoxDecoration(
@@ -163,8 +178,13 @@ class _PhoneConfirmationState extends State<PhoneConfirmation> {
                                     width: 50,
                                     padding: EdgeInsets.all(8),
                                     child: TextFormField(
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                      keyboardType: TextInputType.number,
+                                      maxLength: 1,
                                       decoration: const InputDecoration(
                                           focusColor: Colors.green,
+                                          counterText: ''
                                           ),
                                     ),
                                     decoration: BoxDecoration(
@@ -189,6 +209,7 @@ class _PhoneConfirmationState extends State<PhoneConfirmation> {
                                 },
 
                                 child: Container(
+
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 10, horizontal: 50),
                                   decoration: const BoxDecoration(
