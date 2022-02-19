@@ -1,4 +1,5 @@
 import 'package:aromatherapy/screens/Oils/ListScreen/ListScreen.dart';
+import 'package:aromatherapy/screens/Recipes/ListScreen/ListRecipes.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,7 @@ class _HomeState extends State<Home> {
   final _Screens = [
     const ListScreen(),
     const HomeScreen(),
-    const Center(
-      child: Text('Recipes'),
-    )
+    const ListRecipes()
   ];
   int SelectedIndex = 1;
 
@@ -24,6 +23,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
+
         onTap: (int index) {
           setState(() {
             SelectedIndex = index;

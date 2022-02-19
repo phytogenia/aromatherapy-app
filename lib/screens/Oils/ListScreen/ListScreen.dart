@@ -83,7 +83,7 @@ class _ListScreenState extends State<ListScreen> {
                                 Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: const [
-                                Text('Find your favorite oil'),
+                                Text('Find your favorite'),
                                 Text(
                                 'Essential Oil',
                                 style: TextStyle(
@@ -125,10 +125,11 @@ class _ListScreenState extends State<ListScreen> {
                                 ),
                                 ),
                                 ),
-                                  SizedBox(height: 20),
+                                  const SizedBox(height: 20),
                                   SizedBox(
                                       height: MediaQuery.of(context).size.height,
                                       child: ListView.builder(
+                                          physics: const AlwaysScrollableScrollPhysics(),
                                           padding: const EdgeInsets.symmetric(horizontal: 15),
                                           itemCount: oils.length,
                                           scrollDirection: Axis.vertical,
@@ -136,11 +137,10 @@ class _ListScreenState extends State<ListScreen> {
                                             return BuildOil(context, oils[index]);
                                           })),
 
-                                const SizedBox(
-                                height: 25,
+                                  const SizedBox(
+                                  height: 25,
                                 ),
-
-                                ],
+                              ],
                             ),
                         ),
 
@@ -183,9 +183,9 @@ class _ListScreenState extends State<ListScreen> {
                   color: Colors.white, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 2),
-            Text(
+            const Text(
               'Scientific name',
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white),
             )
           ],
         ),
