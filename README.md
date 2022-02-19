@@ -1,4 +1,4 @@
-# aromatherapy_vtest_app
+# aromatherapy
 
 ## TODO
 - integrate intro_slider

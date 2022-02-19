@@ -1,4 +1,4 @@
-package ga.youcefmegoura.aromatherapy.aromatherapy_vtest_app;
+package com.phytogenia.aromatherapy;
 
 import io.flutter.embedding.android.FlutterActivity;
 

@@ -1,0 +1,84 @@
+{
+  "project_info": {
+    "project_number": "125064876870",
+    "project_id": "aromatherapy-68a74",
+    "storage_bucket": "aromatherapy-68a74.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125064876870:android:65d0cda1eee31db3f38b47",
+        "android_client_info": {
+          "package_name": "com.phytogenia.aromatherapy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125064876870-q6o4m7bimde17cc9amcnfkimf3gbcp9v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phytogenia.aromatherapy",
+            "certificate_hash": "56118aebfd4a6673e2ca61b8fdd25ced6d62b81a"
+          }
+        },
+        {
+          "client_id": "125064876870-36p1j7pee7qsu64hatdkek0fporgke2j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBudNhunJ0mZNPr6Sz9T8sFpW7Gg59-yRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125064876870-36p1j7pee7qsu64hatdkek0fporgke2j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125064876870:android:d240d3dc00d2146cf38b47",
+        "android_client_info": {
+          "package_name": "ga.youcefmegoura.aromatherapy_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125064876870-cvhf2il8ebf2m1nalnle83nc0ekkamfn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ga.youcefmegoura.aromatherapy_app",
+            "certificate_hash": "56118aebfd4a6673e2ca61b8fdd25ced6d62b81a"
+          }
+        },
+        {
+          "client_id": "125064876870-36p1j7pee7qsu64hatdkek0fporgke2j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBudNhunJ0mZNPr6Sz9T8sFpW7Gg59-yRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125064876870-36p1j7pee7qsu64hatdkek0fporgke2j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
