@@ -12,7 +12,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool isObscure = true;
-  int SelectedIndex = 0;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         bottom: false,
         top: false,
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Stack(
             clipBehavior: Clip.none,
@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Image.asset('assets/images/logo2.png'),
                             const SizedBox(height: 8),
                             DefaultTabController(
-                                initialIndex: SelectedIndex,
+                                initialIndex: selectedIndex,
                                 length: 2,
                                 child: Container(
                                   height: 40,
@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     onTap: (int index) {
                                       setState(() {
                                         isObscure = true;
-                                        SelectedIndex = index;
+                                        selectedIndex = index;
                                       });
                                     },
                                     //indicatorColor: Color(0xff61BB46),
@@ -98,10 +98,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                         text: "Sign up",
                                       ),
                                     ],
-                                    unselectedLabelColor: const Color(0xff61BB46),
+                                    unselectedLabelColor:
+                                        const Color(0xff61BB46),
                                     labelColor: Colors.white,
                                     indicator: RectangularIndicator(
-                                      color: Color(0xff61BB46),
+                                      color: const Color(0xff61BB46),
                                       bottomLeftRadius: 100,
                                       bottomRightRadius: 100,
                                       topLeftRadius: 100,
@@ -110,12 +111,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 )),
                             const SizedBox(height: 30),
-                            SelectedIndex == 0
+                            selectedIndex == 0
                                 ? Form(
                                     child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 40,
                                         child: TextFormField(
                                           decoration: InputDecoration(
@@ -127,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ),
                                       const SizedBox(height: 20),
-                                      Container(
+                                      SizedBox(
                                         height: 40,
                                         child: TextFormField(
                                           obscureText: isObscure,
@@ -140,7 +141,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   });
                                                 },
                                                 child: isObscure
-                                                    ? const Icon(Icons.visibility)
+                                                    ? const Icon(
+                                                        Icons.visibility)
                                                     : const Icon(
                                                         Icons.visibility_off),
                                               ),
@@ -157,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         height: 40,
                                         child: TextFormField(
                                           decoration: InputDecoration(
@@ -169,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ),
                                       const SizedBox(height: 20),
-                                      Container(
+                                      SizedBox(
                                         height: 40,
                                         child: TextFormField(
                                           obscureText: isObscure,
@@ -182,7 +184,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   });
                                                 },
                                                 child: isObscure
-                                                    ? const Icon(Icons.visibility)
+                                                    ? const Icon(
+                                                        Icons.visibility)
                                                     : const Icon(
                                                         Icons.visibility_off),
                                               ),
@@ -194,7 +197,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ),
                                       const SizedBox(height: 20),
-                                      Container(
+                                      SizedBox(
                                         height: 40,
                                         child: TextFormField(
                                           obscureText: isObscure,
@@ -207,7 +210,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   });
                                                 },
                                                 child: isObscure
-                                                    ? const Icon(Icons.visibility)
+                                                    ? const Icon(
+                                                        Icons.visibility)
                                                     : const Icon(
                                                         Icons.visibility_off),
                                               ),
@@ -228,16 +232,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: TextStyle(
                                     color: Color(0xff61BB46),
                                     fontWeight: FontWeight.bold),
-
-
                               ),
                             ),
                             const SizedBox(height: 20),
                             GestureDetector(
                               onTap: () {
-                                if (SelectedIndex == 0) {
+                                if (selectedIndex == 0) {
                                   // Login method
-                                  Navigator.push(context, new MaterialPageRoute(builder: (context)=>Home()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => const Home()));
                                 } else {
                                   // Sigup method
                                   //Navigator.push(context, new MaterialPageRoute(builder: (context)=>Home()));
@@ -257,7 +262,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(25))),
                                 child: Text(
-                                  SelectedIndex == 0 ? 'Sign in' : 'Sign up',
+                                  selectedIndex == 0 ? 'Sign in' : 'Sign up',
                                   style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
@@ -274,7 +279,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 )),
                                 SizedBox(width: 5),
                                 Text(
-                                  'OR',
+                                  'Or',
                                   style: TextStyle(color: Colors.grey),
                                 ),
                                 SizedBox(width: 5),
