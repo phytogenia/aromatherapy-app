@@ -1,7 +1,8 @@
 import 'package:aromatherapy/screens/HomeScreen/HomeScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
+import 'package:aromatherapy/screens/ForgotPassword/ForgotPassword.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -98,7 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         text: "Sign up",
                                       ),
                                     ],
-                                    unselectedLabelColor: const Color(0xff61BB46),
+                                    unselectedLabelColor:
+                                        const Color(0xff61BB46),
                                     labelColor: Colors.white,
                                     indicator: RectangularIndicator(
                                       color: Color(0xff61BB46),
@@ -140,7 +142,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   });
                                                 },
                                                 child: isObscure
-                                                    ? const Icon(Icons.visibility)
+                                                    ? const Icon(
+                                                        Icons.visibility)
                                                     : const Icon(
                                                         Icons.visibility_off),
                                               ),
@@ -182,7 +185,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   });
                                                 },
                                                 child: isObscure
-                                                    ? const Icon(Icons.visibility)
+                                                    ? const Icon(
+                                                        Icons.visibility)
                                                     : const Icon(
                                                         Icons.visibility_off),
                                               ),
@@ -207,7 +211,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   });
                                                 },
                                                 child: isObscure
-                                                    ? const Icon(Icons.visibility)
+                                                    ? const Icon(
+                                                        Icons.visibility)
                                                     : const Icon(
                                                         Icons.visibility_off),
                                               ),
@@ -221,15 +226,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ],
                                   )),
                             const SizedBox(height: 20),
-                            const Align(
+                            Align(
                               alignment: Alignment.topRight,
-                              child: Text(
-                                'Forgot your password ?',
-                                style: TextStyle(
-                                    color: Color(0xff61BB46),
-                                    fontWeight: FontWeight.bold),
-
-
+                              child: InkWell(
+                                onTap: () {
+                                    Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                    builder: (context) => FPassword()));},
+                                child: const Text(
+                                  'Forgot your password ?',
+                                  style: TextStyle(
+                                      color: Color(0xff61BB46),
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -237,7 +247,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               onTap: () {
                                 if (SelectedIndex == 0) {
                                   // Login method
-                                  Navigator.push(context, new MaterialPageRoute(builder: (context)=>Home()));
+                                  Navigator.push(
+                                      context,
+                                      new MaterialPageRoute(
+                                          builder: (context) => Home()));
                                 } else {
                                   // Sigup method
                                   //Navigator.push(context, new MaterialPageRoute(builder: (context)=>Home()));
