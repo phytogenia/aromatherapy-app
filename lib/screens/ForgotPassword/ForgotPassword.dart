@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 import 'ConfirmPhoneNumber.dart';
 
-class FPassword extends StatefulWidget {
-  const FPassword({Key? key}) : super(key: key);
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({Key? key}) : super(key: key);
 
   @override
-  _FPasswordState createState() => _FPasswordState();
+  _ForgotPasswordState createState() => _ForgotPasswordState();
 }
 
-class _FPasswordState extends State<FPassword> {
+class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

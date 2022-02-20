@@ -1,5 +1,6 @@
 import 'package:aromatherapy/components/primary_sign_button.dart';
 import 'package:aromatherapy/components/primary_textformfield.dart';
+import 'package:aromatherapy/screens/ForgotPassword/ForgotPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -219,12 +220,20 @@ class _LoginScreenState extends State<LoginScreen> {
             ? _buildLoginForm()
             : _buildSignupForm(),
         const SizedBox(height: 20),
-        const Align(
+        Align(
           alignment: Alignment.topRight,
-          child: Text(
-            'Forgot your password ?',
-            style: TextStyle(
-                color: Color(0xff61BB46), fontWeight: FontWeight.bold),
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ForgotPassword()));},
+            child: const Text(
+              'Forgot your password ?',
+              style: TextStyle(
+                  color: Color(0xff61BB46),
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         ),
         const SizedBox(height: 20),
