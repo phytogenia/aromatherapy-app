@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:aromatherapy/screens/Login/Login.dart';
 import 'package:flutter/material.dart';
-import '../../size_config.dart';
+import '../../utils/size_config.dart';
 
 class SplashScreen extends StatelessWidget {
   static String routeName = "/splash";

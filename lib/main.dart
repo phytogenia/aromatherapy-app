@@ -1,5 +1,3 @@
-import 'package:aromatherapy/routes.dart';
-import 'package:aromatherapy/screens/Splash/splash_screen.dart';
 import 'package:aromatherapy/screens/landing_screen.dart';
 import 'package:aromatherapy/services/auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
