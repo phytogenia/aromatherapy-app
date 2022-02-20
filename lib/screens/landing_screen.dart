@@ -23,7 +23,7 @@ class LandingScreen extends StatelessWidget {
             }
             return Provider<DatabaseService>(
               create: (_) => FirebaseDatabaseService(uid: user.uid),
-              child: const HomeScreen(),
+              child: const Home(),
             );
           }
           return const Scaffold(
