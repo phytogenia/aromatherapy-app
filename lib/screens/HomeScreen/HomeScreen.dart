@@ -2,6 +2,10 @@ import 'package:aromatherapy/screens/Oils/ListScreen/ListScreen.dart';
 import 'package:aromatherapy/screens/Recipes/ListScreen/ListRecipes.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../components/platform_alert_dialog.dart';
+import '../../services/auth_service.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -16,7 +20,7 @@ class _HomeState extends State<Home> {
     const HomeScreen(),
     const ListRecipes()
   ];
-  int SelectedIndex = 1;
+  int SelectedIndex = 1; //TODO :: enumeration
 
   @override
   Widget build(BuildContext context) {
@@ -131,19 +135,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                     )
                                   ],
                                 ),
-                                Container(
-                                  height: 50,
-                                  width: 50,
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Color(0xff61BB46)),
-                                  child: const Center(
-                                    child: Text(
-                                      'Y',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
+                                GestureDetector(
+                                  onTap: () {
+                                    //TODO:: go to settings
+                                    _showDialogToLogout(context);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Color(0xff61BB46)),
+                                    child: const Center(
+                                      child: Text(
+                                        'Y',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                   ),
                                 )
@@ -203,10 +213,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     itemCount: categories.length,
                                     itemBuilder: (context, index) {
                                       if (index % 2 == 0) {
-                                        return BuildOrangeCategories(
+                                        return _buildOrangeCategories(
                                             context, categories[index]);
                                       } else {
-                                        return BuildGreenCategories(
+                                        return _buildGreenCategories(
                                             context, categories[index]);
                                       }
                                     }),
@@ -231,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemCount: oils.length,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
-                                return BuildOils(context, oils[index]);
+                                return _buildOils(context, oils[index]);
                               })),
                       const Padding(
                         padding: EdgeInsets.symmetric(
@@ -249,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemCount: oils.length,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
-                                return BuildRecipes(context, recipes[index]);
+                                return _buildRecipes(context, recipes[index]);
                               })),
                     ],
                   ),
@@ -260,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-Widget BuildRecipes(BuildContext context, String recipename) {
+Widget _buildRecipes(BuildContext context, String recipename) {
   return Container(
     margin: const EdgeInsets.all(5),
     padding: const EdgeInsets.all(8),
@@ -303,7 +313,7 @@ Widget BuildRecipes(BuildContext context, String recipename) {
   );
 }
 
-Widget BuildOils(BuildContext context, String oilname) {
+Widget _buildOils(BuildContext context, String oilname) {
   return Container(
     margin: const EdgeInsets.all(5),
     padding: const EdgeInsets.all(8),
@@ -343,7 +353,7 @@ Widget BuildOils(BuildContext context, String oilname) {
   );
 }
 
-Widget BuildOrangeCategories(BuildContext context, String name) {
+Widget _buildOrangeCategories(BuildContext context, String name) {
   return Container(
     width: 130,
     padding: const EdgeInsets.all(8),
@@ -374,7 +384,7 @@ Widget BuildOrangeCategories(BuildContext context, String name) {
   );
 }
 
-Widget BuildGreenCategories(BuildContext context, String name) {
+Widget _buildGreenCategories(BuildContext context, String name) {
   return Container(
     width: 130,
     padding: const EdgeInsets.all(8),
@@ -403,4 +413,40 @@ Widget BuildGreenCategories(BuildContext context, String name) {
       ),
     ),
   );
+}
+
+void _showDialogToLogout(BuildContext context) async {
+  const dialogTitle = 'Logout';
+  const dialogContent = 'Do you want to logout ?';
+  const cancelTextButton = 'Dismiss';
+  const agreeTextButton = 'Logout';
+
+  bool isUserWantToLogout = await PlatformAlertDialog(
+    content: dialogTitle,
+    title: dialogContent,
+    cancelTextButton: cancelTextButton,
+    agreeTextButton: agreeTextButton,
+  ).show(context);
+
+  if (isUserWantToLogout) {
+    _signOutUser(context);
+    // Dismiss settings page
+  }
+}
+
+void _signOutUser(BuildContext context) async {
+  final authProvider = context.read<AuthService>();
+  try {
+    await authProvider.signOut();
+  } catch (e) {
+    const dialogTitle = 'Logout Error';
+    final dialogContent = 'Cause $e Can you please try later ?';
+    const cancelTextButton = 'Dismiss';
+
+    PlatformAlertDialog(
+      title: dialogTitle,
+      content: dialogContent,
+      cancelTextButton: cancelTextButton,
+    ).show(context);
+  }
 }
