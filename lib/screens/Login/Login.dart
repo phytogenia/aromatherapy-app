@@ -171,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _bodyContent(BuildContext context) {
-    String _textButton =
+    String _textSubmitButton =
         (selectedSignType == SignType.login) ? 'Login' : 'Sign Up';
 
     return Column(
@@ -196,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
               //indicatorColor: Color(0xff61BB46),
               tabs: const [
                 Tab(
-                  text: "Sing in",
+                  text: "Log in",
                 ),
                 Tab(
                   text: "Sign up",
@@ -229,16 +229,8 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         const SizedBox(height: 20),
         PrimarySignButton(
-          onTap: () {
-            if (selectedSignType == SignType.login) {
-              // Login method
-              print('login');
-            } else {
-              // Sigup method
-              print('signup');
-            }
-          },
-          text: _textButton,
+          onTap: _submit,
+          text: _textSubmitButton,
         ),
         const SizedBox(height: 20),
         Row(
@@ -312,6 +304,7 @@ class _LoginScreenState extends State<LoginScreen> {
             focusNode: _passwordFocusNode,
             onEditingComplete: _onCompletePasswordEditing,
             controller: _passwordController,
+            keyboardType: TextInputType.visiblePassword,
           ),
         ],
       ),
@@ -326,6 +319,7 @@ class _LoginScreenState extends State<LoginScreen> {
           PrimaryTextFormField(
             labelText: 'Email',
             hintText: 'Enter you Email',
+            isPasswordField: false,
             focusNode: _emailFocusNode,
             onEditingComplete: _onCompleteEmailEditing,
             controller: _emailController,
@@ -337,6 +331,7 @@ class _LoginScreenState extends State<LoginScreen> {
             focusNode: _passwordFocusNode,
             onEditingComplete: _onCompletePasswordEditing,
             controller: _passwordController,
+            keyboardType: TextInputType.visiblePassword,
           ),
           PrimaryTextFormField(
             isPasswordField: true,
@@ -345,6 +340,7 @@ class _LoginScreenState extends State<LoginScreen> {
             focusNode: _passwordConfirmFocusNode,
             onEditingComplete: _onCompletePasswordConfirmEditing,
             controller: _passwordConfirmController,
+            keyboardType: TextInputType.visiblePassword,
           ),
         ],
       ),
@@ -359,20 +355,20 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onCompletePasswordEditing() {
-    // if (widget.formType == SignEmailType.signIn) {
-    //   _submit();
-    // } else {
-    //   var _newFocus = widget.passwordValidator.isNotEmptyValidation(_password)
-    //       ? _passwordRepeatFocusNode
-    //       : _passwordFocusNode;
-    //   FocusScope.of(context).requestFocus(_newFocus);
-    // }
+    if (selectedSignType == SignType.login) {
+      _submit();
+    } else {
+      // var _newFocus = widget.passwordValidator.isNotEmptyValidation(_password)
+      //     ? _passwordRepeatFocusNode
+      //     : _passwordFocusNode;
+      FocusScope.of(context).requestFocus(_passwordFocusNode);
+    }
   }
 
   void _onCompletePasswordConfirmEditing() {
-    // if (widget.formType == SignEmailType.signUp) {
-    //   _submit();
-    // }
+    if (selectedSignType == SignType.login) {
+      _submit();
+    }
   }
 
   void _updateState() {
@@ -382,19 +378,18 @@ class _LoginScreenState extends State<LoginScreen> {
   void _submit() async {
     final authProvider = context.read<AuthService>();
 
-    setState(() {
-      _isLoading = true;
-      _isFormSubmitted = true;
-    });
+    // setState(() {
+    //   _isLoading = true;
+    //   _isFormSubmitted = true;
+    // });
     try {
       if (selectedSignType == SignType.login) {
-        await authProvider.createUserWithEmailAndPassword(_email,
-            _password); //TODO:: validation + confirm password validation
-      } else {
         await authProvider.signInWithEmailAndPassword(
             _email, _password); // TODO:: validation
+      } else {
+        await authProvider.createUserWithEmailAndPassword(_email,
+            _password); //TODO:: validation + confirm password validation
       }
-      Navigator.pop(context);
     } on PlatformException catch (error) {
       const String errorTitle = 'Authentication Error';
       PlatformExceptionAlertDialog(
@@ -404,8 +399,8 @@ class _LoginScreenState extends State<LoginScreen> {
     } catch (error) {
       print(error.toString());
     } finally {
-      _isLoading = false;
-      _updateState();
+      // _isLoading = false;
+      // _updateState();
     }
   }
 }

@@ -10,6 +10,7 @@ class PrimaryTextFormField extends StatefulWidget {
     required this.focusNode,
     required this.onEditingComplete,
     required this.controller,
+    this.keyboardType = TextInputType.emailAddress,
   }) : super(key: key);
 
   bool isPasswordField;
@@ -18,6 +19,7 @@ class PrimaryTextFormField extends StatefulWidget {
   FocusNode focusNode;
   Function() onEditingComplete;
   TextEditingController controller;
+  TextInputType keyboardType;
 
   @override
   State<PrimaryTextFormField> createState() => _PrimaryTextFormFieldState();
@@ -51,11 +53,9 @@ class _PrimaryTextFormFieldState extends State<PrimaryTextFormField> {
           color: Colors.grey.withOpacity(.7),
         ),
       ),
-      obscureText: !isObscure,
+      obscureText: widget.isPasswordField && !isObscure,
       autocorrect: false,
-      keyboardType: widget.isPasswordField
-          ? TextInputType.visiblePassword
-          : TextInputType.emailAddress,
+      keyboardType: widget.keyboardType,
       controller: widget.controller,
       focusNode: widget.focusNode,
       onEditingComplete: widget.onEditingComplete,
