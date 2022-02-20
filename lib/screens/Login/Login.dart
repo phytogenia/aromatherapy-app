@@ -1,7 +1,18 @@
-import 'package:aromatherapy/screens/HomeScreen/HomeScreen.dart';
+import 'package:aromatherapy/components/primary_sign_button.dart';
+import 'package:aromatherapy/components/primary_textformfield.dart';
 import 'package:flutter/material.dart';
-import 'package:material_segmented_control/material_segmented_control.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
+
+import '../../components/platform_exception_alert_dialog.dart';
+import '../../components/primary_socialmedia_button.dart';
+import '../../services/auth_service.dart';
+
+abstract class SignType {
+  static int get login => 0;
+  static int get signup => 1;
+}
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -11,8 +22,90 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordConfirmController =
+      TextEditingController();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _passwordConfirmFocusNode = FocusNode();
+
+  String get _email => _emailController.text;
+  set _email(String value) {
+    _emailController.text = value;
+  }
+
+  String get _password => _passwordController.text;
+  set _password(String value) {
+    _passwordController.text = value;
+  }
+
+  String get _passwordRepeat => _passwordConfirmController.text;
+  set _passwordRepeat(String value) {
+    _passwordConfirmController.text = value;
+  }
+
+  void _onAuth(BuildContext context, Function authMethod) async {
+    try {
+      setState(() => _isLoading = true);
+      await authMethod(context);
+    } on PlatformException catch (e) {
+      if (e.code != 'ERROR_MISSING_GOOGLE_TOKEN' &&
+          e.code != 'ERROR_MISSING_FACEBOOK_TOKEN') {
+        _showErrorDialog(context: context, exception: e);
+        setState(() => _isLoading = false);
+      }
+      print(e);
+    } finally {
+      if (authMethod == _emailAuth) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  void _showErrorDialog(
+      {String title = 'Sign in Failed',
+      required PlatformException exception,
+      required BuildContext context}) {
+    PlatformExceptionAlertDialog(
+      title: title,
+      exception: exception,
+    ).show(context);
+  }
+
+  void _anonymousAuth(BuildContext context) async {
+    final authProvider = context.read<AuthService>();
+    await authProvider.signInAnonymously();
+  }
+
+  void _googleAuth(BuildContext context) async {
+    final authProvider = context.read<AuthService>();
+    await authProvider.signInWithGoogle();
+  }
+
+  _facebookAuth(BuildContext context) async {
+    final authProvider = context.read<AuthService>();
+    await authProvider.signInWithFacebook();
+  }
+
+  _emailAuth(BuildContext context, String email, String password) async {
+    //TODO:: implement
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _emailFocusNode.dispose();
+    _passwordController.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
+  }
+
+  bool _isFormSubmitted = false;
+  bool _isLoading = false;
+
   bool isObscure = true;
-  int selectedIndex = 0;
+  int selectedSignType = SignType.login;
 
   @override
   Widget build(BuildContext context) {
@@ -49,329 +142,270 @@ class _LoginScreenState extends State<LoginScreen> {
                   right: 0,
                   child: Image.asset('assets/images/picbottom.png')),
               Positioned(
-                  left: 20,
-                  right: 20,
-                  top: MediaQuery.of(context).size.height * 0.2,
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.65,
-                    decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(2, 2),
-                              blurRadius: 16)
-                        ]),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 30),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Image.asset('assets/images/logo2.png'),
-                            const SizedBox(height: 8),
-                            DefaultTabController(
-                                initialIndex: selectedIndex,
-                                length: 2,
-                                child: Container(
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(100)),
-                                      border: Border.all(
-                                          color: Colors.grey.withOpacity(.4),
-                                          width: 1)),
-                                  child: TabBar(
-                                    onTap: (int index) {
-                                      setState(() {
-                                        isObscure = true;
-                                        selectedIndex = index;
-                                      });
-                                    },
-                                    //indicatorColor: Color(0xff61BB46),
-                                    tabs: const [
-                                      Tab(
-                                        text: "Sing in",
-                                      ),
-                                      Tab(
-                                        text: "Sign up",
-                                      ),
-                                    ],
-                                    unselectedLabelColor:
-                                        const Color(0xff61BB46),
-                                    labelColor: Colors.white,
-                                    indicator: RectangularIndicator(
-                                      color: const Color(0xff61BB46),
-                                      bottomLeftRadius: 100,
-                                      bottomRightRadius: 100,
-                                      topLeftRadius: 100,
-                                      topRightRadius: 100,
-                                    ),
-                                  ),
-                                )),
-                            const SizedBox(height: 30),
-                            selectedIndex == 0
-                                ? Form(
-                                    child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                          decoration: InputDecoration(
-                                              hintText: 'Enter you Email',
-                                              hintStyle: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.grey
-                                                      .withOpacity(.7))),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 20),
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                          obscureText: isObscure,
-                                          decoration: InputDecoration(
-                                              suffixIcon: GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    isObscure =
-                                                        !isObscure; // show and hide password
-                                                  });
-                                                },
-                                                child: isObscure
-                                                    ? const Icon(
-                                                        Icons.visibility)
-                                                    : const Icon(
-                                                        Icons.visibility_off),
-                                              ),
-                                              hintText: 'Enter you password',
-                                              hintStyle: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.grey
-                                                      .withOpacity(.7))),
-                                        ),
-                                      ),
-                                    ],
-                                  ))
-                                : Form(
-                                    child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                          decoration: InputDecoration(
-                                              hintText: 'Enter you Email',
-                                              hintStyle: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.grey
-                                                      .withOpacity(.7))),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 20),
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                          obscureText: isObscure,
-                                          decoration: InputDecoration(
-                                              suffixIcon: GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    isObscure =
-                                                        !isObscure; // show and hide password
-                                                  });
-                                                },
-                                                child: isObscure
-                                                    ? const Icon(
-                                                        Icons.visibility)
-                                                    : const Icon(
-                                                        Icons.visibility_off),
-                                              ),
-                                              hintText: 'Enter you password',
-                                              hintStyle: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.grey
-                                                      .withOpacity(.7))),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 20),
-                                      SizedBox(
-                                        height: 40,
-                                        child: TextFormField(
-                                          obscureText: isObscure,
-                                          decoration: InputDecoration(
-                                              suffixIcon: GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    isObscure =
-                                                        !isObscure; // show and hide password
-                                                  });
-                                                },
-                                                child: isObscure
-                                                    ? const Icon(
-                                                        Icons.visibility)
-                                                    : const Icon(
-                                                        Icons.visibility_off),
-                                              ),
-                                              hintText: 'Confirm you password',
-                                              hintStyle: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.grey
-                                                      .withOpacity(.7))),
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                            const SizedBox(height: 20),
-                            const Align(
-                              alignment: Alignment.topRight,
-                              child: Text(
-                                'Forgot your password ?',
-                                style: TextStyle(
-                                    color: Color(0xff61BB46),
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            GestureDetector(
-                              onTap: () {
-                                if (selectedIndex == 0) {
-                                  // Login method
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => const Home()));
-                                } else {
-                                  // Sigup method
-                                  //Navigator.push(context, new MaterialPageRoute(builder: (context)=>Home()));
-                                }
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 50),
-                                decoration: const BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.grey,
-                                          offset: Offset(0, 2),
-                                          blurRadius: 6)
-                                    ],
-                                    color: Color(0xff61BB46),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(25))),
-                                child: Text(
-                                  selectedIndex == 0 ? 'Sign in' : 'Sign up',
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: const [
-                                Expanded(
-                                    child: Divider(
-                                  indent: 70,
-                                )),
-                                SizedBox(width: 5),
-                                Text(
-                                  'Or',
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                                SizedBox(width: 5),
-                                Expanded(
-                                    child: Divider(
-                                  endIndent: 70,
-                                ))
-                              ],
-                            ),
-                            const SizedBox(height: 20),
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    //facebook login method
-                                  },
-                                  child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/facebook.png'),
-                                          fit: BoxFit.scaleDown),
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: Colors.grey.withOpacity(.6),
-                                          width: 1),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                GestureDetector(
-                                  onTap: () {
-                                    //apple login method
-                                  },
-                                  child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/apple.png'),
-                                          fit: BoxFit.scaleDown),
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: Colors.grey.withOpacity(.6),
-                                          width: 1),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                GestureDetector(
-                                  onTap: () {
-                                    //google login method
-                                  },
-                                  child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/google.png'),
-                                          fit: BoxFit.scaleDown),
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: Colors.grey.withOpacity(.6),
-                                          width: 1),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 25),
-                            const Text(
-                              'By signing up, you agree to Aromatherapy\'s Terms of Service and Privacy Policy',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 12,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  )),
+                left: 20,
+                right: 20,
+                top: MediaQuery.of(context).size.height * 0.2,
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.65,
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(2, 2),
+                            blurRadius: 16)
+                      ]),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 30),
+                    child: SingleChildScrollView(child: _bodyContent(context)),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _bodyContent(BuildContext context) {
+    String _textButton =
+        (selectedSignType == SignType.login) ? 'Login' : 'Sign Up';
+
+    return Column(
+      children: [
+        Image.asset('assets/images/logo2.png'),
+        const SizedBox(height: 8),
+        DefaultTabController(
+          initialIndex: selectedSignType,
+          length: 2,
+          child: Container(
+            height: 40,
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(100)),
+                border:
+                    Border.all(color: Colors.grey.withOpacity(.4), width: 1)),
+            child: TabBar(
+              onTap: (int index) {
+                isObscure = true;
+                selectedSignType = index;
+                _updateState();
+              },
+              //indicatorColor: Color(0xff61BB46),
+              tabs: const [
+                Tab(
+                  text: "Sing in",
+                ),
+                Tab(
+                  text: "Sign up",
+                ),
+              ],
+              unselectedLabelColor: const Color(0xff61BB46),
+              labelColor: Colors.white,
+              indicator: RectangularIndicator(
+                color: const Color(0xff61BB46),
+                bottomLeftRadius: 100,
+                bottomRightRadius: 100,
+                topLeftRadius: 100,
+                topRightRadius: 100,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 30),
+        selectedSignType == SignType.login
+            ? _buildLoginForm()
+            : _buildSignupForm(),
+        const SizedBox(height: 20),
+        const Align(
+          alignment: Alignment.topRight,
+          child: Text(
+            'Forgot your password ?',
+            style: TextStyle(
+                color: Color(0xff61BB46), fontWeight: FontWeight.bold),
+          ),
+        ),
+        const SizedBox(height: 20),
+        PrimarySignButton(
+          onTap: () {
+            if (selectedSignType == SignType.login) {
+              // Login method
+              print('login');
+            } else {
+              // Sigup method
+              print('signup');
+            }
+          },
+          text: _textButton,
+        ),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Expanded(
+                child: Divider(
+              indent: 70,
+            )),
+            SizedBox(width: 5),
+            Text(
+              'Or',
+              style: TextStyle(color: Colors.grey),
+            ),
+            SizedBox(width: 5),
+            Expanded(
+                child: Divider(
+              endIndent: 70,
+            ))
+          ],
+        ),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PrimarySocialMediaButton(
+              imagePath: 'assets/images/facebook.png',
+              onTap: () => () => _onAuth(context, _googleAuth), //TODO: facebook
+            ),
+            const SizedBox(width: 15),
+            PrimarySocialMediaButton(
+              imagePath: 'assets/images/apple.png',
+              onTap: () => () => _onAuth(context, _googleAuth), //TODO: facebook
+            ),
+            const SizedBox(width: 15),
+            PrimarySocialMediaButton(
+              imagePath: 'assets/images/google.png',
+              onTap: () => _onAuth(context, _googleAuth),
+            ),
+          ],
+        ),
+        const SizedBox(height: 25),
+        const Text(
+          'By signing up, you agree to Aromatherapy\'s Terms of Service and Privacy Policy',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 12,
+          ),
+        )
+      ],
+    );
+  }
+
+  Form _buildLoginForm() {
+    return Form(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          PrimaryTextFormField(
+            labelText: 'Email',
+            hintText: 'Enter you Email',
+            focusNode: _emailFocusNode,
+            onEditingComplete: _onCompleteEmailEditing,
+            controller: _emailController,
+          ),
+          PrimaryTextFormField(
+            isPasswordField: true,
+            labelText: 'Password',
+            hintText: 'Enter you password',
+            focusNode: _passwordFocusNode,
+            onEditingComplete: _onCompletePasswordEditing,
+            controller: _passwordController,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Form _buildSignupForm() {
+    return Form(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          PrimaryTextFormField(
+            labelText: 'Email',
+            hintText: 'Enter you Email',
+            focusNode: _emailFocusNode,
+            onEditingComplete: _onCompleteEmailEditing,
+            controller: _emailController,
+          ),
+          PrimaryTextFormField(
+            isPasswordField: true,
+            labelText: 'Password',
+            hintText: 'Enter you password',
+            focusNode: _passwordFocusNode,
+            onEditingComplete: _onCompletePasswordEditing,
+            controller: _passwordController,
+          ),
+          PrimaryTextFormField(
+            isPasswordField: true,
+            labelText: 'Confirm Password',
+            hintText: 'Confirm your password',
+            focusNode: _passwordConfirmFocusNode,
+            onEditingComplete: _onCompletePasswordConfirmEditing,
+            controller: _passwordConfirmController,
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _onCompleteEmailEditing() {
+    // var _newFocus = widget.emailValidator.isNotEmptyValidation(_email)
+    //     ? _passwordFocusNode
+    //     : _emailFocusNode;
+    FocusScope.of(context).requestFocus(_passwordFocusNode);
+  }
+
+  void _onCompletePasswordEditing() {
+    // if (widget.formType == SignEmailType.signIn) {
+    //   _submit();
+    // } else {
+    //   var _newFocus = widget.passwordValidator.isNotEmptyValidation(_password)
+    //       ? _passwordRepeatFocusNode
+    //       : _passwordFocusNode;
+    //   FocusScope.of(context).requestFocus(_newFocus);
+    // }
+  }
+
+  void _onCompletePasswordConfirmEditing() {
+    // if (widget.formType == SignEmailType.signUp) {
+    //   _submit();
+    // }
+  }
+
+  void _updateState() {
+    setState(() {});
+  }
+
+  void _submit() async {
+    final authProvider = context.read<AuthService>();
+
+    setState(() {
+      _isLoading = true;
+      _isFormSubmitted = true;
+    });
+    try {
+      if (selectedSignType == SignType.login) {
+        await authProvider.createUserWithEmailAndPassword(_email,
+            _password); //TODO:: validation + confirm password validation
+      } else {
+        await authProvider.signInWithEmailAndPassword(
+            _email, _password); // TODO:: validation
+      }
+      Navigator.pop(context);
+    } on PlatformException catch (error) {
+      const String errorTitle = 'Authentication Error';
+      PlatformExceptionAlertDialog(
+        title: errorTitle,
+        exception: error,
+      ).show(context);
+    } catch (error) {
+      print(error.toString());
+    } finally {
+      _isLoading = false;
+      _updateState();
+    }
   }
 }
