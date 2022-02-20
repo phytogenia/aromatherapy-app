@@ -1,3 +1,4 @@
+import 'package:aromatherapy/screens/ForgotPassword/passwordreset.dart';
 import 'package:aromatherapy/screens/Login/Login.dart';
 import 'package:flutter/material.dart';
 
@@ -205,7 +206,7 @@ class _PhoneConfirmationState extends State<PhoneConfirmation> {
                                 onTap: () {
 
                                   // Sigup method
-                                  Navigator.push(context, new MaterialPageRoute(builder: (context)=>LoginScreen()));
+                                  Navigator.push(context, new MaterialPageRoute(builder: (context)=>passwordreset()));
                                 },
 
                                 child: Container(

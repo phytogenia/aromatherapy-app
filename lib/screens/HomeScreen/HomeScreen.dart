@@ -23,7 +23,6 @@ class _HomeState extends State<Home> {
     return Scaffold(
       extendBody: true,
       bottomNavigationBar: CurvedNavigationBar(
-
         onTap: (int index) {
           setState(() {
             SelectedIndex = index;
@@ -93,7 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-
       extendBody: true,
       body: oils.isEmpty || recipes.isEmpty || categories.isEmpty
           ? const Center(
