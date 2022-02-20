@@ -275,6 +275,7 @@ class _oildetailsState extends State<oildetails> {
                                         height:
                                             MediaQuery.of(context).size.height,
                                         child: ListView.builder(
+                                          padding: const EdgeInsets.symmetric(vertical: 10),
                                             physics:
                                                 const NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
