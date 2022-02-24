@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/platform_alert_dialog.dart';
+import '../../components/primary_category_card.dart';
 import '../../services/auth_service.dart';
+import '../../utils/constants.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -202,26 +204,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(
                               height: 25,
                             ),
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: SizedBox(
-                                height: 120,
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    padding: EdgeInsets.zero,
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: categories.length,
-                                    itemBuilder: (context, index) {
-                                      if (index % 2 == 0) {
-                                        return _buildOrangeCategories(
-                                            context, categories[index]);
-                                      } else {
-                                        return _buildGreenCategories(
-                                            context, categories[index]);
-                                      }
-                                    }),
-                              ),
-                            )
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: const [
+                                PrimaryCategoryCard(
+                                  text: 'Oil',
+                                  backgroundColor: kPrimaryColor,
+                                  iconImagePath: 'assets/images/greenoil.png',
+                                ),
+                                PrimaryCategoryCard(
+                                  text: 'Recipe',
+                                  backgroundColor: kSecondaryColor,
+                                  iconImagePath: 'assets/images/recipe.png',
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -347,68 +346,6 @@ Widget _buildOils(BuildContext context, String oilname) {
             'Scientific name',
             style: const TextStyle(color: Colors.white),
           )
-        ],
-      ),
-    ),
-  );
-}
-
-Widget _buildOrangeCategories(BuildContext context, String name) {
-  return Container(
-    width: 130,
-    padding: const EdgeInsets.all(8),
-    margin: const EdgeInsets.symmetric(horizontal: 20),
-    decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(15),
-        ),
-        border: Border.all(color: Color(0xFFE88B00)),
-        color: Colors.white),
-    child: Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            'assets/images/recipe.png',
-            height: 30,
-            width: 30,
-          ),
-          const SizedBox(height: 5),
-          Text(
-            name,
-            style: const TextStyle(color: Color(0xFFE88B00)),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-Widget _buildGreenCategories(BuildContext context, String name) {
-  return Container(
-    width: 130,
-    padding: const EdgeInsets.all(8),
-    margin: const EdgeInsets.symmetric(horizontal: 20),
-    decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(15),
-        ),
-        border: Border.all(color: Color(0xff61BB46)),
-        color: Colors.white),
-    child: Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            'assets/images/greenoil.png',
-            height: 30,
-            width: 30,
-          ),
-          const SizedBox(height: 5),
-          Text(
-            name,
-            style: const TextStyle(color: Color(0xff61BB46)),
-          ),
         ],
       ),
     ),

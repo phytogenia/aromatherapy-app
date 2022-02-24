@@ -18,7 +18,7 @@ class UrlText extends StatelessWidget {
         style: style ??
             const TextStyle(
               fontWeight: FontWeight.w800,
-              color: kTextColor,
+              color: kPrimaryTextColor,
             ),
       ),
     );

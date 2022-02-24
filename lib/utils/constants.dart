@@ -1,7 +1,8 @@
 import 'package:aromatherapy/utils/size_config.dart';
 import 'package:flutter/material.dart';
 
-const kPrimaryColor = Color(0xFFF8C031);
+const kPrimaryColor = Color(0xFF15CA4D);
+const kSecondaryColor = Color(0xFFF48900);
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,
@@ -10,8 +11,8 @@ const kPrimaryGradientColor = LinearGradient(
 );
 const coco = Color(0xFFFF7643);
 
-const kSecondaryColor = Color(0xFFB4B1B7);
-const kTextColor = Color(0xFF3C3B3C);
+const kSecondaryTextColor = Color(0xFFB4B1B7);
+const kPrimaryTextColor = Color(0xFF3C3B3C);
 const kAnimationDuration = Duration(milliseconds: 200);
 
 final headingStyle = TextStyle(
@@ -46,6 +47,6 @@ final otpInputDecoration = InputDecoration(
 OutlineInputBorder outlineInputBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(getProportionateScreenWidth(15)),
-    borderSide: BorderSide(color: kTextColor),
+    borderSide: BorderSide(color: kPrimaryTextColor),
   );
 }
