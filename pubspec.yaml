@@ -40,7 +40,7 @@ dependencies:
 
   url_launcher: ^6.0.17
   provider: ^6.0.1
-
+  google_fonts: ^2.2.0
   # Firebase services
   firebase_core: ^1.7.0
   firebase_auth: ^3.1.3

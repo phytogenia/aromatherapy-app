@@ -46,9 +46,11 @@ class PrimaryTopItemCard extends StatelessWidget {
                   color: Colors.white, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 2),
-            Text(
-              subText,
-              style: const TextStyle(color: Colors.white),
+            Flexible(
+              child: Text(
+                subText,
+                style: const TextStyle(color: Colors.white),
+              ),
             )
           ],
         ),

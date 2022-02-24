@@ -1,5 +1,6 @@
 import 'package:aromatherapy/screens/landing_screen.dart';
 import 'package:aromatherapy/services/auth_service.dart';
+import 'package:aromatherapy/utils/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,9 +17,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provider<AuthService>(
       create: (context) => FirebaseAuthService(),
-      child: const MaterialApp(
+      child: MaterialApp(
         title: 'Aromatherapy App',
-        home: LandingScreen(),
+        home: const LandingScreen(),
+        theme: theme(),
       ),
     );
   }

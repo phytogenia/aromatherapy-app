@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'constants.dart';
 
 ThemeData theme() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
-    fontFamily: "Poppins",
     appBarTheme: appBarTheme(),
     textTheme: textTheme(),
     inputDecorationTheme: inputDecorationTheme(),
@@ -32,9 +32,9 @@ InputDecorationTheme inputDecorationTheme() {
 }
 
 TextTheme textTheme() {
-  return const TextTheme(
-    bodyText1: TextStyle(color: kPrimaryTextColor),
-    bodyText2: TextStyle(color: kPrimaryTextColor),
+  return GoogleFonts.poppinsTextTheme().apply(
+    bodyColor: kPrimaryTextColor,
+    displayColor: kPrimaryTextColor,
   );
 }
 
