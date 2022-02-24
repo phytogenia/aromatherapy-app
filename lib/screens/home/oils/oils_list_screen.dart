@@ -1,4 +1,7 @@
+import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
+
+import '../../../components/secondary_item_card.dart';
 
 class OilListScreen extends StatefulWidget {
   const OilListScreen({Key? key}) : super(key: key);
@@ -132,17 +135,25 @@ class _OilListScreenState extends State<OilListScreen> {
                                 ),
                                 const SizedBox(height: 20),
                                 SizedBox(
-                                    height: MediaQuery.of(context).size.height,
-                                    child: ListView.builder(
-                                        physics:
-                                            const AlwaysScrollableScrollPhysics(),
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        itemCount: oils.length,
-                                        scrollDirection: Axis.vertical,
-                                        itemBuilder: (context, index) {
-                                          return BuildOil(context, oils[index]);
-                                        })),
+                                  height: MediaQuery.of(context).size.height,
+                                  child: ListView.builder(
+                                    physics:
+                                        const AlwaysScrollableScrollPhysics(),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15),
+                                    itemCount: oils.length,
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (context, index) {
+                                      return SecondaryItemCard(
+                                          text: oils[index],
+                                          subText:
+                                              '${oils[index]} Scientific name',
+                                          imagePath:
+                                              'assets/images/whiteoil.png',
+                                          backgroundColor: kPrimaryColor);
+                                    },
+                                  ),
+                                ),
                                 const SizedBox(
                                   height: 25,
                                 ),
