@@ -1,6 +1,5 @@
 import 'package:aromatherapy/components/primary_sign_button.dart';
 import 'package:aromatherapy/components/primary_textformfield.dart';
-import 'package:aromatherapy/screens/ForgotPassword/ForgotPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +9,7 @@ import '../../components/platform_exception_alert_dialog.dart';
 import '../../components/primary_socialmedia_button.dart';
 import '../../components/url_text.dart';
 import '../../services/auth_service.dart';
+import 'forgot_password/forgot_password_screen.dart';
 
 abstract class SignType {
   static int get login => 0;
@@ -225,8 +225,10 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.topRight,
           child: InkWell(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ForgotPassword()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ForgotPasswordScreen()));
             },
             child: const Text(
               'Forgot your password ?',

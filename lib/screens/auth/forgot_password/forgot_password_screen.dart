@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'ConfirmPhoneNumber.dart';
+import 'confirm_phone_number_screen.dart';
 
-class ForgotPassword extends StatefulWidget {
-  const ForgotPassword({Key? key}) : super(key: key);
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  _ForgotPasswordState createState() => _ForgotPasswordState();
+  _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
 }
 
-class _ForgotPasswordState extends State<ForgotPassword> {
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +110,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                       context,
                                       new MaterialPageRoute(
                                           builder: (context) =>
-                                              PhoneConfirmation()));
+                                              ConfirmPhoneNumberScreen()));
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(

@@ -1,16 +1,14 @@
-import 'package:aromatherapy/screens/ForgotPassword/ForgotPassword.dart';
-import 'package:aromatherapy/screens/HomeScreen/HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
-class oildetails extends StatefulWidget {
-  const oildetails({Key? key}) : super(key: key);
+class OilDetails extends StatefulWidget {
+  const OilDetails({Key? key}) : super(key: key);
 
   @override
-  _oildetailsState createState() => _oildetailsState();
+  _OilDetailsState createState() => _OilDetailsState();
 }
 
-class _oildetailsState extends State<oildetails> {
+class _OilDetailsState extends State<OilDetails> {
   bool isObscure = true;
   int SelectedIndex = 0;
   List aspect = [];
@@ -275,7 +273,8 @@ class _oildetailsState extends State<oildetails> {
                                         height:
                                             MediaQuery.of(context).size.height,
                                         child: ListView.builder(
-                                          padding: const EdgeInsets.symmetric(vertical: 10),
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10),
                                             physics:
                                                 const NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
@@ -284,10 +283,9 @@ class _oildetailsState extends State<oildetails> {
                                             itemBuilder: (context, index) {
                                               return prop(context, odor[index]);
                                             }))
-
-                                        : const SizedBox(
-                                            height: 0,
-                                          )
+                                    : const SizedBox(
+                                        height: 0,
+                                      )
                               ],
                             ),
                           ),

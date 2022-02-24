@@ -1,15 +1,13 @@
-import 'package:aromatherapy/screens/OilDetails/oildetails.dart';
 import 'package:flutter/material.dart';
 
-import 'ConfirmPhoneNumber.dart';
-class passwordreset extends StatefulWidget {
-  const passwordreset({Key? key}) : super(key: key);
+class PasswordResetScreen extends StatefulWidget {
+  const PasswordResetScreen({Key? key}) : super(key: key);
 
   @override
-  _passwordresetState createState() => _passwordresetState();
+  _PasswordResetScreenState createState() => _PasswordResetScreenState();
 }
 
-class _passwordresetState extends State<passwordreset> {
+class _PasswordResetScreenState extends State<PasswordResetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,12 +72,10 @@ class _passwordresetState extends State<passwordreset> {
                                 child: Text(
                                   'Reset Password',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 18),
-
-
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
                                 ),
                               ),
-
                               const SizedBox(height: 60),
                               Container(
                                 padding: const EdgeInsets.symmetric(
@@ -91,12 +87,10 @@ class _passwordresetState extends State<passwordreset> {
                                       hintText: 'New password',
                                       hintStyle: TextStyle(
                                           fontSize: 15,
-                                          color: Colors.grey
-                                              .withOpacity(.7))),
+                                          color: Colors.grey.withOpacity(.7))),
                                 ),
                               ),
                               const SizedBox(height: 10),
-
                               Container(
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 30),
@@ -107,18 +101,12 @@ class _passwordresetState extends State<passwordreset> {
                                       hintText: 'Confirm new password',
                                       hintStyle: TextStyle(
                                           fontSize: 15,
-                                          color: Colors.grey
-                                              .withOpacity(.7))),
+                                          color: Colors.grey.withOpacity(.7))),
                                 ),
                               ),
-
                               const SizedBox(height: 100),
-
                               GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context, new MaterialPageRoute(builder: (context)=>oildetails()));
-                                },
-
+                                onTap: () {},
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 10, horizontal: 50),
@@ -130,8 +118,8 @@ class _passwordresetState extends State<passwordreset> {
                                             blurRadius: 6)
                                       ],
                                       color: Color(0xff61BB46),
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(25))),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(25))),
                                   child: const Text(
                                     'Submit',
                                     style: TextStyle(

@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import '../models/user.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
-import 'HomeScreen/HomeScreen.dart';
-import 'Login/login_screen.dart';
+import 'auth/login_screen.dart';
+import 'home/home_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({Key? key}) : super(key: key);

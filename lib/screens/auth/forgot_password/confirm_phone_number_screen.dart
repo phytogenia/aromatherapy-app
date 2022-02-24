@@ -1,14 +1,15 @@
-import 'package:aromatherapy/screens/ForgotPassword/passwordreset.dart';
+import 'package:aromatherapy/screens/auth/forgot_password/password_reset_screen.dart';
 import 'package:flutter/material.dart';
 
-class PhoneConfirmation extends StatefulWidget {
-  const PhoneConfirmation({Key? key}) : super(key: key);
+class ConfirmPhoneNumberScreen extends StatefulWidget {
+  const ConfirmPhoneNumberScreen({Key? key}) : super(key: key);
 
   @override
-  _PhoneConfirmationState createState() => _PhoneConfirmationState();
+  _ConfirmPhoneNumberScreenState createState() =>
+      _ConfirmPhoneNumberScreenState();
 }
 
-class _PhoneConfirmationState extends State<PhoneConfirmation> {
+class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -197,7 +198,7 @@ class _PhoneConfirmationState extends State<PhoneConfirmation> {
                                       context,
                                       new MaterialPageRoute(
                                           builder: (context) =>
-                                              passwordreset()));
+                                              PasswordResetScreen()));
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(

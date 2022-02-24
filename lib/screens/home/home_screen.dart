@@ -1,5 +1,4 @@
-import 'package:aromatherapy/screens/Oils/ListScreen/ListScreen.dart';
-import 'package:aromatherapy/screens/Recipes/ListScreen/ListRecipes.dart';
+import 'package:aromatherapy/screens/home/recipes/recipes_list_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +7,7 @@ import '../../components/platform_alert_dialog.dart';
 import '../../components/primary_category_card.dart';
 import '../../services/auth_service.dart';
 import '../../utils/constants.dart';
+import 'oils/oils_list_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,9 +18,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _Screens = [
-    const ListScreen(),
+    const OilListScreen(),
     const HomeScreen(),
-    const ListRecipes()
+    const RecipesListScreen()
   ];
   int SelectedIndex = 1; //TODO :: enumeration
 
