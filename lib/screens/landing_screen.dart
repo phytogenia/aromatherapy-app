@@ -1,4 +1,3 @@
-import 'package:aromatherapy/screens/Login/Login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,6 +5,7 @@ import '../models/user.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
 import 'HomeScreen/HomeScreen.dart';
+import 'Login/login_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({Key? key}) : super(key: key);

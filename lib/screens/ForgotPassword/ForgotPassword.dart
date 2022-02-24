@@ -1,4 +1,3 @@
-import 'package:aromatherapy/screens/Login/Login.dart';
 import 'package:flutter/material.dart';
 
 import 'ConfirmPhoneNumber.dart';
@@ -75,19 +74,18 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 child: Text(
                                   'Forgot your password ?',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 15),
-
-
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
                                 ),
                               ),
                               const SizedBox(height: 10),
-
                               const Center(
                                 child: Text(
                                   'Don’t worry! It happens. Please enter the address associated with your account.',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.normal, fontSize: 15),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 15),
                                 ),
                               ),
                               const SizedBox(height: 60),
@@ -97,23 +95,23 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 height: 40,
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    focusColor: Colors.green,
+                                      focusColor: Colors.green,
                                       hintText: 'Enter you Email',
                                       hintStyle: TextStyle(
                                           fontSize: 15,
-                                          color: Colors.grey
-                                              .withOpacity(.7))),
+                                          color: Colors.grey.withOpacity(.7))),
                                 ),
                               ),
                               const SizedBox(height: 100),
-
                               GestureDetector(
                                 onTap: () {
-
-                                    // Sigup method
-                                    Navigator.push(context, new MaterialPageRoute(builder: (context)=>PhoneConfirmation()));
-                                  },
-
+                                  // Sigup method
+                                  Navigator.push(
+                                      context,
+                                      new MaterialPageRoute(
+                                          builder: (context) =>
+                                              PhoneConfirmation()));
+                                },
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 10, horizontal: 50),
@@ -125,8 +123,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                             blurRadius: 6)
                                       ],
                                       color: Color(0xff61BB46),
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(25))),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(25))),
                                   child: const Text(
                                     'Submit',
                                     style: TextStyle(

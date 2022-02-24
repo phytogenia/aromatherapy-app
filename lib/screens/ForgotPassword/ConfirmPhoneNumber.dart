@@ -1,5 +1,4 @@
 import 'package:aromatherapy/screens/ForgotPassword/passwordreset.dart';
-import 'package:aromatherapy/screens/Login/Login.dart';
 import 'package:flutter/material.dart';
 
 class PhoneConfirmation extends StatefulWidget {
@@ -72,24 +71,21 @@ class _PhoneConfirmationState extends State<PhoneConfirmation> {
                               const Align(
                                 alignment: Alignment.center,
                                 child: Text(
-
                                   'Enter your confirmation \n number',
                                   textAlign: TextAlign.center,
-
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 18),
-
-
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
                                 ),
                               ),
                               const SizedBox(height: 10),
-
                               const Center(
                                 child: Text(
                                   'An 4 digit code has been sent to your email adress',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.normal, fontSize: 15),
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 15),
                                 ),
                               ),
                               const SizedBox(height: 60),
@@ -102,115 +98,108 @@ class _PhoneConfirmationState extends State<PhoneConfirmation> {
                                     padding: EdgeInsets.all(8),
                                     child: TextFormField(
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(fontWeight: FontWeight.bold),
-                                      keyboardType: TextInputType.number,
-                                      maxLength: 1,
-                                      decoration: const InputDecoration(
-                                        focusColor: Colors.green,
-                                        counterText: ''
-                                      ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        color: Colors.grey.withOpacity(.2),
-                                        border: Border.all(
-                                            color: Colors.grey.withOpacity(.6),
-                                            width: 1),
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(5))
-                                    ),
-                                  ),
-                                  const SizedBox(width: 15),
-
-                                  Container(
-                                    height: 50,
-                                    width: 50,
-                                    padding: EdgeInsets.all(8),
-                                    child: TextFormField(
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontWeight: FontWeight.bold),
-                                      maxLength: 1,
-                                      keyboardType: TextInputType.number,
-                                      decoration: const InputDecoration(
-                                        focusColor: Colors.green,
-                                        counterText: ''
-                                      ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        color: Colors.grey.withOpacity(.2),
-                                        border: Border.all(
-                                            color: Colors.grey.withOpacity(.6),
-                                            width: 1),
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(5))
-                                    ),
-                                  ),
-                                  const SizedBox(width: 15),
-
-                                  Container(
-                                    height: 50,
-                                    width: 50,
-                                    padding: EdgeInsets.all(8),
-                                    child: TextFormField(
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontWeight: FontWeight.bold),
-                                      keyboardType: TextInputType.number,
-                                      maxLength: 1,
-                                      decoration: const InputDecoration(
-                                        focusColor: Colors.green,
-                                        counterText: ''
-                                      ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.rectangle,
-                                        color: Colors.grey.withOpacity(.2),
-                                        border: Border.all(
-                                            color: Colors.grey.withOpacity(.6),
-                                            width: 1),
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(5))
-                                    ),
-                                  ),
-                                  const SizedBox(width: 15),
-
-                                  Container(
-                                    height: 50,
-                                    width: 50,
-                                    padding: EdgeInsets.all(8),
-                                    child: TextFormField(
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
                                       keyboardType: TextInputType.number,
                                       maxLength: 1,
                                       decoration: const InputDecoration(
                                           focusColor: Colors.green,
-                                          counterText: ''
-                                          ),
+                                          counterText: ''),
                                     ),
                                     decoration: BoxDecoration(
-                                      shape: BoxShape.rectangle,
-                                      color: Colors.grey.withOpacity(.2),
-                                      border: Border.all(
-                                          color: Colors.grey.withOpacity(.6),
-                                          width: 1),
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(5))
+                                        shape: BoxShape.rectangle,
+                                        color: Colors.grey.withOpacity(.2),
+                                        border: Border.all(
+                                            color: Colors.grey.withOpacity(.6),
+                                            width: 1),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5))),
+                                  ),
+                                  const SizedBox(width: 15),
+                                  Container(
+                                    height: 50,
+                                    width: 50,
+                                    padding: EdgeInsets.all(8),
+                                    child: TextFormField(
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      maxLength: 1,
+                                      keyboardType: TextInputType.number,
+                                      decoration: const InputDecoration(
+                                          focusColor: Colors.green,
+                                          counterText: ''),
                                     ),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        color: Colors.grey.withOpacity(.2),
+                                        border: Border.all(
+                                            color: Colors.grey.withOpacity(.6),
+                                            width: 1),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5))),
+                                  ),
+                                  const SizedBox(width: 15),
+                                  Container(
+                                    height: 50,
+                                    width: 50,
+                                    padding: EdgeInsets.all(8),
+                                    child: TextFormField(
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      keyboardType: TextInputType.number,
+                                      maxLength: 1,
+                                      decoration: const InputDecoration(
+                                          focusColor: Colors.green,
+                                          counterText: ''),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        color: Colors.grey.withOpacity(.2),
+                                        border: Border.all(
+                                            color: Colors.grey.withOpacity(.6),
+                                            width: 1),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5))),
+                                  ),
+                                  const SizedBox(width: 15),
+                                  Container(
+                                    height: 50,
+                                    width: 50,
+                                    padding: EdgeInsets.all(8),
+                                    child: TextFormField(
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      keyboardType: TextInputType.number,
+                                      maxLength: 1,
+                                      decoration: const InputDecoration(
+                                          focusColor: Colors.green,
+                                          counterText: ''),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        color: Colors.grey.withOpacity(.2),
+                                        border: Border.all(
+                                            color: Colors.grey.withOpacity(.6),
+                                            width: 1),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5))),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 100),
-
                               GestureDetector(
                                 onTap: () {
-
                                   // Sigup method
-                                  Navigator.push(context, new MaterialPageRoute(builder: (context)=>passwordreset()));
+                                  Navigator.push(
+                                      context,
+                                      new MaterialPageRoute(
+                                          builder: (context) =>
+                                              passwordreset()));
                                 },
-
                                 child: Container(
-
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 10, horizontal: 50),
                                   decoration: const BoxDecoration(
@@ -221,8 +210,8 @@ class _PhoneConfirmationState extends State<PhoneConfirmation> {
                                             blurRadius: 6)
                                       ],
                                       color: Color(0xff61BB46),
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(25))),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(25))),
                                   child: const Text(
                                     'Submit',
                                     style: TextStyle(

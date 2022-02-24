@@ -10,8 +10,8 @@ const kPrimaryGradientColor = LinearGradient(
 );
 const coco = Color(0xFFFF7643);
 
-const kSecondaryColor = Color(0xFF979797);
-const kTextColor = Color(0xFF656565);
+const kSecondaryColor = Color(0xFFB4B1B7);
+const kTextColor = Color(0xFF3C3B3C);
 const kAnimationDuration = Duration(milliseconds: 200);
 
 final headingStyle = TextStyle(

@@ -8,6 +8,7 @@ import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 import '../../components/platform_exception_alert_dialog.dart';
 import '../../components/primary_socialmedia_button.dart';
+import '../../components/url_text.dart';
 import '../../services/auth_service.dart';
 
 abstract class SignType {
@@ -224,15 +225,13 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.topRight,
           child: InkWell(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ForgotPassword()));},
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ForgotPassword()));
+            },
             child: const Text(
               'Forgot your password ?',
               style: TextStyle(
-                  color: Color(0xff61BB46),
-                  fontWeight: FontWeight.bold),
+                  color: Color(0xff61BB46), fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -282,16 +281,33 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
         const SizedBox(height: 25),
-        const Text(
-          'By signing up, you agree to Aromatherapy\'s Terms of Service and Privacy Policy',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.grey,
-            fontSize: 12,
-          ),
-        )
+        _buildFooter(),
       ],
     );
+  }
+
+  Widget _buildFooter() {
+    return Column(children: [
+      const Text(
+        'By segning up, you agree to Aromatherapy\'s',
+      ),
+      Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          UrlText(
+            text: 'Terms of Service',
+            url: 'https://google.com/', //TODO:: to replace
+          ),
+          const Text(
+            ' and ',
+          ),
+          UrlText(
+            text: 'Privacy Policy',
+            url: 'https://google.com/', //TODO:: to replace
+          ),
+        ],
+      )
+    ]);
   }
 
   Form _buildLoginForm() {
