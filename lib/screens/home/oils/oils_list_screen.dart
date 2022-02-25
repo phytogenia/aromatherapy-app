@@ -1,7 +1,9 @@
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../../../components/primary_top_list_item.dart';
 import '../../../components/secondary_item_card.dart';
+import '../../../components/secondary_list_items.dart';
 
 class OilListScreen extends StatefulWidget {
   const OilListScreen({Key? key}) : super(key: key);
@@ -62,7 +64,7 @@ class _OilListScreenState extends State<OilListScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 50,
                           ),
                           const Padding(
@@ -74,15 +76,13 @@ class _OilListScreenState extends State<OilListScreen> {
                             ),
                           ),
                           SizedBox(
-                              height: 120,
-                              child: ListView.builder(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  itemCount: oils.length,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    return BuildOils(context, oils[index]);
-                                  })),
+                            height: 120,
+                            child: PrimaryTopListItems(
+                              list: oils,
+                              backgroundColor: kPrimaryColor,
+                              imagePath: 'assets/images/whiteoil.png',
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.all(30.0),
                             child: Column(
@@ -136,22 +136,10 @@ class _OilListScreenState extends State<OilListScreen> {
                                 const SizedBox(height: 20),
                                 SizedBox(
                                   height: MediaQuery.of(context).size.height,
-                                  child: ListView.builder(
-                                    physics:
-                                        const AlwaysScrollableScrollPhysics(),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15),
-                                    itemCount: oils.length,
-                                    scrollDirection: Axis.vertical,
-                                    itemBuilder: (context, index) {
-                                      return SecondaryItemCard(
-                                          text: oils[index],
-                                          subText:
-                                              '${oils[index]} Scientific name',
-                                          imagePath:
-                                              'assets/images/whiteoil.png',
-                                          backgroundColor: kPrimaryColor);
-                                    },
+                                  child: SecondaryListItems(
+                                    list: oils,
+                                    backgroundColor: kPrimaryColor,
+                                    imagePath: 'assets/images/whiteoil.png',
                                   ),
                                 ),
                                 const SizedBox(
@@ -205,66 +193,6 @@ class _OilListScreenState extends State<OilListScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget BuildOil(BuildContext context, String oilname) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Stack(clipBehavior: Clip.none, children: [
-        Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(5),
-              ),
-              border: Border.all(color: Colors.grey),
-              color: Colors.white),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  oilname,
-                  style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 2),
-                const Text(
-                  'Scientific name',
-                  style: TextStyle(color: Colors.black),
-                )
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-          left: 20,
-          bottom: 20,
-          child: Container(
-            margin: const EdgeInsets.all(5),
-            padding: const EdgeInsets.all(8),
-            width: 50,
-            height: 50,
-            decoration: const BoxDecoration(
-                color: Color(0xff61BB46),
-                borderRadius: BorderRadius.all(Radius.circular(5))),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset('assets/images/whiteoil.png'),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ]),
     );
   }
 }
