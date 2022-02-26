@@ -9,6 +9,7 @@ import '../../components/platform_exception_alert_dialog.dart';
 import '../../components/primary_socialmedia_button.dart';
 import '../../components/url_text.dart';
 import '../../services/auth_service.dart';
+import '../../utils/constants.dart';
 import 'forgot_password/forgot_password_screen.dart';
 
 abstract class SignType {
@@ -131,8 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             MediaQuery.of(context).size.width, 130.0)),
                     image: DecorationImage(
                         colorFilter: ColorFilter.mode(
-                            Color(0xff61BB46).withOpacity(.8),
-                            BlendMode.srcOver),
+                            kPrimaryColor.withOpacity(.8), BlendMode.srcOver),
                         image: const AssetImage('assets/images/pictop.jpg'),
                         fit: BoxFit.cover)),
                 child: Center(
@@ -195,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 selectedSignType = index;
                 _updateState();
               },
-              //indicatorColor: Color(0xff61BB46),
+              //indicatorColor: kPrimaryColor,
               tabs: const [
                 Tab(
                   text: "Log in",
@@ -204,10 +204,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: "Sign up",
                 ),
               ],
-              unselectedLabelColor: const Color(0xff61BB46),
+              unselectedLabelColor: kPrimaryColor,
               labelColor: Colors.white,
               indicator: RectangularIndicator(
-                color: const Color(0xff61BB46),
+                color: kPrimaryColor,
                 bottomLeftRadius: 100,
                 bottomRightRadius: 100,
                 topLeftRadius: 100,
@@ -228,12 +228,12 @@ class _LoginScreenState extends State<LoginScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ForgotPasswordScreen()));
+                      builder: (context) => const ForgotPasswordScreen()));
             },
             child: const Text(
               'Forgot your password ?',
-              style: TextStyle(
-                  color: Color(0xff61BB46), fontWeight: FontWeight.bold),
+              style:
+                  TextStyle(color: kPrimaryColor, fontWeight: FontWeight.bold),
             ),
           ),
         ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/constants.dart';
+
 class PrimarySignButton extends StatelessWidget {
   Function() onTap;
   String text;
@@ -17,7 +19,7 @@ class PrimarySignButton extends StatelessWidget {
             boxShadow: [
               BoxShadow(color: Colors.grey, offset: Offset(0, 2), blurRadius: 6)
             ],
-            color: Color(0xff61BB46),
+            color: kPrimaryColor,
             borderRadius: BorderRadius.all(Radius.circular(25))),
         child: Text(
           text,

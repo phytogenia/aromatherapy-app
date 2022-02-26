@@ -48,7 +48,7 @@ class _OilListScreenState extends State<OilListScreen> {
         body: oils.isEmpty
             ? const Center(
                 child: CircularProgressIndicator(
-                  color: Color(0xff61BB46),
+                  color: kPrimaryColor,
                 ),
               )
             : SafeArea(
@@ -162,7 +162,7 @@ class _OilListScreenState extends State<OilListScreen> {
       padding: const EdgeInsets.all(8),
       width: 130,
       decoration: const BoxDecoration(
-          color: Color(0xff61BB46),
+          color: kPrimaryColor,
           borderRadius: BorderRadius.all(Radius.circular(15))),
       child: Center(
         child: Column(

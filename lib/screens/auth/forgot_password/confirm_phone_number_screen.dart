@@ -1,6 +1,8 @@
 import 'package:aromatherapy/screens/auth/forgot_password/password_reset_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/constants.dart';
+
 class ConfirmPhoneNumberScreen extends StatefulWidget {
   const ConfirmPhoneNumberScreen({Key? key}) : super(key: key);
 
@@ -33,8 +35,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
                               MediaQuery.of(context).size.width, 130.0)),
                       image: DecorationImage(
                           colorFilter: ColorFilter.mode(
-                              Color(0xff61BB46).withOpacity(.8),
-                              BlendMode.srcOver),
+                              kPrimaryColor.withOpacity(.8), BlendMode.srcOver),
                           image: const AssetImage('assets/images/pictop.jpg'),
                           fit: BoxFit.cover)),
                   child: Center(
@@ -210,7 +211,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
                                             offset: Offset(0, 2),
                                             blurRadius: 6)
                                       ],
-                                      color: Color(0xff61BB46),
+                                      color: kPrimaryColor,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(25))),
                                   child: const Text(

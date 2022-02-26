@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/constants.dart';
+
 class PasswordResetScreen extends StatefulWidget {
   const PasswordResetScreen({Key? key}) : super(key: key);
 
@@ -29,11 +31,10 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                       borderRadius: BorderRadius.vertical(
                           bottom: Radius.elliptical(
                               MediaQuery.of(context).size.width, 130.0)),
-                      image: DecorationImage(
+                      image: const DecorationImage(
                           colorFilter: ColorFilter.mode(
-                              Color(0xff61BB46).withOpacity(.8),
-                              BlendMode.srcOver),
-                          image: const AssetImage('assets/images/pictop.jpg'),
+                              kPrimaryColor, BlendMode.srcOver),
+                          image: AssetImage('assets/images/pictop.jpg'),
                           fit: BoxFit.cover)),
                   child: Center(
                     child: Image.asset('assets/images/intersect.png'),
@@ -117,7 +118,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
                                             offset: Offset(0, 2),
                                             blurRadius: 6)
                                       ],
-                                      color: Color(0xff61BB46),
+                                      color: kPrimaryColor,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(25))),
                                   child: const Text(

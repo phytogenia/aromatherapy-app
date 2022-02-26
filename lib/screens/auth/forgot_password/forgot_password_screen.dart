@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/constants.dart';
 import 'confirm_phone_number_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -33,8 +34,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               MediaQuery.of(context).size.width, 130.0)),
                       image: DecorationImage(
                           colorFilter: ColorFilter.mode(
-                              Color(0xff61BB46).withOpacity(.8),
-                              BlendMode.srcOver),
+                              kPrimaryColor.withOpacity(.8), BlendMode.srcOver),
                           image: const AssetImage('assets/images/pictop.jpg'),
                           fit: BoxFit.cover)),
                   child: Center(
@@ -108,7 +108,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   // Sigup method
                                   Navigator.push(
                                       context,
-                                      new MaterialPageRoute(
+                                      MaterialPageRoute(
                                           builder: (context) =>
                                               ConfirmPhoneNumberScreen()));
                                 },
@@ -122,7 +122,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                             offset: Offset(0, 2),
                                             blurRadius: 6)
                                       ],
-                                      color: Color(0xff61BB46),
+                                      color: kPrimaryColor,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(25))),
                                   child: const Text(

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
+import '../../../components/primary_list_properties.dart';
+import '../../../components/primary_property_item.dart';
+import '../../../utils/constants.dart';
+
 class OilDetails extends StatefulWidget {
   const OilDetails({Key? key}) : super(key: key);
 
@@ -9,11 +13,10 @@ class OilDetails extends StatefulWidget {
 }
 
 class _OilDetailsState extends State<OilDetails> {
-  bool isObscure = true;
   int SelectedIndex = 0;
-  List aspect = [];
-  List colo = [];
-  List odor = [];
+  List<String> aspect = [];
+  List<String> colo = [];
+  List<String> odor = [];
 
   @override
   void initState() {
@@ -41,10 +44,11 @@ class _OilDetailsState extends State<OilDetails> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Center(
-            child: Text(
-          "Essential oils",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        )),
+          child: Text(
+            "Essential oils",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
@@ -68,11 +72,10 @@ class _OilDetailsState extends State<OilDetails> {
                         borderRadius: BorderRadius.vertical(
                             bottom: Radius.elliptical(
                                 MediaQuery.of(context).size.width, 130.0)),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                             colorFilter: ColorFilter.mode(
-                                const Color(0xff61BB46).withOpacity(.8),
-                                BlendMode.srcOver),
-                            image: const AssetImage('assets/images/pictop.jpg'),
+                                kPrimaryColor, BlendMode.srcOver),
+                            image: AssetImage('assets/images/pictop.jpg'),
                             fit: BoxFit.cover)),
                   ), // Picture on top background
 
@@ -122,7 +125,7 @@ class _OilDetailsState extends State<OilDetails> {
                                   indent: 60,
                                   thickness: 1,
                                   endIndent: 60,
-                                  color: Color(0xff61BB46),
+                                  color: kPrimaryColor,
                                 ),
                                 const SizedBox(height: 5),
                                 const Align(
@@ -152,7 +155,7 @@ class _OilDetailsState extends State<OilDetails> {
                                     'Allergies',
                                     style: TextStyle(
                                         fontSize: 15,
-                                        color: Color(0xff61BB46),
+                                        color: kPrimaryColor,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -162,7 +165,7 @@ class _OilDetailsState extends State<OilDetails> {
                                     'Melaleuque',
                                     style: TextStyle(
                                         fontSize: 15,
-                                        color: Color(0xff61BB46),
+                                        color: kPrimaryColor,
                                         fontStyle: FontStyle.italic),
                                   ),
                                 ),
@@ -179,14 +182,10 @@ class _OilDetailsState extends State<OilDetails> {
                                 ),
                                 const SizedBox(height: 5),
                                 SizedBox(
-                                    height: 40,
-                                    child: ListView.builder(
-                                        itemCount: aspect.length,
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) {
-                                          return aspectt(
-                                              context, aspect[index]);
-                                        })),
+                                  height: 40,
+                                  child:
+                                      PrimaryListProperties(properties: aspect),
+                                ),
                                 const SizedBox(height: 10),
                                 const Align(
                                   alignment: Alignment.topLeft,
@@ -200,13 +199,10 @@ class _OilDetailsState extends State<OilDetails> {
                                 ),
                                 const SizedBox(height: 5),
                                 SizedBox(
-                                    height: 40,
-                                    child: ListView.builder(
-                                        itemCount: colo.length,
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) {
-                                          return aspectt(context, colo[index]);
-                                        })),
+                                  height: 40,
+                                  child:
+                                      PrimaryListProperties(properties: colo),
+                                ),
                                 const SizedBox(height: 10),
                                 const Align(
                                   alignment: Alignment.topLeft,
@@ -220,13 +216,10 @@ class _OilDetailsState extends State<OilDetails> {
                                 ),
                                 const SizedBox(height: 5),
                                 SizedBox(
-                                    height: 40,
-                                    child: ListView.builder(
-                                        itemCount: odor.length,
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) {
-                                          return aspectt(context, odor[index]);
-                                        })),
+                                  height: 40,
+                                  child:
+                                      PrimaryListProperties(properties: odor),
+                                ),
                                 const SizedBox(height: 20),
                                 DefaultTabController(
                                     initialIndex: SelectedIndex,
@@ -244,7 +237,7 @@ class _OilDetailsState extends State<OilDetails> {
                                         onTap: (int index) {
                                           setState(() {});
                                         },
-                                        //indicatorColor: Color(0xff61BB46),
+                                        //indicatorColor: kPrimaryColor,
                                         tabs: const [
                                           Tab(
                                             text: "Health",
@@ -256,11 +249,10 @@ class _OilDetailsState extends State<OilDetails> {
                                             text: "Well Being",
                                           ),
                                         ],
-                                        unselectedLabelColor:
-                                            const Color(0xff61BB46),
+                                        unselectedLabelColor: kPrimaryColor,
                                         labelColor: Colors.white,
                                         indicator: RectangularIndicator(
-                                          color: const Color(0xff61BB46),
+                                          color: kPrimaryColor,
                                           bottomLeftRadius: 100,
                                           bottomRightRadius: 100,
                                           topLeftRadius: 100,
@@ -299,29 +291,6 @@ class _OilDetailsState extends State<OilDetails> {
       ),
     );
   }
-}
-
-Widget aspectt(BuildContext context, String name) {
-  return Container(
-    margin: const EdgeInsets.all(5),
-    padding: const EdgeInsets.all(7),
-    decoration: const BoxDecoration(
-        color: Color(0xff61BB46),
-        borderRadius: BorderRadius.all(Radius.circular(15))),
-    child: Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            name,
-            style: const TextStyle(
-                color: Colors.white, fontStyle: FontStyle.italic),
-          ),
-        ],
-      ),
-    ),
-  );
 }
 
 Widget prop(BuildContext context, String name) {

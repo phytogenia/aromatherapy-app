@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
         },
         color: Colors.white,
         backgroundColor: Colors.transparent,
-        buttonBackgroundColor: Color(0xff61BB46),
+        buttonBackgroundColor: kPrimaryColor,
         index: SelectedIndex,
         items: [
           Padding(
@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: oils.isEmpty || recipes.isEmpty || categories.isEmpty
           ? const Center(
               child: CircularProgressIndicator(
-                color: Color(0xff61BB46),
+                color: kPrimaryColor,
               ),
             )
           : SafeArea(
@@ -149,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: 50,
                                     decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
-                                        color: Color(0xff61BB46)),
+                                        color: kPrimaryColor),
                                     child: const Center(
                                       child: Text(
                                         'Y',
