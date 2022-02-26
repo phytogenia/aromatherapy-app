@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.white,
+      backgroundColor: kSecondaryBackgroundColor,
       body: SafeArea(
         bottom: false,
         top: false,
@@ -150,11 +150,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.65,
                   decoration: const BoxDecoration(
-                      color: Colors.white,
+                      color: kSecondaryBackgroundColor,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                       boxShadow: [
                         BoxShadow(
-                            color: Colors.grey,
+                            color: kSecondaryTextColor,
                             offset: Offset(2, 2),
                             blurRadius: 16)
                       ]),
@@ -187,8 +187,8 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 40,
             decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(100)),
-                border:
-                    Border.all(color: Colors.grey.withOpacity(.4), width: 1)),
+                border: Border.all(
+                    color: kSecondaryTextColor.withOpacity(.4), width: 1)),
             child: TabBar(
               onTap: (int index) {
                 isObscure = true;
@@ -205,7 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
               unselectedLabelColor: kPrimaryColor,
-              labelColor: Colors.white,
+              labelColor: kSecondaryBackgroundColor,
               indicator: RectangularIndicator(
                 color: kPrimaryColor,
                 bottomLeftRadius: 100,
@@ -253,7 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(width: 5),
             Text(
               'Or',
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(color: kSecondaryTextColor),
             ),
             SizedBox(width: 5),
             Expanded(

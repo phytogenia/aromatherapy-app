@@ -32,7 +32,7 @@ class _OilListScreenState extends State<OilListScreen> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(
-            color: Color(0XFF3C3B3C), //change your color here
+            color: kPrimaryTextColor, //change your color here
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -40,7 +40,7 @@ class _OilListScreenState extends State<OilListScreen> {
               child: Text(
             "Essential oils",
             style: TextStyle(
-                color: Color(0XFF3C3B3C), fontWeight: FontWeight.bold),
+                color: kPrimaryTextColor, fontWeight: FontWeight.bold),
           )),
         ),
         resizeToAvoidBottomInset: true,
@@ -107,7 +107,7 @@ class _OilListScreenState extends State<OilListScreen> {
                                   decoration: const BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(30)),
-                                    color: Colors.white,
+                                    color: kSecondaryBackgroundColor,
                                   ),
                                   height: 40,
                                   child: Center(
@@ -115,18 +115,19 @@ class _OilListScreenState extends State<OilListScreen> {
                                       decoration: const InputDecoration(
                                         suffixIcon: Icon(
                                           Icons.search,
-                                          color: Colors.grey,
+                                          color: kSecondaryTextColor,
                                         ),
                                         hintText: 'Quick search for oils ...',
                                         hintStyle: TextStyle(fontSize: 12),
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                                width: 1, color: Colors.grey),
+                                                width: 1,
+                                                color: kSecondaryTextColor),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(30))),
                                         focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                                width: 1, color: Colors.green),
+                                                width: 1, color: kPrimaryColor),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(30))),
                                       ),
@@ -183,12 +184,13 @@ class _OilListScreenState extends State<OilListScreen> {
             Text(
               oilname,
               style: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold),
+                  color: kSecondaryBackgroundColor,
+                  fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 2),
             const Text(
               'Scientific name',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: kSecondaryBackgroundColor),
             )
           ],
         ),

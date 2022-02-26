@@ -26,8 +26,8 @@ class SecondaryItemCard extends StatelessWidget {
               borderRadius: const BorderRadius.all(
                 Radius.circular(5),
               ),
-              border: Border.all(color: Colors.grey),
-              color: Colors.white),
+              border: Border.all(color: kSecondaryTextColor),
+              color: kSecondaryBackgroundColor),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,

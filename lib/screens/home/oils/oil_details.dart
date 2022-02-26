@@ -39,14 +39,15 @@ class _OilDetailsState extends State<OilDetails> {
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.white, //change your color here
+          color: kSecondaryBackgroundColor, //change your color here
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Center(
           child: Text(
             "Essential oils",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: kSecondaryBackgroundColor, fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -86,11 +87,11 @@ class _OilDetailsState extends State<OilDetails> {
                       child: Container(
                         height: MediaQuery.of(context).size.height,
                         decoration: const BoxDecoration(
-                            color: Colors.white,
+                            color: kSecondaryBackgroundColor,
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                             boxShadow: [
                               BoxShadow(
-                                  color: Colors.grey,
+                                  color: kSecondaryTextColor,
                                   offset: Offset(2, 2),
                                   blurRadius: 16)
                             ]),
@@ -116,7 +117,7 @@ class _OilDetailsState extends State<OilDetails> {
                                     'Prunus Armeniaca',
                                     style: TextStyle(
                                         fontSize: 15,
-                                        color: Colors.grey,
+                                        color: kSecondaryTextColor,
                                         fontStyle: FontStyle.italic),
                                   ),
                                 ),
@@ -134,7 +135,7 @@ class _OilDetailsState extends State<OilDetails> {
                                     'Other denomination',
                                     style: TextStyle(
                                         fontSize: 15,
-                                        color: Color(0XFF3C3B3C),
+                                        color: kPrimaryTextColor,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -144,7 +145,7 @@ class _OilDetailsState extends State<OilDetails> {
                                     'Arbre a the, Melaleuque',
                                     style: TextStyle(
                                         fontSize: 15,
-                                        color: Color(0XFF3C3B3C),
+                                        color: kPrimaryTextColor,
                                         fontStyle: FontStyle.italic),
                                   ),
                                 ),
@@ -176,7 +177,7 @@ class _OilDetailsState extends State<OilDetails> {
                                     'Aspect',
                                     style: TextStyle(
                                         fontSize: 15,
-                                        color: Color(0XFF3C3B3C),
+                                        color: kPrimaryTextColor,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -193,7 +194,7 @@ class _OilDetailsState extends State<OilDetails> {
                                     'Color',
                                     style: TextStyle(
                                         fontSize: 15,
-                                        color: Color(0XFF3C3B3C),
+                                        color: kPrimaryTextColor,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -210,7 +211,7 @@ class _OilDetailsState extends State<OilDetails> {
                                     'Odor',
                                     style: TextStyle(
                                         fontSize: 15,
-                                        color: Color(0XFF3C3B3C),
+                                        color: kPrimaryTextColor,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -230,8 +231,8 @@ class _OilDetailsState extends State<OilDetails> {
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(100)),
                                           border: Border.all(
-                                              color:
-                                                  Colors.grey.withOpacity(.4),
+                                              color: kSecondaryTextColor
+                                                  .withOpacity(.4),
                                               width: 1)),
                                       child: TabBar(
                                         onTap: (int index) {
@@ -250,7 +251,7 @@ class _OilDetailsState extends State<OilDetails> {
                                           ),
                                         ],
                                         unselectedLabelColor: kPrimaryColor,
-                                        labelColor: Colors.white,
+                                        labelColor: kSecondaryBackgroundColor,
                                         indicator: RectangularIndicator(
                                           color: kPrimaryColor,
                                           bottomLeftRadius: 100,
@@ -300,7 +301,7 @@ Widget prop(BuildContext context, String name) {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(
-          color: Color(0XFFE5E5E5),
+          color: kSecondaryBackgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Column(
         children: const [
@@ -313,8 +314,8 @@ Widget prop(BuildContext context, String name) {
                   "When an unknown printer took a galley of type Scrambled it to make a type specimen book." +
                   "It has survived not only five centuries" +
                   "When an unknown printer took a galley of type Scrambled it to make a type specimen book.",
-              style:
-                  TextStyle(color: Colors.black, fontStyle: FontStyle.italic),
+              style: TextStyle(
+                  color: kPrimaryTextColor, fontStyle: FontStyle.italic),
             ),
           ),
         ],
@@ -324,7 +325,7 @@ Widget prop(BuildContext context, String name) {
       height: 30,
       width: MediaQuery.of(context).size.height,
       decoration: const BoxDecoration(
-          color: Colors.green,
+          color: kPrimaryColor,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10), topRight: Radius.circular(10))),
       child: Row(
@@ -334,7 +335,7 @@ Widget prop(BuildContext context, String name) {
             height: 15,
             width: 15,
             decoration: const BoxDecoration(
-                shape: BoxShape.circle, color: Colors.white),
+                shape: BoxShape.circle, color: kSecondaryBackgroundColor),
           ),
           const Align(
             alignment: Alignment.centerLeft,
@@ -342,7 +343,7 @@ Widget prop(BuildContext context, String name) {
               'Properties',
               style: TextStyle(
                   fontSize: 15,
-                  color: Colors.white,
+                  color: kSecondaryBackgroundColor,
                   fontWeight: FontWeight.normal),
             ),
           ),

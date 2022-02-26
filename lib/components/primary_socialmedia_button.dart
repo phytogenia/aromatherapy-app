@@ -1,3 +1,4 @@
+import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class PrimarySocialMediaButton extends StatelessWidget {
@@ -21,7 +22,8 @@ class PrimarySocialMediaButton extends StatelessWidget {
             fit: BoxFit.scaleDown,
           ),
           shape: BoxShape.circle,
-          border: Border.all(color: Colors.grey.withOpacity(.6), width: 1),
+          border:
+              Border.all(color: kSecondaryTextColor.withOpacity(.6), width: 1),
         ),
       ),
     );

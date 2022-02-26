@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
             SelectedIndex = index;
           });
         },
-        color: Colors.white,
+        color: kSecondaryBackgroundColor,
         backgroundColor: Colors.transparent,
         buttonBackgroundColor: kPrimaryColor,
         index: SelectedIndex,
@@ -46,21 +46,27 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(
               'assets/images/whiteoil.png',
-              color: SelectedIndex == 0 ? Colors.white : Colors.grey,
+              color: SelectedIndex == 0
+                  ? kSecondaryBackgroundColor
+                  : kSecondaryTextColor,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(
               'assets/images/home.png',
-              color: SelectedIndex == 1 ? Colors.white : Colors.grey,
+              color: SelectedIndex == 1
+                  ? kSecondaryBackgroundColor
+                  : kSecondaryTextColor,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(
               'assets/images/recipe.png',
-              color: SelectedIndex == 2 ? Colors.white : Colors.grey,
+              color: SelectedIndex == 2
+                  ? kSecondaryBackgroundColor
+                  : kSecondaryTextColor,
             ),
           ),
         ],
@@ -160,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: Text(
                                         'Y',
                                         style: TextStyle(
-                                            color: Colors.white,
+                                            color: kSecondaryBackgroundColor,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -176,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               decoration: const BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30)),
-                                color: Colors.white,
+                                color: kSecondaryBackgroundColor,
                               ),
                               height: 40,
                               child: Center(
@@ -184,18 +190,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                   decoration: const InputDecoration(
                                     suffixIcon: Icon(
                                       Icons.search,
-                                      color: Colors.grey,
+                                      color: kSecondaryTextColor,
                                     ),
                                     hintText: 'Find your Essential oil',
                                     hintStyle: TextStyle(fontSize: 12),
                                     enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            width: 1, color: Colors.grey),
+                                            width: 1,
+                                            color: kSecondaryTextColor),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(30))),
                                     focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            width: 1, color: Colors.green),
+                                            width: 1, color: kPrimaryColor),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(30))),
                                   ),

@@ -51,13 +51,14 @@ class PrimaryTopItemCard extends StatelessWidget {
               Text(
                 text,
                 style: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.bold),
+                    color: kSecondaryBackgroundColor,
+                    fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 2),
               Flexible(
                 child: Text(
                   subText,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: kSecondaryBackgroundColor),
                 ),
               )
             ],

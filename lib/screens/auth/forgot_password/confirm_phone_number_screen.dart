@@ -16,7 +16,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.white,
+      backgroundColor: kSecondaryBackgroundColor,
       body: SafeArea(
         bottom: false,
         top: false,
@@ -53,11 +53,11 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.65,
                       decoration: const BoxDecoration(
-                          color: Colors.white,
+                          color: kSecondaryBackgroundColor,
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                           boxShadow: [
                             BoxShadow(
-                                color: Colors.grey,
+                                color: kSecondaryBackgroundColor,
                                 offset: Offset(2, 2),
                                 blurRadius: 16)
                           ]),
@@ -105,14 +105,16 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
                                       keyboardType: TextInputType.number,
                                       maxLength: 1,
                                       decoration: const InputDecoration(
-                                          focusColor: Colors.green,
+                                          focusColor: kPrimaryColor,
                                           counterText: ''),
                                     ),
                                     decoration: BoxDecoration(
                                         shape: BoxShape.rectangle,
-                                        color: Colors.grey.withOpacity(.2),
+                                        color:
+                                            kSecondaryTextColor.withOpacity(.2),
                                         border: Border.all(
-                                            color: Colors.grey.withOpacity(.6),
+                                            color: kSecondaryTextColor
+                                                .withOpacity(.6),
                                             width: 1),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(5))),
@@ -129,14 +131,16 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
                                       maxLength: 1,
                                       keyboardType: TextInputType.number,
                                       decoration: const InputDecoration(
-                                          focusColor: Colors.green,
+                                          focusColor: kPrimaryColor,
                                           counterText: ''),
                                     ),
                                     decoration: BoxDecoration(
                                         shape: BoxShape.rectangle,
-                                        color: Colors.grey.withOpacity(.2),
+                                        color:
+                                            kSecondaryTextColor.withOpacity(.2),
                                         border: Border.all(
-                                            color: Colors.grey.withOpacity(.6),
+                                            color: kSecondaryTextColor
+                                                .withOpacity(.6),
                                             width: 1),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(5))),
@@ -153,14 +157,16 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
                                       keyboardType: TextInputType.number,
                                       maxLength: 1,
                                       decoration: const InputDecoration(
-                                          focusColor: Colors.green,
+                                          focusColor: kPrimaryColor,
                                           counterText: ''),
                                     ),
                                     decoration: BoxDecoration(
                                         shape: BoxShape.rectangle,
-                                        color: Colors.grey.withOpacity(.2),
+                                        color:
+                                            kSecondaryTextColor.withOpacity(.2),
                                         border: Border.all(
-                                            color: Colors.grey.withOpacity(.6),
+                                            color: kSecondaryTextColor
+                                                .withOpacity(.6),
                                             width: 1),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(5))),
@@ -177,14 +183,16 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
                                       keyboardType: TextInputType.number,
                                       maxLength: 1,
                                       decoration: const InputDecoration(
-                                          focusColor: Colors.green,
+                                          focusColor: kPrimaryColor,
                                           counterText: ''),
                                     ),
                                     decoration: BoxDecoration(
                                         shape: BoxShape.rectangle,
-                                        color: Colors.grey.withOpacity(.2),
+                                        color:
+                                            kSecondaryTextColor.withOpacity(.2),
                                         border: Border.all(
-                                            color: Colors.grey.withOpacity(.6),
+                                            color: kSecondaryTextColor
+                                                .withOpacity(.6),
                                             width: 1),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(5))),
@@ -207,7 +215,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
                                   decoration: const BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
-                                            color: Colors.grey,
+                                            color: kSecondaryTextColor,
                                             offset: Offset(0, 2),
                                             blurRadius: 6)
                                       ],
@@ -217,7 +225,7 @@ class _ConfirmPhoneNumberScreenState extends State<ConfirmPhoneNumberScreen> {
                                   child: const Text(
                                     'Submit',
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: kSecondaryBackgroundColor,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),

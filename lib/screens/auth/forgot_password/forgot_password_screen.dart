@@ -15,7 +15,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.white,
+      backgroundColor: kSecondaryBackgroundColor,
       body: SafeArea(
         bottom: false,
         top: false,
@@ -52,11 +52,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.65,
                       decoration: const BoxDecoration(
-                          color: Colors.white,
+                          color: kSecondaryBackgroundColor,
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                           boxShadow: [
                             BoxShadow(
-                                color: Colors.grey,
+                                color: kSecondaryTextColor,
                                 offset: Offset(2, 2),
                                 blurRadius: 16)
                           ]),
@@ -95,11 +95,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 height: 40,
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                      focusColor: Colors.green,
+                                      focusColor: kPrimaryColor,
                                       hintText: 'Enter you Email',
                                       hintStyle: TextStyle(
                                           fontSize: 15,
-                                          color: Colors.grey.withOpacity(.7))),
+                                          color: kSecondaryTextColor
+                                              .withOpacity(.7))),
                                 ),
                               ),
                               const SizedBox(height: 100),
@@ -118,7 +119,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   decoration: const BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
-                                            color: Colors.grey,
+                                            color: kSecondaryTextColor,
                                             offset: Offset(0, 2),
                                             blurRadius: 6)
                                       ],
@@ -128,7 +129,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                   child: const Text(
                                     'Submit',
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: kSecondaryBackgroundColor,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),

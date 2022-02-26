@@ -17,14 +17,17 @@ class PrimarySignButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
         decoration: const BoxDecoration(
             boxShadow: [
-              BoxShadow(color: Colors.grey, offset: Offset(0, 2), blurRadius: 6)
+              BoxShadow(
+                  color: kSecondaryTextColor,
+                  offset: Offset(0, 2),
+                  blurRadius: 6)
             ],
             color: kPrimaryColor,
             borderRadius: BorderRadius.all(Radius.circular(25))),
         child: Text(
           text,
-          style:
-              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+              color: kSecondaryBackgroundColor, fontWeight: FontWeight.bold),
         ),
       ),
     );

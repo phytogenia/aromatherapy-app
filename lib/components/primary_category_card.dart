@@ -26,7 +26,7 @@ class PrimaryCategoryCard extends StatelessWidget {
             Radius.circular(15),
           ),
           border: Border.all(color: backgroundColor),
-          color: Colors.white),
+          color: kSecondaryBackgroundColor),
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,

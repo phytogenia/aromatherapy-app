@@ -1,3 +1,4 @@
+import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryTextFormField extends StatefulWidget {
@@ -50,7 +51,7 @@ class _PrimaryTextFormFieldState extends State<PrimaryTextFormField> {
         hintText: widget.hintText,
         hintStyle: TextStyle(
           fontSize: 15,
-          color: Colors.grey.withOpacity(.7),
+          color: kSecondaryTextColor.withOpacity(.7),
         ),
       ),
       obscureText: widget.isPasswordField && !isObscure,

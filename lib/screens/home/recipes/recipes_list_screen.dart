@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/constants.dart';
+
 class RecipesListScreen extends StatefulWidget {
   const RecipesListScreen({Key? key}) : super(key: key);
 
@@ -27,7 +29,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(
-            color: Color(0XFF3C3B3C), //change your color here
+            color: kPrimaryTextColor, //change your color here
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -35,7 +37,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
               child: Text(
             "Recipes",
             style: TextStyle(
-                color: Color(0XFF3C3B3C), fontWeight: FontWeight.bold),
+                color: kPrimaryTextColor, fontWeight: FontWeight.bold),
           )),
         ),
         resizeToAvoidBottomInset: true,
@@ -43,7 +45,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
         body: oils.isEmpty
             ? const Center(
                 child: CircularProgressIndicator(
-                  color: Color(0xFFE88B00),
+                  color: kSecondaryColor,
                 ),
               )
             : SafeArea(
@@ -104,7 +106,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                                   decoration: const BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(30)),
-                                    color: Colors.white,
+                                    color: kSecondaryBackgroundColor,
                                   ),
                                   height: 40,
                                   child: Center(
@@ -112,18 +114,20 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                                       decoration: const InputDecoration(
                                         suffixIcon: Icon(
                                           Icons.search,
-                                          color: Colors.grey,
+                                          color: kSecondaryTextColor,
                                         ),
                                         hintText: 'Quick search for oils ...',
                                         hintStyle: TextStyle(fontSize: 12),
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                                width: 1, color: Colors.grey),
+                                                width: 1,
+                                                color: kSecondaryTextColor),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(30))),
                                         focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                                width: 1, color: Colors.orange),
+                                                width: 1,
+                                                color: kSecondaryColor),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(30))),
                                       ),
@@ -163,7 +167,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
       padding: const EdgeInsets.all(8),
       width: 130,
       decoration: const BoxDecoration(
-          color: Color(0xFFE88B00),
+          color: kSecondaryColor,
           borderRadius: BorderRadius.all(Radius.circular(15))),
       child: Center(
         child: Column(
@@ -184,12 +188,13 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
             Text(
               oilname,
               style: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold),
+                  color: kSecondaryBackgroundColor,
+                  fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 2),
             const Text(
               'Scientific name',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: kSecondaryBackgroundColor),
             )
           ],
         ),
@@ -207,8 +212,8 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
               borderRadius: const BorderRadius.all(
                 Radius.circular(5),
               ),
-              border: Border.all(color: Colors.grey),
-              color: Colors.white),
+              border: Border.all(color: kSecondaryTextColor),
+              color: kSecondaryBackgroundColor),
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -220,12 +225,12 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                 Text(
                   oilname,
                   style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
+                      color: kPrimaryTextColor, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 2),
                 const Text(
                   'Scientific name',
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: kPrimaryTextColor),
                 )
               ],
             ),
@@ -240,7 +245,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
             width: 50,
             height: 50,
             decoration: const BoxDecoration(
-                color: Color(0xFFE88B00),
+                color: kSecondaryColor,
                 borderRadius: BorderRadius.all(Radius.circular(5))),
             child: Center(
               child: Column(

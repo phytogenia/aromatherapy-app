@@ -23,7 +23,8 @@ class PrimaryPropertyItem extends StatelessWidget {
               child: Text(
                 text,
                 style: const TextStyle(
-                    color: Colors.white, fontStyle: FontStyle.italic),
+                    color: kSecondaryBackgroundColor,
+                    fontStyle: FontStyle.italic),
               ),
             ),
           ],
