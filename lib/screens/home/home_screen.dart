@@ -1,4 +1,5 @@
 import 'package:aromatherapy/screens/home/recipes/recipes_list_screen.dart';
+import 'package:aromatherapy/screens/home/settings/settings_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -141,8 +142,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    //TODO:: go to settings
-                                    _showDialogToLogout(context);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SettingsScreen(),
+                                      ),
+                                    );
                                   },
                                   child: Container(
                                     height: 50,
@@ -267,41 +273,5 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
     );
-  }
-}
-
-void _showDialogToLogout(BuildContext context) async {
-  const dialogTitle = 'Logout';
-  const dialogContent = 'Do you want to logout ?';
-  const cancelTextButton = 'Dismiss';
-  const agreeTextButton = 'Logout';
-
-  bool isUserWantToLogout = await PlatformAlertDialog(
-    content: dialogTitle,
-    title: dialogContent,
-    cancelTextButton: cancelTextButton,
-    agreeTextButton: agreeTextButton,
-  ).show(context);
-
-  if (isUserWantToLogout) {
-    _signOutUser(context);
-    // Dismiss settings page
-  }
-}
-
-void _signOutUser(BuildContext context) async {
-  final authProvider = context.read<AuthService>();
-  try {
-    await authProvider.signOut();
-  } catch (e) {
-    const dialogTitle = 'Logout Error';
-    final dialogContent = 'Cause $e Can you please try later ?';
-    const cancelTextButton = 'Dismiss';
-
-    PlatformAlertDialog(
-      title: dialogTitle,
-      content: dialogContent,
-      cancelTextButton: cancelTextButton,
-    ).show(context);
   }
 }

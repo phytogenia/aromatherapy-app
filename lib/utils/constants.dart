@@ -1,8 +1,11 @@
 import 'package:aromatherapy/utils/size_config.dart';
 import 'package:flutter/material.dart';
 
+const String urlTermOfUse = 'https://google.com/';
+const String urlPrivacyPolicy = 'https://google.com/';
+
 const kPrimaryColor = Color(0xFF15CA4D);
-const kSecondaryColor = Color(0xFFF48900);
+const kSecondaryColor = Color(0xFFFF7643);
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,
