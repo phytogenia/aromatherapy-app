@@ -18,7 +18,7 @@ class SecondaryListItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      physics: const AlwaysScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 15),
       itemCount: list.length,
       scrollDirection: Axis.vertical,

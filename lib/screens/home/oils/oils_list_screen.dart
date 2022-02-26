@@ -30,6 +30,8 @@ class _OilListScreenState extends State<OilListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        extendBodyBehindAppBar: true,
+
         appBar: AppBar(
           iconTheme: const IconThemeData(
             color: kPrimaryTextColor, //change your color here
@@ -43,118 +45,119 @@ class _OilListScreenState extends State<OilListScreen> {
                 color: kPrimaryTextColor, fontWeight: FontWeight.bold),
           )),
         ),
-        resizeToAvoidBottomInset: true,
-        extendBody: true,
         body: oils.isEmpty
             ? const Center(
                 child: CircularProgressIndicator(
                   color: kPrimaryColor,
                 ),
               )
-            : SafeArea(
-                bottom: false,
-                child: SingleChildScrollView(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height,
-                    decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/images/bg.png'),
-                            fit: BoxFit.fill)),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 40.0, vertical: 10),
-                            child: Text(
-                              'Popular Essential oils',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+            : SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              child: SafeArea(
+                  bottom: false,
+                  child: SingleChildScrollView(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/images/bg.png'),
+                              fit: BoxFit.fill)),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 50,
                             ),
-                          ),
-                          SizedBox(
-                            height: 120,
-                            child: PrimaryTopListItems(
-                              list: oils,
-                              backgroundColor: kPrimaryColor,
-                              imagePath: 'assets/images/whiteoil.png',
+                            const Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 40.0, vertical: 10),
+                              child: Text(
+                                'Popular Essential oils',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(30.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    Text('Find your favorite'),
-                                    Text(
-                                      'Essential Oil',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                Container(
-                                  decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(30)),
-                                    color: kSecondaryBackgroundColor,
+                            SizedBox(
+                              height: 120,
+                              child: PrimaryTopListItems(
+                                list: oils,
+                                backgroundColor: kPrimaryColor,
+                                imagePath: 'assets/images/whiteoil.png',
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(30.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: const [
+                                      Text('Find your favorite'),
+                                      Text(
+                                        'Essential Oil',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      )
+                                    ],
                                   ),
-                                  height: 40,
-                                  child: Center(
-                                    child: TextFormField(
-                                      decoration: const InputDecoration(
-                                        suffixIcon: Icon(
-                                          Icons.search,
-                                          color: kSecondaryTextColor,
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  Container(
+                                    decoration: const BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(30)),
+                                      color: kSecondaryBackgroundColor,
+                                    ),
+                                    height: 40,
+                                    child: Center(
+                                      child: TextFormField(
+                                        decoration: const InputDecoration(
+                                          suffixIcon: Icon(
+                                            Icons.search,
+                                            color: kSecondaryTextColor,
+                                          ),
+                                          hintText: 'Quick search for oils ...',
+                                          hintStyle: TextStyle(fontSize: 12),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  width: 1,
+                                                  color: kSecondaryTextColor),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(30))),
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  width: 1, color: kPrimaryColor),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(30))),
                                         ),
-                                        hintText: 'Quick search for oils ...',
-                                        hintStyle: TextStyle(fontSize: 12),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 1,
-                                                color: kSecondaryTextColor),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(30))),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 1, color: kPrimaryColor),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(30))),
                                       ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(height: 20),
-                                SizedBox(
-                                  height: MediaQuery.of(context).size.height,
-                                  child: SecondaryListItems(
-                                    list: oils,
-                                    backgroundColor: kPrimaryColor,
-                                    imagePath: 'assets/images/whiteoil.png',
+                                  const SizedBox(height: 20),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height,
+                                    child: SecondaryListItems(
+                                      list: oils,
+                                      backgroundColor: kPrimaryColor,
+                                      imagePath: 'assets/images/whiteoil.png',
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 25,
-                                ),
-                              ],
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ));
+            ));
   }
 
   Widget BuildOils(BuildContext context, String oilname) {
