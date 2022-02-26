@@ -1,5 +1,6 @@
 import 'package:aromatherapy/components/primary_sign_button.dart';
 import 'package:aromatherapy/components/primary_textformfield.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -113,59 +114,60 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       backgroundColor: kSecondaryBackgroundColor,
-      body: SafeArea(
-        bottom: false,
-        top: false,
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.3,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.vertical(
-                        bottom: Radius.elliptical(
-                            MediaQuery.of(context).size.width, 130.0)),
-                    image: DecorationImage(
-                        colorFilter: ColorFilter.mode(
-                            kPrimaryColor.withOpacity(.8), BlendMode.srcOver),
-                        image: const AssetImage('assets/images/pictop.jpg'),
-                        fit: BoxFit.cover)),
-                child: Center(
-                  child: Image.asset('assets/images/intersect.png'),
-                ),
-              ),
-              Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Image.asset('assets/images/picbottom.png')),
-              Positioned(
-                left: 20,
-                right: 20,
-                top: MediaQuery.of(context).size.height * 0.2,
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.65,
-                  decoration: const BoxDecoration(
-                      color: kSecondaryBackgroundColor,
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      boxShadow: [
-                        BoxShadow(
-                            color: kSecondaryTextColor,
-                            offset: Offset(2, 2),
-                            blurRadius: 16)
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 30),
-                    child: SingleChildScrollView(child: _bodyContent(context)),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          bottom: false,
+          top: false,
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
+                          bottom: Radius.elliptical(
+                              MediaQuery.of(context).size.width, 130.0)),
+                      image: DecorationImage(
+                          colorFilter: ColorFilter.mode(
+                              kPrimaryColor.withOpacity(.8), BlendMode.srcOver),
+                          image: const AssetImage('assets/images/pictop.jpg'),
+                          fit: BoxFit.cover)),
+                  child: Center(
+                    child: Image.asset('assets/images/intersect.png'),
                   ),
                 ),
-              ),
-            ],
+                Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Image.asset('assets/images/picbottom.png')),
+                Positioned(
+                  left: 20,
+                  right: 20,
+                  top: MediaQuery.of(context).size.height * 0.2,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.65,
+                    decoration: const BoxDecoration(
+                        color: kSecondaryBackgroundColor,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        boxShadow: [
+                          BoxShadow(
+                              color: kSecondaryTextColor,
+                              offset: Offset(2, 2),
+                              blurRadius: 16)
+                        ]),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 30),
+                      child: SingleChildScrollView(child: _bodyContent(context)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -289,27 +291,33 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildFooter() {
-    return Column(children: [
-      const Text(
-        'By segning up, you agree to Aromatherapy\'s',
-      ),
-      Row(
-        mainAxisSize: MainAxisSize.min,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
         children: [
-          UrlText(
-            text: 'Terms of Service',
-            url: 'https://google.com/', //TODO:: to replace
-          ),
-          const Text(
-            ' and ',
-          ),
-          UrlText(
-            text: 'Privacy Policy',
-            url: 'https://google.com/', //TODO:: to replace
-          ),
+          Column(children: [
+            const Text(
+              "By segning up, you agree to Aromatherapy's",
+            ),
+            Row(
+              children: [
+                UrlText(
+                  text: 'Terms of Service',
+                  url: 'https://google.com/', //TODO:: to replace
+                ),
+                const Text(
+                  ' and ',
+                ),
+                UrlText(
+                  text: 'Privacy Policy',
+                  url: 'https://google.com/', //TODO:: to replace
+                ),
+              ],
+            )
+          ]),
         ],
-      )
-    ]);
+      ),
+    );
   }
 
   Form _buildLoginForm() {
@@ -324,6 +332,7 @@ class _LoginScreenState extends State<LoginScreen> {
             onEditingComplete: _onCompleteEmailEditing,
             controller: _emailController,
           ),
+          const SizedBox(height: 10,),
           PrimaryTextFormField(
             isPasswordField: true,
             labelText: 'Password',

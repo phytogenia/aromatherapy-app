@@ -27,7 +27,7 @@ class PrimaryTopItemCard extends StatelessWidget {
       },
       child: Container(
         margin: const EdgeInsets.all(5),
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(9),
         width: 130,
         decoration: BoxDecoration(
             color: backgroundColor,
@@ -42,7 +42,7 @@ class PrimaryTopItemCard extends StatelessWidget {
                 children: [
                   Container(),
                   // Empty Container to align the icon on the right with spacebetween
-                  Image.asset(imagePath)
+                  Image.asset(imagePath,color: whitecolor,)
                 ],
               ),
               const SizedBox(
@@ -58,9 +58,9 @@ class PrimaryTopItemCard extends StatelessWidget {
               Flexible(
                 child: Text(
                   subText,
-                  style: const TextStyle(color: kSecondaryBackgroundColor),
+                  style: const TextStyle(color: kSecondaryBackgroundColor,fontSize: 10),
                 ),
-              )
+              ),
             ],
           ),
         ),

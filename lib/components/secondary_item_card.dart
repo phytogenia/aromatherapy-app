@@ -51,8 +51,9 @@ class SecondaryItemCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: 20,
-          bottom: 20,
+          left: 10,
+          bottom: 30,
+
           child: Container(
             margin: const EdgeInsets.all(5),
             padding: const EdgeInsets.all(8),

@@ -114,171 +114,173 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: kPrimaryColor,
               ),
             )
-          : SafeArea(
-              bottom: false,
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/bg.png'),
-                        fit: BoxFit.fill)),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    Text('Find your favorite oil'),
-                                    Text(
-                                      'Essential Oil',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SettingsScreen(),
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: kPrimaryColor),
-                                    child: const Center(
-                                      child: Text(
-                                        'Y',
+          : SingleChildScrollView(
+            child: SafeArea(
+                bottom: false,
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/bg.png'),
+                          fit: BoxFit.fill)),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: const [
+                                      Text('Find your favorite oil'),
+                                      Text(
+                                        'Essential Oil',
                                         style: TextStyle(
-                                            color: kSecondaryBackgroundColor,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SettingsScreen(),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 50,
+                                      width: 50,
+                                      decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: kPrimaryColor),
+                                      child: const Center(
+                                        child: Text(
+                                          'Y',
+                                          style: TextStyle(
+                                              color: kSecondaryBackgroundColor,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 50,
-                            ),
-                            Container(
-                              decoration: const BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30)),
-                                color: kSecondaryBackgroundColor,
+                                  )
+                                ],
                               ),
-                              height: 40,
-                              child: Center(
-                                child: TextFormField(
-                                  decoration: const InputDecoration(
-                                    suffixIcon: Icon(
-                                      Icons.search,
-                                      color: kSecondaryTextColor,
+                              const SizedBox(
+                                height: 50,
+                              ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30)),
+                                  color: kSecondaryBackgroundColor,
+                                ),
+                                height: 40,
+                                child: Center(
+                                  child: TextFormField(
+                                    decoration: const InputDecoration(
+                                      suffixIcon: Icon(
+                                        Icons.search,
+                                        color: kSecondaryTextColor,
+                                      ),
+                                      hintText: 'Find your Essential oil',
+                                      hintStyle: TextStyle(fontSize: 12),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 1,
+                                              color: kSecondaryTextColor),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(30))),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 1, color: kPrimaryColor),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(30))),
                                     ),
-                                    hintText: 'Find your Essential oil',
-                                    hintStyle: TextStyle(fontSize: 12),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1,
-                                            color: kSecondaryTextColor),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30))),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1, color: kPrimaryColor),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30))),
                                   ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 25,
-                            ),
-                            const Text(
-                              'Categories',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(
-                              height: 25,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: const [
-                                PrimaryCategoryCard(
-                                  text: 'Oil',
-                                  backgroundColor: kPrimaryColor,
-                                  iconImagePath: 'assets/images/greenoil.png',
-                                ),
-                                PrimaryCategoryCard(
-                                  text: 'Recipe',
-                                  backgroundColor: kSecondaryColor,
-                                  iconImagePath: 'assets/images/recipe.png',
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 30.0, vertical: 10),
-                        child: Text(
-                          'Popular Essential oils',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 120,
-                        child: SizedBox(
-                          height: 120,
-                          child: PrimaryTopListItems(
-                            list: oils,
-                            backgroundColor: kPrimaryColor,
-                            imagePath: 'assets/images/whiteoil.png',
+                              const SizedBox(
+                                height: 25,
+                              ),
+                              const Text(
+                                'Categories',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(
+                                height: 25,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.max,
+                                children: const [
+                                  PrimaryCategoryCard(
+                                    text: 'Oil',
+                                    backgroundColor: kPrimaryColor,
+                                    iconImagePath: 'assets/images/greenoil.png',
+                                  ),
+                                  PrimaryCategoryCard(
+                                    text: 'Recipe',
+                                    backgroundColor: kSecondaryColor,
+                                    iconImagePath: 'assets/images/recipe.png',
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 30.0, vertical: 10),
-                        child: Text(
-                          'Popular Essential recipes',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30.0, vertical: 10),
+                          child: Text(
+                            'Popular Essential oils',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 120,
-                        child: PrimaryTopListItems(
-                          list: recipes,
-                          backgroundColor: kSecondaryColor,
-                          imagePath: 'assets/images/recipe.png',
+                        SizedBox(
+                          height: 120,
+                          child: SizedBox(
+                            height: 120,
+                            child: PrimaryTopListItems(
+                              list: oils,
+                              backgroundColor: kPrimaryColor,
+                              imagePath: 'assets/images/whiteoil.png',
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30.0, vertical: 10),
+                          child: Text(
+                            'Popular Essential recipes',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 120,
+                          child: PrimaryTopListItems(
+                            list: recipes,
+                            backgroundColor: kSecondaryColor,
+                            imagePath: 'assets/images/recipe.png',
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
+          ),
     );
   }
 }

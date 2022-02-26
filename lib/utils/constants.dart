@@ -9,6 +9,8 @@ const kSecondaryColor = Color(0xFFFF7643);
 const kSecondaryTextColor = Color(0xFFB4B1B7);
 const kPrimaryTextColor = Color(0xFF3C3B3C);
 const kSecondaryBackgroundColor = Color(0xFFF9F4FF);
+const whitecolor = Colors.white;
+const graycolor = Colors.grey;
 
 // const kPrimaryLightColor = Color(0xFFFFECDF);
 // const kPrimaryGradientColor = LinearGradient(
