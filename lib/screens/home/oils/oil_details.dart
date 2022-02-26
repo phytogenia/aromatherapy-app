@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 import '../../../components/primary_list_properties.dart';
+import '../../../components/primary_property_description_card.dart';
 import '../../../components/primary_property_item.dart';
 import '../../../utils/constants.dart';
 
@@ -274,7 +275,14 @@ class _OilDetailsState extends State<OilDetails> {
                                             itemCount: odor.length,
                                             scrollDirection: Axis.vertical,
                                             itemBuilder: (context, index) {
-                                              return prop(context, odor[index]);
+                                              return PrimaryPropertyDescriptionCard(
+                                                title: odor[index],
+                                                description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
+                                                    "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
+                                                    "When an unknown printer took a galley of type Scrambled it to make a type specimen book." +
+                                                    "It has survived not only five centuries" +
+                                                    "When an unknown printer took a galley of type Scrambled it to make a type specimen book.",
+                                              );
                                             }))
                                     : const SizedBox(
                                         height: 0,
@@ -292,63 +300,4 @@ class _OilDetailsState extends State<OilDetails> {
       ),
     );
   }
-}
-
-Widget prop(BuildContext context, String name) {
-  return Stack(children: [
-    Container(
-      width: MediaQuery.of(context).size.height,
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(20),
-      decoration: const BoxDecoration(
-          color: kSecondaryBackgroundColor,
-          borderRadius: BorderRadius.all(Radius.circular(10))),
-      child: Column(
-        children: const [
-          SizedBox(height: 20),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
-                  "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
-                  "When an unknown printer took a galley of type Scrambled it to make a type specimen book." +
-                  "It has survived not only five centuries" +
-                  "When an unknown printer took a galley of type Scrambled it to make a type specimen book.",
-              style: TextStyle(
-                  color: kPrimaryTextColor, fontStyle: FontStyle.italic),
-            ),
-          ),
-        ],
-      ),
-    ),
-    Container(
-      height: 30,
-      width: MediaQuery.of(context).size.height,
-      decoration: const BoxDecoration(
-          color: kPrimaryColor,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10), topRight: Radius.circular(10))),
-      child: Row(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(right: 8, left: 8),
-            height: 15,
-            width: 15,
-            decoration: const BoxDecoration(
-                shape: BoxShape.circle, color: kSecondaryBackgroundColor),
-          ),
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Properties',
-              style: TextStyle(
-                  fontSize: 15,
-                  color: kSecondaryBackgroundColor,
-                  fontWeight: FontWeight.normal),
-            ),
-          ),
-        ],
-      ),
-    ),
-  ]);
 }
