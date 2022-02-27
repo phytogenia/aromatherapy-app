@@ -1,16 +1,16 @@
 import 'package:aromatherapy/screens/home/recipes/recipes_list_screen.dart';
 import 'package:aromatherapy/screens/home/settings/settings_screen.dart';
+import 'package:aromatherapy/services/auth_service.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../components/platform_alert_dialog.dart';
 import '../../components/primary_category_card.dart';
 import '../../components/primary_top_item_card.dart';
 import '../../components/primary_top_list_item.dart';
-import '../../services/auth_service.dart';
+import '../../models/oil/oil.dart';
 import '../../utils/constants.dart';
 import 'oils/oils_list_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,6 +20,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   final _Screens = [
     const OilListScreen(),
     const HomeScreen(),
@@ -88,6 +89,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List oils = [];
   List recipes = [];
 
+  CollectionReference users = FirebaseFirestore.instance.collection('oils');
+
+
   @override
   void initState() {
     getData();
@@ -115,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             )
           : SingleChildScrollView(
-            child: SafeArea(
+              child: SafeArea(
                 bottom: false,
                 child: Container(
                   height: MediaQuery.of(context).size.height,
@@ -133,10 +137,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: const [
                                       Text('Find your favorite oil'),
                                       Text(
@@ -250,13 +256,36 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         SizedBox(
                           height: 120,
-                          child: SizedBox(
-                            height: 120,
-                            child: PrimaryTopListItems(
-                              list: oils,
-                              backgroundColor: kPrimaryColor,
-                              imagePath: 'assets/images/whiteoil.png',
-                            ),
+                          child: FutureBuilder<QuerySnapshot>(
+                              future: users.get(),
+                            builder: (context,snapshot) {
+
+                              if (snapshot.hasError) {
+                                return Text("Something went wrong");
+                              }
+
+                              if (snapshot.connectionState == ConnectionState.done) {
+                                List<DocumentSnapshot> data = snapshot.data!.docs;
+                              return ListView.builder(
+                                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                                      itemCount: data.length,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        return PrimaryTopItemCard(
+                                          text: data[index]["name"],
+                                          subText: data[index]["sciName"],
+                                          imagePath: 'assets/images/whiteoil.png',
+                                          backgroundColor: kPrimaryColor,
+                                        );
+                                      });
+                            }
+                              return const Center(
+                                child: CircularProgressIndicator(
+                                  color: kPrimaryColor,
+                                ),
+                              );
+
+                            }
                           ),
                         ),
                         const Padding(
@@ -280,7 +309,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-          ),
+            ),
     );
   }
 }

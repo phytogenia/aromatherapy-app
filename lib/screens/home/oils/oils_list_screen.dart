@@ -1,6 +1,5 @@
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
-
 import '../../../components/primary_top_list_item.dart';
 import '../../../components/secondary_item_card.dart';
 import '../../../components/secondary_list_items.dart';
