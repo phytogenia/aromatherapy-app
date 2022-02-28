@@ -28,7 +28,7 @@ class _OilListScreenState extends State<OilListScreen> {
 
   getData() {
     setState(() {
-      oils.addAll(['Oil 1', 'Oil 2', 'Oil 3', 'Oil 4', 'Oil 5', 'Oil 6']);
+      //oils.addAll(['Oil 1', 'Oil 2', 'Oil 3', 'Oil 4', 'Oil 5', 'Oil 6']);
     });
   }
 
@@ -70,13 +70,7 @@ class _OilListScreenState extends State<OilListScreen> {
                 color: kPrimaryTextColor, fontWeight: FontWeight.bold),
           )),
         ),
-        body: oils.isEmpty
-            ? const Center(
-                child: CircularProgressIndicator(
-                  color: kPrimaryColor,
-                ),
-              )
-            : SingleChildScrollView(
+        body: SingleChildScrollView(
               physics: AlwaysScrollableScrollPhysics(),
               child: SafeArea(
                   bottom: false,
@@ -199,43 +193,24 @@ class _OilListScreenState extends State<OilListScreen> {
                                   const SizedBox(height: 20),
                                   SizedBox(
                                     height: MediaQuery.of(context).size.height,
-                                    child: FutureBuilder<QuerySnapshot>(
-                                        future: oilss.get(),
-                                        builder: (context,snapshot) {
-
-                                          if (snapshot.hasError) {
-                                            return Text("Something went wrong");
-                                          }
-
-                                          if (snapshot.connectionState == ConnectionState.done) {
-                                            data = snapshot.data!.docs;
-
-                                            return _foundUsers.isNotEmpty
+                                    child: _foundUsers.isNotEmpty
                                                 ? ListView.builder(
                                                 padding: const EdgeInsets.symmetric(horizontal: 15),
                                                 itemCount: _foundUsers.length,
                                                 scrollDirection: Axis.vertical,
                                                 itemBuilder: (context, index) {
-                                                  Oil oil =Oil.fromMap(Map<String, dynamic>.from(data[index].data() as Map), snapshot.data?.docs[index].reference.id as String);
                                                   return SecondaryItemCard(
                                                       text: _foundUsers[index]["name"].toString(),
-                                                      subText: oil.sciName as String,
+                                                      subText: _foundUsers[index]["sciName"].toString(),
                                                       imagePath: 'assets/images/whiteoil.png',
                                                       backgroundColor: kPrimaryColor);
                                                 }):
                                             const Text(
                                               'No results found',
                                               style: TextStyle(fontSize: 24),
-                                            );
-                                          }
-                                          return const Center(
-                                            child: CircularProgressIndicator(
-                                              color: kPrimaryColor,
                                             ),
-                                          );
+                                          ),
 
-                                        }
-                                    ),
 
 
                                     /*child: SecondaryListItems(
@@ -243,7 +218,6 @@ class _OilListScreenState extends State<OilListScreen> {
                                       backgroundColor: kPrimaryColor,
                                       imagePath: 'assets/images/whiteoil.png',
                                     ),*/
-                                  ),
                                   const SizedBox(
                                     height: 25,
                                   ),
