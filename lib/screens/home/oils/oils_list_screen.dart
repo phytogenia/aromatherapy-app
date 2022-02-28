@@ -1,8 +1,11 @@
 import 'package:aromatherapy/utils/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../../../components/primary_top_item_card.dart';
 import '../../../components/primary_top_list_item.dart';
 import '../../../components/secondary_item_card.dart';
 import '../../../components/secondary_list_items.dart';
+import '../../../models/oil/oil.dart';
 
 class OilListScreen extends StatefulWidget {
   const OilListScreen({Key? key}) : super(key: key);
@@ -13,7 +16,10 @@ class OilListScreen extends StatefulWidget {
 
 class _OilListScreenState extends State<OilListScreen> {
   List oils = [];
-
+  CollectionReference oilss = FirebaseFirestore.instance.collection('oils');
+  List<DocumentSnapshot> data = [];
+  // This list holds the data for the list view
+  List<DocumentSnapshot> _foundUsers = [];
   @override
   void initState() {
     getData();
@@ -23,6 +29,26 @@ class _OilListScreenState extends State<OilListScreen> {
   getData() {
     setState(() {
       oils.addAll(['Oil 1', 'Oil 2', 'Oil 3', 'Oil 4', 'Oil 5', 'Oil 6']);
+    });
+  }
+
+  // This function is called whenever the text field changes
+  void _runFilter(String enteredKeyword) {
+    List<DocumentSnapshot> results = [];
+    if (enteredKeyword.isEmpty) {
+      // if the search field is empty or only contains white-space, we'll display all users
+      results = data;
+    } else {
+      results = data
+          .where((user) =>
+          user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+      // we use the toLowerCase() method to make it case-insensitive
+    }
+
+    // Refresh the UI
+    setState(() {
+      _foundUsers = results;
     });
   }
 
@@ -78,11 +104,45 @@ class _OilListScreenState extends State<OilListScreen> {
                             ),
                             SizedBox(
                               height: 120,
-                              child: PrimaryTopListItems(
-                                list: oils,
+                                child: FutureBuilder<QuerySnapshot>(
+                                    future: oilss.get(),
+                                    builder: (context,snapshot) {
+
+                                      if (snapshot.hasError) {
+                                        return Text("Something went wrong");
+                                      }
+
+                                      if (snapshot.connectionState == ConnectionState.done) {
+                                        data = snapshot.data!.docs;
+
+                                        return ListView.builder(
+                                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                                            itemCount: data.length,
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) {
+                                              Oil oil =Oil.fromMap(Map<String, dynamic>.from(data[index].data() as Map), snapshot.data?.docs[index].reference.id as String);
+                                              return PrimaryTopItemCard(
+                                                text: oil.name,
+                                                subText: oil.sciName.toString(),
+                                                imagePath: 'assets/images/whiteoil.png',
+                                                backgroundColor: kPrimaryColor,
+                                              );
+                                            },);
+
+                                      }
+                                      return const Text(
+                                        'No results found',
+                                        style: TextStyle(fontSize: 24),
+                                      );
+                                      }
+
+
+                                ),
+                             /* child: PrimaryTopListItems(
+                                list: data,
                                 backgroundColor: kPrimaryColor,
                                 imagePath: 'assets/images/whiteoil.png',
-                              ),
+                              ),*/
                             ),
                             Padding(
                               padding: const EdgeInsets.all(30.0),
@@ -113,6 +173,7 @@ class _OilListScreenState extends State<OilListScreen> {
                                     height: 40,
                                     child: Center(
                                       child: TextFormField(
+                                        onChanged: (value) => _runFilter(value),
                                         decoration: const InputDecoration(
                                           suffixIcon: Icon(
                                             Icons.search,
@@ -138,11 +199,50 @@ class _OilListScreenState extends State<OilListScreen> {
                                   const SizedBox(height: 20),
                                   SizedBox(
                                     height: MediaQuery.of(context).size.height,
-                                    child: SecondaryListItems(
+                                    child: FutureBuilder<QuerySnapshot>(
+                                        future: oilss.get(),
+                                        builder: (context,snapshot) {
+
+                                          if (snapshot.hasError) {
+                                            return Text("Something went wrong");
+                                          }
+
+                                          if (snapshot.connectionState == ConnectionState.done) {
+                                            data = snapshot.data!.docs;
+
+                                            return _foundUsers.isNotEmpty
+                                                ? ListView.builder(
+                                                padding: const EdgeInsets.symmetric(horizontal: 15),
+                                                itemCount: _foundUsers.length,
+                                                scrollDirection: Axis.vertical,
+                                                itemBuilder: (context, index) {
+                                                  Oil oil =Oil.fromMap(Map<String, dynamic>.from(data[index].data() as Map), snapshot.data?.docs[index].reference.id as String);
+                                                  return SecondaryItemCard(
+                                                      text: _foundUsers[index]["name"].toString(),
+                                                      subText: oil.sciName as String,
+                                                      imagePath: 'assets/images/whiteoil.png',
+                                                      backgroundColor: kPrimaryColor);
+                                                }):
+                                            const Text(
+                                              'No results found',
+                                              style: TextStyle(fontSize: 24),
+                                            );
+                                          }
+                                          return const Center(
+                                            child: CircularProgressIndicator(
+                                              color: kPrimaryColor,
+                                            ),
+                                          );
+
+                                        }
+                                    ),
+
+
+                                    /*child: SecondaryListItems(
                                       list: oils,
                                       backgroundColor: kPrimaryColor,
                                       imagePath: 'assets/images/whiteoil.png',
-                                    ),
+                                    ),*/
                                   ),
                                   const SizedBox(
                                     height: 25,

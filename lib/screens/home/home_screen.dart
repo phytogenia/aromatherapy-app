@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:aromatherapy/screens/home/recipes/recipes_list_screen.dart';
 import 'package:aromatherapy/screens/home/settings/settings_screen.dart';
 import 'package:aromatherapy/services/auth_service.dart';
@@ -85,12 +87,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int SelectedIndex = 1; //TODO :: enumeration
+
   List categories = [];
   List oils = [];
   List recipes = [];
 
-  CollectionReference users = FirebaseFirestore.instance.collection('oils');
-
+  CollectionReference oilss = FirebaseFirestore.instance.collection('oils');
+  List<DocumentSnapshot> data = [];
+  // This list holds the data for the list view
+  List<DocumentSnapshot> _foundUsers = [];
 
   @override
   void initState() {
@@ -104,6 +110,26 @@ class _HomeScreenState extends State<HomeScreen> {
       oils.addAll(['Oil 1', 'Oil 2', 'Oil 3', 'Oil 4', 'Oil 5']);
       recipes
           .addAll(['Recipe 1', 'Recipe 3', 'Recipe 3', 'Recipe 5', 'Recipe 5']);
+    });
+  }
+
+  // This function is called whenever the text field changes
+  void _runFilter(String enteredKeyword) {
+    List<DocumentSnapshot> results = [];
+    if (enteredKeyword.isEmpty) {
+      // if the search field is empty or only contains white-space, we'll display all users
+      results = data;
+    } else {
+      results = data
+          .where((user) =>
+          user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+      // we use the toLowerCase() method to make it case-insensitive
+    }
+
+    // Refresh the UI
+    setState(() {
+      _foundUsers = results;
     });
   }
 
@@ -194,6 +220,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 40,
                                 child: Center(
                                   child: TextFormField(
+                                    onTap: () {
+                                      setState(() {
+                                        SelectedIndex = 0;
+                                      });
+                                    },
                                     decoration: const InputDecoration(
                                       suffixIcon: Icon(
                                         Icons.search,
@@ -257,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: 120,
                           child: FutureBuilder<QuerySnapshot>(
-                              future: users.get(),
+                              future: oilss.get(),
                             builder: (context,snapshot) {
 
                               if (snapshot.hasError) {
@@ -265,15 +296,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               }
 
                               if (snapshot.connectionState == ConnectionState.done) {
-                                List<DocumentSnapshot> data = snapshot.data!.docs;
+                                data = snapshot.data!.docs;
+                                
                               return ListView.builder(
                                       padding: const EdgeInsets.symmetric(horizontal: 15),
                                       itemCount: data.length,
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
+                                       Oil oil =Oil.fromMap(Map<String, dynamic>.from(data[index].data() as Map), snapshot.data?.docs[index].reference.id as String);
                                         return PrimaryTopItemCard(
-                                          text: data[index]["name"],
-                                          subText: data[index]["sciName"],
+                                          text: oil.name,
+                                          subText: oil.sciName.toString(),
                                           imagePath: 'assets/images/whiteoil.png',
                                           backgroundColor: kPrimaryColor,
                                         );
