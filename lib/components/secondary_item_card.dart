@@ -28,32 +28,37 @@ class SecondaryItemCard extends StatelessWidget {
               ),
               border: Border.all(color: kSecondaryTextColor),
               color: kSecondaryBackgroundColor),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  text,
-                  style: const TextStyle(
-                      color: kPrimaryTextColor, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  subText,
-                  style: const TextStyle(color: kPrimaryTextColor),
-                )
-              ],
-            ),
+          child: Row(
+            children: [
+              const SizedBox(
+                width: 70,
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    text,
+                    style: const TextStyle(
+                        color: kPrimaryTextColor, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    subText,
+                    style: const TextStyle(color: kPrimaryTextColor),
+                  ),
+                  SizedBox(height: 5,)
+                ],
+              ),
+            ],
           ),
         ),
         Positioned(
           left: 10,
           bottom: 30,
-
           child: Container(
             margin: const EdgeInsets.all(5),
             padding: const EdgeInsets.all(8),

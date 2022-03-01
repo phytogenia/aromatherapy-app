@@ -20,6 +20,7 @@ class _OilListScreenState extends State<OilListScreen> {
   List<DocumentSnapshot> data = [];
   // This list holds the data for the list view
   List<DocumentSnapshot> _foundUsers = [];
+
   @override
   void initState() {
     getData();
