@@ -9,9 +9,7 @@ import '../../../models/oil/oil_domain.dart';
 import '../../../utils/constants.dart';
 
 class OilDetails extends StatefulWidget {
-  const OilDetails(
-      {Key? key, required this.oil}
-      ) : super(key: key);
+  const OilDetails({Key? key, required this.oil}) : super(key: key);
   final Oil oil;
 
   @override
@@ -19,20 +17,23 @@ class OilDetails extends StatefulWidget {
 }
 
 class _OilDetailsState extends State<OilDetails> {
-  String name='';
-  List<String> otherNames=[];
-  String sciName='';
+  String name = '';
+  List<String> otherNames = [];
+  String sciName = '';
   String? distilledOrgan;
   String? extractionProcess;
 
   int SelectedIndex = 0;
-  List<String> aspect =[];
+  List<String> aspect = [];
   OilDomain? health;
+  OilDomain? beauty;
+  OilDomain? wellBeing;
   List<String> colo = [];
   List<String> odor = [];
   List<String> allergie = [];
-  String s='';
-  String p='';
+  String s = '';
+  String p = '';
+
   @override
   void initState() {
     getData();
@@ -45,19 +46,20 @@ class _OilDetailsState extends State<OilDetails> {
       aspect.addAll(oil.aspect);
       colo.addAll(oil.color);
       odor.addAll(oil.smell);
-      allergie=oil.allergies;
-      name=oil.name;
-      otherNames=oil.otherNames!;
+      allergie = oil.allergies;
+      name = oil.name;
+      otherNames = oil.otherNames!;
       sciName = oil.sciName!;
       s = otherNames.join(', ');
       p = allergie.join(', ');
       health = oil.health;
+      beauty = oil.beauty;
+      wellBeing = oil.wellBeing;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: true,
@@ -82,10 +84,7 @@ class _OilDetailsState extends State<OilDetails> {
           top: false,
           child: SingleChildScrollView(
             child: Container(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height,
+              height: MediaQuery.of(context).size.height,
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/images/bg.png'),
@@ -95,17 +94,11 @@ class _OilDetailsState extends State<OilDetails> {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.3,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.vertical(
                             bottom: Radius.elliptical(
-                                MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width, 130.0)),
+                                MediaQuery.of(context).size.width, 130.0)),
                         image: const DecorationImage(
                             colorFilter: ColorFilter.mode(
                                 kPrimaryColor, BlendMode.srcOver),
@@ -116,15 +109,9 @@ class _OilDetailsState extends State<OilDetails> {
                   Positioned(
                       left: 20,
                       right: 20,
-                      top: MediaQuery
-                          .of(context)
-                          .size
-                          .height * 0.2,
+                      top: MediaQuery.of(context).size.height * 0.2,
                       child: Container(
-                        height: MediaQuery
-                            .of(context)
-                            .size
-                            .height,
+                        height: MediaQuery.of(context).size.height,
                         decoration: const BoxDecoration(
                             color: kSecondaryBackgroundColor,
                             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -224,7 +211,7 @@ class _OilDetailsState extends State<OilDetails> {
                                 SizedBox(
                                   height: 40,
                                   child:
-                                  PrimaryListProperties(properties: aspect),
+                                      PrimaryListProperties(properties: aspect),
                                 ),
                                 const SizedBox(height: 10),
                                 const Align(
@@ -241,7 +228,7 @@ class _OilDetailsState extends State<OilDetails> {
                                 SizedBox(
                                   height: 40,
                                   child:
-                                  PrimaryListProperties(properties: colo),
+                                      PrimaryListProperties(properties: colo),
                                 ),
                                 const SizedBox(height: 10),
                                 const Align(
@@ -258,7 +245,7 @@ class _OilDetailsState extends State<OilDetails> {
                                 SizedBox(
                                   height: 40,
                                   child:
-                                  PrimaryListProperties(properties: odor),
+                                      PrimaryListProperties(properties: odor),
                                 ),
                                 const SizedBox(height: 20),
                                 DefaultTabController(
@@ -275,7 +262,7 @@ class _OilDetailsState extends State<OilDetails> {
                                               width: 1)),
                                       child: TabBar(
                                         onTap: (int index) {
-                                          SelectedIndex=index;
+                                          SelectedIndex = index;
                                           setState(() {});
                                         },
                                         //indicatorColor: kPrimaryColor,
@@ -303,48 +290,134 @@ class _OilDetailsState extends State<OilDetails> {
                                     )),
                                 SelectedIndex == 0
                                     ? SizedBox(
-                                    height:
-                                    MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height,
-                                    child: ListView.builder(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10),
-                                        physics:
-                                        const NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        itemCount: odor.length,
-                                        scrollDirection: Axis.vertical,
-                                        itemBuilder: (context, index) {
-                                          print(health);
-                                          return PrimaryPropertyDescriptionCard(
-                                            title: health as String,
-                                            description: health?.properties as String,
-                                          );
-                                        }))
-                                    :SelectedIndex == 1 ?
-                                SizedBox(
-                                    height:
-                                    MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height,
-                                    child: ListView.builder(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10),
-                                        physics:
-                                        const NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        itemCount: odor.length,
-                                        scrollDirection: Axis.vertical,
-                                        itemBuilder: (context, index) {
-                                          return PrimaryPropertyDescriptionCard(
-                                            title: odor[index],
-                                            description: "karimm",
-                                          );
-                                        })):SizedBox(height: 5,)
-
+                                        height:
+                                            MediaQuery.of(context).size.height,
+                                        child: ListView.builder(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: health
+                                                .toString()
+                                                .split(",")
+                                                .length,
+                                            scrollDirection: Axis.vertical,
+                                            itemBuilder: (context, index) {
+                                              return !health
+                                                      .toString()
+                                                      .split(",")[index]
+                                                      .split(":")[1]
+                                                      .contains("null")
+                                                  ? PrimaryPropertyDescriptionCard(
+                                                      title: health
+                                                          .toString()
+                                                          .split(",")[index]
+                                                          .split(":")[0],
+                                                      description: health
+                                                          .toString()
+                                                          .split(",")[index]
+                                                          .split(":")[1],
+                                                    )
+                                                  : const SizedBox(
+                                                      height: 0,
+                                                    );
+                                            }))
+                                    : SelectedIndex == 1
+                                        ? SizedBox(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height,
+                                            child: beauty != null
+                                                ? ListView.builder(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 10),
+                                                    physics:
+                                                        const NeverScrollableScrollPhysics(),
+                                                    shrinkWrap: true,
+                                                    itemCount: beauty
+                                                        .toString()
+                                                        .split(",")
+                                                        .length,
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return !beauty
+                                                              .toString()
+                                                              .split(",")[index]
+                                                              .split(":")[1]
+                                                              .contains("null")
+                                                          ? PrimaryPropertyDescriptionCard(
+                                                              title: beauty
+                                                                  .toString()
+                                                                  .split(",")[
+                                                                      index]
+                                                                  .split(
+                                                                      ":")[0],
+                                                              description: beauty
+                                                                  .toString()
+                                                                  .split(",")[
+                                                                      index]
+                                                                  .split(
+                                                                      ":")[1],
+                                                            )
+                                                          : const SizedBox(
+                                                              height: 0,
+                                                            );
+                                                    })
+                                                : const SizedBox(
+                                                    height: 0,
+                                                  ))
+                                        : SelectedIndex == 2
+                                            ? SizedBox(
+                                                height: MediaQuery.of(context)
+                                                    .size
+                                                    .height,
+                                                child:wellBeing!=null? ListView.builder(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 10),
+                                                    physics:
+                                                        const NeverScrollableScrollPhysics(),
+                                                    shrinkWrap: true,
+                                                    itemCount: wellBeing
+                                                        .toString()
+                                                        .split(",")
+                                                        .length,
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return !wellBeing
+                                                              .toString()
+                                                              .split(",")[index]
+                                                              .split(":")[1]
+                                                              .contains("null")
+                                                          ? PrimaryPropertyDescriptionCard(
+                                                              title: wellBeing
+                                                                  .toString()
+                                                                  .split(",")[
+                                                                      index]
+                                                                  .split(
+                                                                      ":")[0],
+                                                              description: wellBeing
+                                                                  .toString()
+                                                                  .split(",")[
+                                                                      index]
+                                                                  .split(
+                                                                      ":")[1],
+                                                            )
+                                                          : const SizedBox(
+                                                              height: 0,
+                                                            );
+                                                    }):
+                                const SizedBox(height: 0,)
+                                )
+                                            : const SizedBox(
+                                                height: 0,
+                                              )
                               ],
                             ),
                           ),
