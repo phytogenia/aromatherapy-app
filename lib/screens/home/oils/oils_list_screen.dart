@@ -120,6 +120,7 @@ class _OilListScreenState extends State<OilListScreen> {
                                                 text: oil.name,
                                                 subText: oil.sciName.toString(),
                                                 imagePath: 'assets/images/whiteoil.png',
+                                                oil: oil,
                                                 backgroundColor: kPrimaryColor,
                                               );
                                             },);
@@ -200,10 +201,13 @@ class _OilListScreenState extends State<OilListScreen> {
                                                 itemCount: _foundUsers.length,
                                                 scrollDirection: Axis.vertical,
                                                 itemBuilder: (context, index) {
+                                                  Oil oil =Oil.fromMap(Map<String, dynamic>.from(_foundUsers[index].data() as Map), _foundUsers[index]["id"].toString());
+
                                                   return SecondaryItemCard(
                                                       text: _foundUsers[index]["name"].toString(),
                                                       subText: _foundUsers[index]["sciName"].toString(),
                                                       imagePath: 'assets/images/whiteoil.png',
+                                                      oil: oil,
                                                       backgroundColor: kPrimaryColor);
                                                 }):
                                             const Text(

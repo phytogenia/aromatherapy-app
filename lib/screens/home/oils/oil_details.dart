@@ -1,3 +1,4 @@
+import 'package:aromatherapy/models/oil/oil.dart';
 import 'package:flutter/material.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
@@ -7,15 +8,21 @@ import '../../../components/primary_property_item.dart';
 import '../../../utils/constants.dart';
 
 class OilDetails extends StatefulWidget {
-  const OilDetails({Key? key}) : super(key: key);
+  const OilDetails(
+      {Key? key, required this.oil}
+      ) : super(key: key);
+  final Oil oil;
 
   @override
   _OilDetailsState createState() => _OilDetailsState();
 }
 
 class _OilDetailsState extends State<OilDetails> {
+
+
   int SelectedIndex = 0;
-  List<String> aspect = [];
+  List<String> aspect =[];
+
   List<String> colo = [];
   List<String> odor = [];
 
@@ -27,7 +34,7 @@ class _OilDetailsState extends State<OilDetails> {
 
   getData() {
     setState(() {
-      aspect.addAll(['Arbre a the']);
+      aspect.addAll(['Arbre a the', 'Arbre']);
       colo.addAll(['Arbre a the', 'Arbre']);
       odor.addAll(['Arbre a the', 'Arbre', 'Arbre a the']);
     });
@@ -35,6 +42,9 @@ class _OilDetailsState extends State<OilDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final Oil oil = widget.oil;
+   List<String?>? list = oil.aspect;
+    aspect.addAll(list);
     return Scaffold(
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: true,
@@ -59,7 +69,10 @@ class _OilDetailsState extends State<OilDetails> {
           top: false,
           child: SingleChildScrollView(
             child: Container(
-              height: MediaQuery.of(context).size.height,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height,
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/images/bg.png'),
@@ -69,11 +82,17 @@ class _OilDetailsState extends State<OilDetails> {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: MediaQuery.of(context).size.height * 0.3,
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.3,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.vertical(
                             bottom: Radius.elliptical(
-                                MediaQuery.of(context).size.width, 130.0)),
+                                MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width, 130.0)),
                         image: const DecorationImage(
                             colorFilter: ColorFilter.mode(
                                 kPrimaryColor, BlendMode.srcOver),
@@ -84,9 +103,15 @@ class _OilDetailsState extends State<OilDetails> {
                   Positioned(
                       left: 20,
                       right: 20,
-                      top: MediaQuery.of(context).size.height * 0.2,
+                      top: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.2,
                       child: Container(
-                        height: MediaQuery.of(context).size.height,
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height,
                         decoration: const BoxDecoration(
                             color: kSecondaryBackgroundColor,
                             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -186,7 +211,7 @@ class _OilDetailsState extends State<OilDetails> {
                                 SizedBox(
                                   height: 40,
                                   child:
-                                      PrimaryListProperties(properties: aspect),
+                                  PrimaryListProperties(properties: aspect),
                                 ),
                                 const SizedBox(height: 10),
                                 const Align(
@@ -203,7 +228,7 @@ class _OilDetailsState extends State<OilDetails> {
                                 SizedBox(
                                   height: 40,
                                   child:
-                                      PrimaryListProperties(properties: colo),
+                                  PrimaryListProperties(properties: colo),
                                 ),
                                 const SizedBox(height: 10),
                                 const Align(
@@ -220,7 +245,7 @@ class _OilDetailsState extends State<OilDetails> {
                                 SizedBox(
                                   height: 40,
                                   child:
-                                      PrimaryListProperties(properties: odor),
+                                  PrimaryListProperties(properties: odor),
                                 ),
                                 const SizedBox(height: 20),
                                 DefaultTabController(
@@ -264,29 +289,32 @@ class _OilDetailsState extends State<OilDetails> {
                                     )),
                                 SelectedIndex == 0
                                     ? SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height,
-                                        child: ListView.builder(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 10),
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            shrinkWrap: true,
-                                            itemCount: odor.length,
-                                            scrollDirection: Axis.vertical,
-                                            itemBuilder: (context, index) {
-                                              return PrimaryPropertyDescriptionCard(
-                                                title: odor[index],
-                                                description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
-                                                    "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
-                                                    "When an unknown printer took a galley of type Scrambled it to make a type specimen book." +
-                                                    "It has survived not only five centuries" +
-                                                    "When an unknown printer took a galley of type Scrambled it to make a type specimen book.",
-                                              );
-                                            }))
+                                    height:
+                                    MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height,
+                                    child: ListView.builder(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10),
+                                        physics:
+                                        const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: odor.length,
+                                        scrollDirection: Axis.vertical,
+                                        itemBuilder: (context, index) {
+                                          return PrimaryPropertyDescriptionCard(
+                                            title: odor[index],
+                                            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
+                                                "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
+                                                "When an unknown printer took a galley of type Scrambled it to make a type specimen book." +
+                                                "It has survived not only five centuries" +
+                                                "When an unknown printer took a galley of type Scrambled it to make a type specimen book.",
+                                          );
+                                        }))
                                     : const SizedBox(
-                                        height: 0,
-                                      )
+                                  height: 0,
+                                )
                               ],
                             ),
                           ),

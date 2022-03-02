@@ -2,12 +2,15 @@ import 'package:aromatherapy/screens/home/oils/oil_details.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../models/oil/oil.dart';
+
 class PrimaryTopItemCard extends StatelessWidget {
   const PrimaryTopItemCard({
     Key? key,
     required this.text,
     required this.subText,
     required this.imagePath,
+    required this.oil,
     this.backgroundColor = kPrimaryColor,
   }) : super(key: key);
 
@@ -15,6 +18,7 @@ class PrimaryTopItemCard extends StatelessWidget {
   final String subText;
   final String imagePath;
   final Color backgroundColor;
+  final Oil oil;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,7 @@ class PrimaryTopItemCard extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => OilDetails())); //TODO: refactore
+                builder: (context) => OilDetails(oil: oil,))); //TODO: refactore
       },
       child: Container(
         margin: const EdgeInsets.all(5),

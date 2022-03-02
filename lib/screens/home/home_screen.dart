@@ -308,6 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           text: oil.name,
                                           subText: oil.sciName.toString(),
                                           imagePath: 'assets/images/whiteoil.png',
+                                          oil: oil,
                                           backgroundColor: kPrimaryColor,
                                         );
                                       });
@@ -331,11 +332,56 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         SizedBox(
                           height: 120,
-                          child: PrimaryTopListItems(
+                          child: ListView.builder(
+                              padding: const EdgeInsets.symmetric(horizontal: 15),
+                              itemCount: recipes.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  margin: const EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(9),
+                                  width: 130,
+                                  decoration: const BoxDecoration(
+                                      color: kPrimaryColor,
+                                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(),
+                                            // Empty Container to align the icon on the right with spacebetween
+                                            Image.asset('assets/images/recipe.png',color: whitecolor,)
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const Text(
+                                          "text",
+                                          style: TextStyle(
+                                              color: kSecondaryBackgroundColor,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        const SizedBox(height: 2),
+                                        const Flexible(
+                                          child: Text(
+                                            "subText",
+                                            style: TextStyle(color: kSecondaryBackgroundColor,fontSize: 10),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }) /*PrimaryTopListItems(
                             list: recipes,
                             backgroundColor: kSecondaryColor,
                             imagePath: 'assets/images/recipe.png',
-                          ),
+                          ),*/
                         ),
                       ],
                     ),
