@@ -1,16 +1,16 @@
 import 'oil_domain.dart';
 
 class Oil {
-  String? id;
+  String id;
   String name;
-  List<String?>? otherNames;
-  String? sciName;
+  List<String> otherNames;
+  String sciName;
   String? distilledOrgan;
   String? extractionProcess;
-  List<String?>? allergies;
-  List<String?>? color;
-  List<String?>? aspect;
-  List<String?>? smell;
+  List<String> allergies;
+  List<String> color;
+  List<String> aspect;
+  List<String> smell;
   OilDomain? health;
   OilDomain? beauty;
   OilDomain? wellBeing;
@@ -19,16 +19,16 @@ class Oil {
       {required this.id,
       required this.name,
       required this.otherNames,
-      this.sciName,
-      this.distilledOrgan,
+      required this.sciName,
+        this.distilledOrgan,
       this.extractionProcess,
-      this.allergies,
-      this.color,
-      this.aspect,
-      this.smell,
-      this.health,
-      this.beauty,
-      this.wellBeing});
+      required this.allergies,
+      required this.color,
+      required this.aspect,
+      required this.smell,
+      required this.health,
+      required this.beauty,
+      required this.wellBeing});
 
   Map<String, dynamic> toMap() {
     return {
@@ -47,15 +47,15 @@ class Oil {
 
   factory Oil.fromMap(Map<String, dynamic>? data, String documentID) {
     String name = data!['name'].toString();
-    String? sciName = data['sciName'];
-    List<String?>? otherNames = List<String?>.from(data['otherNames']);
+    String sciName = data['sciName'];
+    List<String> otherNames = List<String>.from(data['otherNames']);
     String? distilledOrgan = data['distilledOrgan'];
 
     String? extractionProcess = data['extractionProcess'];
-    List<String?>? allergies = List<String?>.from(data['allergies']);
-    List<String?>? color = List<String?>.from(data['color']);
-    List<String?>? aspect = List<String?>.from(data['aspect']);
-    List<String?>? smell = List<String?>.from(data['smell']);
+    List<String> allergies = List<String>.from(data['allergies']);
+    List<String> color = List<String>.from(data['color']);
+    List<String> aspect = List<String>.from(data['aspect']);
+    List<String> smell = List<String>.from(data['smell']);
 
     OilDomain? health =
         data['health'] != null ? OilDomain.fromMap(data['health']) : null;

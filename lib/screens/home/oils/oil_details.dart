@@ -18,14 +18,20 @@ class OilDetails extends StatefulWidget {
 }
 
 class _OilDetailsState extends State<OilDetails> {
-
+  String name='';
+  List<String> otherNames=[];
+  String sciName='';
+  String? distilledOrgan;
+  String? extractionProcess;
 
   int SelectedIndex = 0;
   List<String> aspect =[];
 
   List<String> colo = [];
   List<String> odor = [];
-
+  List<String> allergie = [];
+  String s='';
+  String p='';
   @override
   void initState() {
     getData();
@@ -34,17 +40,22 @@ class _OilDetailsState extends State<OilDetails> {
 
   getData() {
     setState(() {
-      aspect.addAll(['Arbre a the', 'Arbre']);
-      colo.addAll(['Arbre a the', 'Arbre']);
-      odor.addAll(['Arbre a the', 'Arbre', 'Arbre a the']);
+      final Oil oil = widget.oil;
+      aspect.addAll(oil.aspect);
+      colo.addAll(oil.color);
+      odor.addAll(oil.smell);
+      allergie=oil.allergies;
+      name=oil.name;
+      otherNames=oil.otherNames;
+      sciName = oil.sciName;
+      s = otherNames.join(', ');
+      p = allergie.join(', ');
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final Oil oil = widget.oil;
-   List<String?>? list = oil.aspect;
-    aspect.addAll(list);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: true,
@@ -128,20 +139,20 @@ class _OilDetailsState extends State<OilDetails> {
                             child: Column(
                               children: [
                                 const SizedBox(height: 8),
-                                const Align(
+                                Align(
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    'Apricot',
-                                    style: TextStyle(
+                                    name,
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25),
                                   ),
                                 ),
-                                const Align(
+                                Align(
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    'Prunus Armeniaca',
-                                    style: TextStyle(
+                                    sciName,
+                                    style: const TextStyle(
                                         fontSize: 15,
                                         color: kSecondaryTextColor,
                                         fontStyle: FontStyle.italic),
@@ -165,11 +176,11 @@ class _OilDetailsState extends State<OilDetails> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                const Align(
+                                Align(
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    'Arbre a the, Melaleuque',
-                                    style: TextStyle(
+                                    s,
+                                    style: const TextStyle(
                                         fontSize: 15,
                                         color: kPrimaryTextColor,
                                         fontStyle: FontStyle.italic),
@@ -186,11 +197,11 @@ class _OilDetailsState extends State<OilDetails> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                const Align(
+                                Align(
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    'Melaleuque',
-                                    style: TextStyle(
+                                    p,
+                                    style: const TextStyle(
                                         fontSize: 15,
                                         color: kPrimaryColor,
                                         fontStyle: FontStyle.italic),
