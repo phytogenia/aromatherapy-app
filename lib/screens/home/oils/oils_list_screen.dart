@@ -201,7 +201,7 @@ class _OilListScreenState extends State<OilListScreen> {
                                                 itemCount: _foundUsers.length,
                                                 scrollDirection: Axis.vertical,
                                                 itemBuilder: (context, index) {
-                                                  Oil oil =Oil.fromMap(Map<String, dynamic>.from(_foundUsers[index].data() as Map), _foundUsers[index]["id"].toString());
+                                                  Oil oil =Oil.fromMap(Map<String, dynamic>.from(_foundUsers[index].data() as Map), _foundUsers[index].id);
 
                                                   return SecondaryItemCard(
                                                       text: _foundUsers[index]["name"].toString(),
@@ -210,10 +210,49 @@ class _OilListScreenState extends State<OilListScreen> {
                                                       oil: oil,
                                                       backgroundColor: kPrimaryColor);
                                                 }):
-                                            const Text(
+                                    SizedBox(
+                                      height: 120,
+                                      child: FutureBuilder<QuerySnapshot>(
+                                          future: oilss.get(),
+                                          builder: (context,snapshot) {
+
+                                            if (snapshot.hasError) {
+                                              return Text("Something went wrong");
+                                            }
+
+                                            if (snapshot.connectionState == ConnectionState.done) {
+                                              data = snapshot.data!.docs;
+
+                                              return ListView.builder(
+                                                padding: const EdgeInsets.symmetric(horizontal: 15),
+                                                itemCount: data.length,
+                                                scrollDirection: Axis.vertical,
+                                                itemBuilder: (context, index) {
+                                                  Oil oil =Oil.fromMap(Map<String, dynamic>.from(data[index].data() as Map), snapshot.data?.docs[index].reference.id as String);
+                                                  return SecondaryItemCard(
+                                                    text: oil.name,
+                                                    subText: oil.sciName.toString(),
+                                                    imagePath: 'assets/images/whiteoil.png',
+                                                    oil: oil,
+                                                    backgroundColor: kPrimaryColor,
+                                                  );
+                                                },);
+
+                                            }
+                                            return const Text(
                                               'No results found',
                                               style: TextStyle(fontSize: 24),
-                                            ),
+                                            );
+                                          }
+
+
+                                      ),
+                                      /* child: PrimaryTopListItems(
+                                list: data,
+                                backgroundColor: kPrimaryColor,
+                                imagePath: 'assets/images/whiteoil.png',
+                              ),*/
+                                    ),
                                           ),
 
 
