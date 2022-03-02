@@ -172,7 +172,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                                       Icons.search,
                                       color: kSecondaryTextColor,
                                     ),
-                                    hintText: 'Quick search for oils ...',
+                                    hintText: 'Quick search for recipes ...',
                                     hintStyle: TextStyle(fontSize: 12),
                                     enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(

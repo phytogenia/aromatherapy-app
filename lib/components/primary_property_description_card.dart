@@ -20,7 +20,7 @@ class PrimaryPropertyDescriptionCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
-            color: kSecondaryBackgroundColor,
+            color: graycolorclear,
             borderRadius: BorderRadius.all(Radius.circular(10))),
         child: Column(
           children: [

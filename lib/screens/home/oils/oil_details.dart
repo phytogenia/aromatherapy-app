@@ -5,6 +5,7 @@ import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import '../../../components/primary_list_properties.dart';
 import '../../../components/primary_property_description_card.dart';
 import '../../../components/primary_property_item.dart';
+import '../../../models/oil/oil_domain.dart';
 import '../../../utils/constants.dart';
 
 class OilDetails extends StatefulWidget {
@@ -26,7 +27,7 @@ class _OilDetailsState extends State<OilDetails> {
 
   int SelectedIndex = 0;
   List<String> aspect =[];
-
+  OilDomain? health;
   List<String> colo = [];
   List<String> odor = [];
   List<String> allergie = [];
@@ -50,6 +51,7 @@ class _OilDetailsState extends State<OilDetails> {
       sciName = oil.sciName!;
       s = otherNames.join(', ');
       p = allergie.join(', ');
+      health = oil.health;
     });
   }
 
@@ -266,13 +268,14 @@ class _OilDetailsState extends State<OilDetails> {
                                       height: 40,
                                       decoration: BoxDecoration(
                                           borderRadius: const BorderRadius.all(
-                                              Radius.circular(100)),
+                                              Radius.circular(10)),
                                           border: Border.all(
                                               color: kSecondaryTextColor
                                                   .withOpacity(.4),
                                               width: 1)),
                                       child: TabBar(
                                         onTap: (int index) {
+                                          SelectedIndex=index;
                                           setState(() {});
                                         },
                                         //indicatorColor: kPrimaryColor,
@@ -291,10 +294,10 @@ class _OilDetailsState extends State<OilDetails> {
                                         labelColor: kSecondaryBackgroundColor,
                                         indicator: RectangularIndicator(
                                           color: kPrimaryColor,
-                                          bottomLeftRadius: 100,
-                                          bottomRightRadius: 100,
-                                          topLeftRadius: 100,
-                                          topRightRadius: 100,
+                                          bottomLeftRadius: 10,
+                                          bottomRightRadius: 10,
+                                          topLeftRadius: 10,
+                                          topRightRadius: 10,
                                         ),
                                       ),
                                     )),
@@ -314,18 +317,34 @@ class _OilDetailsState extends State<OilDetails> {
                                         itemCount: odor.length,
                                         scrollDirection: Axis.vertical,
                                         itemBuilder: (context, index) {
+                                          print(health);
                                           return PrimaryPropertyDescriptionCard(
-                                            title: odor[index],
-                                            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
-                                                "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
-                                                "When an unknown printer took a galley of type Scrambled it to make a type specimen book." +
-                                                "It has survived not only five centuries" +
-                                                "When an unknown printer took a galley of type Scrambled it to make a type specimen book.",
+                                            title: health as String,
+                                            description: health?.properties as String,
                                           );
                                         }))
-                                    : const SizedBox(
-                                  height: 0,
-                                )
+                                    :SelectedIndex == 1 ?
+                                SizedBox(
+                                    height:
+                                    MediaQuery
+                                        .of(context)
+                                        .size
+                                        .height,
+                                    child: ListView.builder(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10),
+                                        physics:
+                                        const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemCount: odor.length,
+                                        scrollDirection: Axis.vertical,
+                                        itemBuilder: (context, index) {
+                                          return PrimaryPropertyDescriptionCard(
+                                            title: odor[index],
+                                            description: "karimm",
+                                          );
+                                        })):SizedBox(height: 5,)
+
                               ],
                             ),
                           ),

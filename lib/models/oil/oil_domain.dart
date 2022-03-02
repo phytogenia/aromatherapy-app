@@ -23,6 +23,16 @@ class OilDomain {
     };
   }
 
+  List<String> tolist() {
+    return
+     ['properties', properties!,
+      'precautionOfUse', precautionOfUse!,
+      'areaOfUse', areaOfUse!,
+      'practicalUse', practicalUse!,
+      'synergy', synergy!,
+    ];
+  }
+
   factory OilDomain.fromMap(Map<String, dynamic> data) {
     String? properties = data['properties'];
     String? precautionOfUse = data['precautionOfUse'];
