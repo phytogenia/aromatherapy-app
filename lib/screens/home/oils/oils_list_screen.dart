@@ -115,7 +115,7 @@ class _OilListScreenState extends State<OilListScreen> {
                                             itemCount: data.length,
                                             scrollDirection: Axis.horizontal,
                                             itemBuilder: (context, index) {
-                                              Oil oil =Oil.fromMap(Map<String, dynamic>.from(data[index].data() as Map), snapshot.data?.docs[index].reference.id as String);
+                                              Oil oil =Oil.fromMap(Map<String, dynamic>.from(data[index].data() as Map), data[index].id);
                                               return PrimaryTopItemCard(
                                                 text: oil.name,
                                                 subText: oil.sciName.toString(),
@@ -228,7 +228,7 @@ class _OilListScreenState extends State<OilListScreen> {
                                                 itemCount: data.length,
                                                 scrollDirection: Axis.vertical,
                                                 itemBuilder: (context, index) {
-                                                  Oil oil =Oil.fromMap(Map<String, dynamic>.from(data[index].data() as Map), snapshot.data?.docs[index].reference.id as String);
+                                                  Oil oil =Oil.fromMap(Map<String, dynamic>.from(data[index].data() as Map), data[index].id);
                                                   return SecondaryItemCard(
                                                     text: oil.name,
                                                     subText: oil.sciName.toString(),
@@ -247,21 +247,8 @@ class _OilListScreenState extends State<OilListScreen> {
 
 
                                       ),
-                                      /* child: PrimaryTopListItems(
-                                list: data,
-                                backgroundColor: kPrimaryColor,
-                                imagePath: 'assets/images/whiteoil.png',
-                              ),*/
                                     ),
                                           ),
-
-
-
-                                    /*child: SecondaryListItems(
-                                      list: oils,
-                                      backgroundColor: kPrimaryColor,
-                                      imagePath: 'assets/images/whiteoil.png',
-                                    ),*/
                                   const SizedBox(
                                     height: 25,
                                   ),

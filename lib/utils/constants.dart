@@ -5,7 +5,7 @@ const String urlTermOfUse = 'https://google.com/';
 const String urlPrivacyPolicy = 'https://google.com/';
 
 const kPrimaryColor = Color(0xFF15CA4D);
-const kSecondaryColor = Color(0xFFFF7643);
+const kSecondaryColor = Color(0xFFE88B00);
 const kSecondaryTextColor = Color(0xFFB4B1B7);
 const kPrimaryTextColor = Color(0xFF3C3B3C);
 const kSecondaryBackgroundColor = Color(0xFFF9F4FF);

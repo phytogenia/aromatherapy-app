@@ -46,8 +46,8 @@ class _OilDetailsState extends State<OilDetails> {
       odor.addAll(oil.smell);
       allergie=oil.allergies;
       name=oil.name;
-      otherNames=oil.otherNames;
-      sciName = oil.sciName;
+      otherNames=oil.otherNames!;
+      sciName = oil.sciName!;
       s = otherNames.join(', ');
       p = allergie.join(', ');
     });

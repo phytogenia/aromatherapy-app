@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:aromatherapy/components/primary_top_item_card_rec.dart';
 import 'package:aromatherapy/screens/home/recipes/recipes_list_screen.dart';
 import 'package:aromatherapy/screens/home/settings/settings_screen.dart';
 import 'package:aromatherapy/services/auth_service.dart';
@@ -10,6 +11,7 @@ import '../../components/primary_category_card.dart';
 import '../../components/primary_top_item_card.dart';
 import '../../components/primary_top_list_item.dart';
 import '../../models/oil/oil.dart';
+import '../../models/recipe/recipe.dart';
 import '../../utils/constants.dart';
 import 'oils/oils_list_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,7 +24,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   final _Screens = [
     const OilListScreen(),
     const HomeScreen(),
@@ -94,7 +95,10 @@ class _HomeScreenState extends State<HomeScreen> {
   List recipes = [];
 
   CollectionReference oilss = FirebaseFirestore.instance.collection('oils');
+  CollectionReference rcp = FirebaseFirestore.instance.collection('recipes');
+
   List<DocumentSnapshot> data = [];
+
   // This list holds the data for the list view
   List<DocumentSnapshot> _foundUsers = [];
 
@@ -122,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } else {
       results = data
           .where((user) =>
-          user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+              user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       // we use the toLowerCase() method to make it case-insensitive
     }
@@ -289,38 +293,41 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 120,
                           child: FutureBuilder<QuerySnapshot>(
                               future: oilss.get(),
-                            builder: (context,snapshot) {
+                              builder: (context, snapshot) {
+                                if (snapshot.hasError) {
+                                  return Text("Something went wrong");
+                                }
 
-                              if (snapshot.hasError) {
-                                return Text("Something went wrong");
-                              }
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  data = snapshot.data!.docs;
 
-                              if (snapshot.connectionState == ConnectionState.done) {
-                                data = snapshot.data!.docs;
-                                
-                              return ListView.builder(
-                                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                                  return ListView.builder(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15),
                                       itemCount: data.length,
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
-                                       Oil oil =Oil.fromMap(Map<String, dynamic>.from(data[index].data() as Map), snapshot.data?.docs[index].reference.id as String);
+                                        Oil oil = Oil.fromMap(
+                                            Map<String, dynamic>.from(
+                                                data[index].data() as Map),
+                                            data[index].id);
                                         return PrimaryTopItemCard(
                                           text: oil.name,
                                           subText: oil.sciName.toString(),
-                                          imagePath: 'assets/images/whiteoil.png',
+                                          imagePath:
+                                              'assets/images/whiteoil.png',
                                           oil: oil,
                                           backgroundColor: kPrimaryColor,
                                         );
                                       });
-                            }
-                              return const Center(
-                                child: CircularProgressIndicator(
-                                  color: kPrimaryColor,
-                                ),
-                              );
-
-                            }
-                          ),
+                                }
+                                return const Center(
+                                  child: CircularProgressIndicator(
+                                    color: kPrimaryColor,
+                                  ),
+                                );
+                              }),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(
@@ -331,58 +338,46 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 120,
-                          child: ListView.builder(
-                              padding: const EdgeInsets.symmetric(horizontal: 15),
-                              itemCount: recipes.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  margin: const EdgeInsets.all(5),
-                                  padding: const EdgeInsets.all(9),
-                                  width: 130,
-                                  decoration: const BoxDecoration(
+                            height: 120,
+                            child: FutureBuilder<QuerySnapshot>(
+                                future: rcp.get(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasError) {
+                                    return const Text("Something went wrong");
+                                  }
+
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    List<DocumentSnapshot> data2 =
+                                        snapshot.data!.docs;
+
+                                    return ListView.builder(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 15),
+                                        itemCount: data2.length,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context, index) {
+                                          Recipe recipe = Recipe.fromMap(
+                                              Map<String, dynamic>.from(
+                                                  data2[index].data() as Map),
+                                              data2[index].id);
+                                          return PrimaryTopItemCardRecipe(
+                                            text: recipe.name,
+                                            subText:
+                                                recipe.reference.toString(),
+                                            imagePath:
+                                                'assets/images/whiteoil.png',
+                                            recipe: recipe,
+                                            backgroundColor: kSecondaryColor,
+                                          );
+                                        });
+                                  }
+                                  return const Center(
+                                    child: CircularProgressIndicator(
                                       color: kPrimaryColor,
-                                      borderRadius: BorderRadius.all(Radius.circular(15))),
-                                  child: Center(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(),
-                                            // Empty Container to align the icon on the right with spacebetween
-                                            Image.asset('assets/images/recipe.png',color: whitecolor,)
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        const Text(
-                                          "text",
-                                          style: TextStyle(
-                                              color: kSecondaryBackgroundColor,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(height: 2),
-                                        const Flexible(
-                                          child: Text(
-                                            "subText",
-                                            style: TextStyle(color: kSecondaryBackgroundColor,fontSize: 10),
-                                          ),
-                                        ),
-                                      ],
                                     ),
-                                  ),
-                                );
-                              }) /*PrimaryTopListItems(
-                            list: recipes,
-                            backgroundColor: kSecondaryColor,
-                            imagePath: 'assets/images/recipe.png',
-                          ),*/
-                        ),
+                                  );
+                                })),
                       ],
                     ),
                   ),

@@ -33,8 +33,7 @@ class Recipe {
   factory Recipe.fromMap(Map<String, dynamic>? data, String documentID) {
     String name = data!['name'].toString();
     String? reference = data['reference'];
-    List<Ingredient?>? ingredients =
-        List<Ingredient?>.from(data['ingredients']);
+    //List<Ingredient?>? ingredients = List<Ingredient?>.from(data['ingredients']);
     String? description = data['description'];
     String? notes = data['notes'];
     String? usage = data['usage'];
@@ -43,7 +42,7 @@ class Recipe {
       id: documentID,
       name: name,
       reference: reference,
-      ingredients: ingredients,
+      //ingredients: ingredients,
       description: description,
       notes: notes,
       usage: usage,

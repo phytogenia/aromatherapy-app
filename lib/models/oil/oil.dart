@@ -3,8 +3,8 @@ import 'oil_domain.dart';
 class Oil {
   String id;
   String name;
-  List<String> otherNames;
-  String sciName;
+  List<String>? otherNames;
+  String? sciName;
   String? distilledOrgan;
   String? extractionProcess;
   List<String> allergies;
@@ -18,8 +18,8 @@ class Oil {
   Oil(
       {required this.id,
       required this.name,
-      required this.otherNames,
-      required this.sciName,
+      this.otherNames,
+        this.sciName,
         this.distilledOrgan,
       this.extractionProcess,
       required this.allergies,
@@ -47,8 +47,8 @@ class Oil {
 
   factory Oil.fromMap(Map<String, dynamic>? data, String documentID) {
     String name = data!['name'].toString();
-    String sciName = data['sciName'];
-    List<String> otherNames = List<String>.from(data['otherNames']);
+    String? sciName = data['sciName'];
+    List<String>? otherNames = List<String>.from(data['otherNames']);
     String? distilledOrgan = data['distilledOrgan'];
 
     String? extractionProcess = data['extractionProcess'];
