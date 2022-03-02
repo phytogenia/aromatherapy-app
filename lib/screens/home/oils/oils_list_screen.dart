@@ -2,9 +2,7 @@ import 'package:aromatherapy/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../../components/primary_top_item_card.dart';
-import '../../../components/primary_top_list_item.dart';
 import '../../../components/secondary_item_card.dart';
-import '../../../components/secondary_list_items.dart';
 import '../../../models/oil/oil.dart';
 
 class OilListScreen extends StatefulWidget {
@@ -19,7 +17,7 @@ class _OilListScreenState extends State<OilListScreen> {
   CollectionReference oilss = FirebaseFirestore.instance.collection('oils');
   List<DocumentSnapshot> data = [];
   // This list holds the data for the list view
-  List<DocumentSnapshot> _foundUsers = [];
+  List<DocumentSnapshot> _foundoils = [];
 
   @override
   void initState() {
@@ -49,7 +47,7 @@ class _OilListScreenState extends State<OilListScreen> {
 
     // Refresh the UI
     setState(() {
-      _foundUsers = results;
+      _foundoils= results;
     });
   }
 
@@ -195,17 +193,17 @@ class _OilListScreenState extends State<OilListScreen> {
                                   const SizedBox(height: 20),
                                   SizedBox(
                                     height: MediaQuery.of(context).size.height,
-                                    child: _foundUsers.isNotEmpty
+                                    child: _foundoils.isNotEmpty
                                                 ? ListView.builder(
                                                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                                                itemCount: _foundUsers.length,
+                                                itemCount: _foundoils.length,
                                                 scrollDirection: Axis.vertical,
                                                 itemBuilder: (context, index) {
-                                                  Oil oil =Oil.fromMap(Map<String, dynamic>.from(_foundUsers[index].data() as Map), _foundUsers[index].id);
+                                                  Oil oil =Oil.fromMap(Map<String, dynamic>.from(_foundoils[index].data() as Map), _foundoils[index].id);
 
                                                   return SecondaryItemCard(
-                                                      text: _foundUsers[index]["name"].toString(),
-                                                      subText: _foundUsers[index]["sciName"].toString(),
+                                                      text: _foundoils[index]["name"].toString(),
+                                                      subText: _foundoils[index]["sciName"].toString(),
                                                       imagePath: 'assets/images/whiteoil.png',
                                                       oil: oil,
                                                       backgroundColor: kPrimaryColor);
