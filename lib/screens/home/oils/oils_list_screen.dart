@@ -70,7 +70,7 @@ class _OilListScreenState extends State<OilListScreen> {
           )),
         ),
         body: SingleChildScrollView(
-              physics: AlwaysScrollableScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               child: SafeArea(
                   bottom: false,
                   child: SingleChildScrollView(
@@ -195,6 +195,8 @@ class _OilListScreenState extends State<OilListScreen> {
                                     height: MediaQuery.of(context).size.height,
                                     child: _foundoils.isNotEmpty
                                                 ? ListView.builder(
+                                        shrinkWrap: true,
+                                        physics: const NeverScrollableScrollPhysics(),
                                                 padding: const EdgeInsets.symmetric(horizontal: 15),
                                                 itemCount: _foundoils.length,
                                                 scrollDirection: Axis.vertical,
@@ -222,6 +224,8 @@ class _OilListScreenState extends State<OilListScreen> {
                                               data = snapshot.data!.docs;
 
                                               return ListView.builder(
+                                                shrinkWrap: true,
+                                                physics: const NeverScrollableScrollPhysics(),
                                                 padding: const EdgeInsets.symmetric(horizontal: 15),
                                                 itemCount: data.length,
                                                 scrollDirection: Axis.vertical,
@@ -242,8 +246,6 @@ class _OilListScreenState extends State<OilListScreen> {
                                               style: TextStyle(fontSize: 24),
                                             );
                                           }
-
-
                                       ),
                                     ),
                                           ),

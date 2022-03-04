@@ -78,11 +78,12 @@ class _OilDetailsState extends State<OilDetails> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: const ScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(),
         child: SafeArea(
           bottom: false,
           top: false,
           child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
             child: Container(
               height: MediaQuery.of(context).size.height,
               decoration: const BoxDecoration(
@@ -155,111 +156,136 @@ class _OilDetailsState extends State<OilDetails> {
                                   color: kPrimaryColor,
                                 ),
                                 const SizedBox(height: 5),
-                                const Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Other denomination',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: kPrimaryTextColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    s,
-                                    style: const TextStyle(
-                                        fontSize: 15,
-                                        color: kPrimaryTextColor,
-                                        fontStyle: FontStyle.italic),
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                const Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Allergies',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: kPrimaryColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    p,
-                                    style: const TextStyle(
-                                        fontSize: 15,
-                                        color: kPrimaryColor,
-                                        fontStyle: FontStyle.italic),
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                const Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Aspect',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: kPrimaryTextColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                SizedBox(
-                                  height: 40,
-                                  child:
+                                !s.isEmpty ?
+                                Column(
+                                  children: [
+                                    const Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Other denomination',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: kPrimaryTextColor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        s,
+                                        style: const TextStyle(
+                                            fontSize: 15,
+                                            color: kPrimaryTextColor,
+                                            fontStyle: FontStyle.italic),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+
+                                  ],
+                                ):
+                                    const SizedBox(height: 0,),
+
+                                !p.isEmpty ?
+                                Column(
+                                  children: [
+                                    const Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Allergies',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: kPrimaryColor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        p,
+                                        style: const TextStyle(
+                                            fontSize: 15,
+                                            color: kPrimaryColor,
+                                            fontStyle: FontStyle.italic),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+
+                                  ],
+                                ): const SizedBox(height: 0,),
+
+                               !aspect.isEmpty? Column(
+                                  children: [
+                                    const Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Aspect',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: kPrimaryTextColor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    SizedBox(
+                                      height: 40,
+                                      child:
                                       PrimaryListProperties(properties: aspect),
-                                ),
-                                const SizedBox(height: 10),
-                                const Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Color',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: kPrimaryTextColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                SizedBox(
-                                  height: 40,
-                                  child:
+                                    ),
+                                    const SizedBox(height: 10),
+
+                                  ],
+                                ): SizedBox(height: 0,),
+
+                                Column(
+                                  children: [
+                                    const Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Color',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: kPrimaryTextColor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    SizedBox(
+                                      height: 40,
+                                      child:
                                       PrimaryListProperties(properties: colo),
+                                    ),
+                                    const SizedBox(height: 10),
+                                  ],
                                 ),
-                                const SizedBox(height: 10),
-                                const Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Odor',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: kPrimaryTextColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                SizedBox(
-                                  height: 40,
-                                  child:
+
+                                Column(
+                                  children: [
+                                    const Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Odor',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: kPrimaryTextColor,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    SizedBox(
+                                      height: 40,
+                                      child:
                                       PrimaryListProperties(properties: odor),
+                                    ),
+                                    const SizedBox(height: 20),
+                                  ],
                                 ),
-                                const SizedBox(height: 20),
+
                                 DefaultTabController(
                                     initialIndex: SelectedIndex,
                                     length: 3,
                                     child: Container(
                                       height: 40,
-                                      decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(10)),
-                                          border: Border.all(
-                                              color: kSecondaryTextColor
-                                                  .withOpacity(.4),
-                                              width: 1)),
                                       child: TabBar(
                                         onTap: (int index) {
                                           SelectedIndex = index;
@@ -277,15 +303,9 @@ class _OilDetailsState extends State<OilDetails> {
                                             text: "Well Being",
                                           ),
                                         ],
-                                        unselectedLabelColor: kPrimaryColor,
-                                        labelColor: kSecondaryBackgroundColor,
-                                        indicator: RectangularIndicator(
-                                          color: kPrimaryColor,
-                                          bottomLeftRadius: 10,
-                                          bottomRightRadius: 10,
-                                          topLeftRadius: 10,
-                                          topRightRadius: 10,
-                                        ),
+                                        unselectedLabelColor: graycolor,
+                                        labelColor: kPrimaryColor,
+                                        indicatorColor: kPrimaryColor,
                                       ),
                                     )),
                                 SelectedIndex == 0
@@ -295,8 +315,7 @@ class _OilDetailsState extends State<OilDetails> {
                                         child: ListView.builder(
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 10),
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
+                                            physics: NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
                                             itemCount: health
                                                 .toString()
@@ -304,10 +323,11 @@ class _OilDetailsState extends State<OilDetails> {
                                                 .length,
                                             scrollDirection: Axis.vertical,
                                             itemBuilder: (context, index) {
+
                                               return !health
                                                       .toString()
                                                       .split(",")[index]
-                                                      .split(":")[1]
+                                                      .split(':')[1]
                                                       .contains("null")
                                                   ? PrimaryPropertyDescriptionCard(
                                                       title: health
@@ -333,8 +353,7 @@ class _OilDetailsState extends State<OilDetails> {
                                                     padding: const EdgeInsets
                                                             .symmetric(
                                                         vertical: 10),
-                                                    physics:
-                                                        const NeverScrollableScrollPhysics(),
+                                                    physics: NeverScrollableScrollPhysics(),
                                                     shrinkWrap: true,
                                                     itemCount: beauty
                                                         .toString()
@@ -379,8 +398,7 @@ class _OilDetailsState extends State<OilDetails> {
                                                     padding: const EdgeInsets
                                                             .symmetric(
                                                         vertical: 10),
-                                                    physics:
-                                                        const NeverScrollableScrollPhysics(),
+                                                    physics: NeverScrollableScrollPhysics(),
                                                     shrinkWrap: true,
                                                     itemCount: wellBeing
                                                         .toString()
