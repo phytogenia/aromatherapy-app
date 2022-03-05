@@ -126,6 +126,7 @@ class _OilDetailsState extends State<OilDetails> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 40),
                           child: SingleChildScrollView(
+
                             child: Column(
                               children: [
                                 const SizedBox(height: 8),
@@ -156,131 +157,139 @@ class _OilDetailsState extends State<OilDetails> {
                                   color: kPrimaryColor,
                                 ),
                                 const SizedBox(height: 5),
-                                !s.isEmpty ?
-                                Column(
-                                  children: [
-                                    const Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        'Other denomination',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: kPrimaryTextColor,
-                                            fontWeight: FontWeight.bold),
+                                !s.isEmpty
+                                    ? Column(
+                                        children: [
+                                          const Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              'Other denomination',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: kPrimaryTextColor,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              s,
+                                              style: const TextStyle(
+                                                  fontSize: 15,
+                                                  color: kPrimaryTextColor,
+                                                  fontStyle: FontStyle.italic),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 10),
+                                        ],
+                                      )
+                                    : const SizedBox(
+                                        height: 0,
                                       ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        s,
-                                        style: const TextStyle(
-                                            fontSize: 15,
-                                            color: kPrimaryTextColor,
-                                            fontStyle: FontStyle.italic),
+                                !p.isEmpty
+                                    ? Column(
+                                        children: [
+                                          const Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              'Allergies',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: kPrimaryColor,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              p,
+                                              style: const TextStyle(
+                                                  fontSize: 15,
+                                                  color: kPrimaryColor,
+                                                  fontStyle: FontStyle.italic),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 10),
+                                        ],
+                                      )
+                                    : const SizedBox(
+                                        height: 0,
                                       ),
-                                    ),
-                                    const SizedBox(height: 10),
-
-                                  ],
-                                ):
-                                    const SizedBox(height: 0,),
-
-                                !p.isEmpty ?
-                                Column(
-                                  children: [
-                                    const Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        'Allergies',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: kPrimaryColor,
-                                            fontWeight: FontWeight.bold),
+                                !aspect.isEmpty
+                                    ? Column(
+                                        children: [
+                                          const Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              'Aspect',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: kPrimaryTextColor,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          SizedBox(
+                                            height: 40,
+                                            child: PrimaryListProperties(
+                                                properties: aspect),
+                                          ),
+                                          const SizedBox(height: 10),
+                                        ],
+                                      )
+                                    : SizedBox(
+                                        height: 0,
                                       ),
-                                    ),
-
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        p,
-                                        style: const TextStyle(
-                                            fontSize: 15,
-                                            color: kPrimaryColor,
-                                            fontStyle: FontStyle.italic),
+                                colo.isNotEmpty
+                                    ? Column(
+                                        children: [
+                                          const Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              'Color',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: kPrimaryTextColor,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          SizedBox(
+                                            height: 40,
+                                            child: PrimaryListProperties(
+                                                properties: colo),
+                                          ),
+                                          const SizedBox(height: 10),
+                                        ],
+                                      )
+                                    : const SizedBox(
+                                        height: 0,
                                       ),
-                                    ),
-                                    const SizedBox(height: 10),
-
-                                  ],
-                                ): const SizedBox(height: 0,),
-
-                               !aspect.isEmpty? Column(
-                                  children: [
-                                    const Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        'Aspect',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: kPrimaryTextColor,
-                                            fontWeight: FontWeight.bold),
+                                odor.isNotEmpty
+                                    ? Column(
+                                        children: [
+                                          const Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              'Odor',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  color: kPrimaryTextColor,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          SizedBox(
+                                            height: 40,
+                                            child: PrimaryListProperties(
+                                                properties: odor),
+                                          ),
+                                          const SizedBox(height: 20),
+                                        ],
+                                      )
+                                    : const SizedBox(
+                                        height: 0,
                                       ),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    SizedBox(
-                                      height: 40,
-                                      child:
-                                      PrimaryListProperties(properties: aspect),
-                                    ),
-                                    const SizedBox(height: 10),
-
-                                  ],
-                                ): SizedBox(height: 0,),
-
-                                Column(
-                                  children: [
-                                    const Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        'Color',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: kPrimaryTextColor,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    SizedBox(
-                                      height: 40,
-                                      child:
-                                      PrimaryListProperties(properties: colo),
-                                    ),
-                                    const SizedBox(height: 10),
-                                  ],
-                                ),
-
-                                Column(
-                                  children: [
-                                    const Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        'Odor',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: kPrimaryTextColor,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    SizedBox(
-                                      height: 40,
-                                      child:
-                                      PrimaryListProperties(properties: odor),
-                                    ),
-                                    const SizedBox(height: 20),
-                                  ],
-                                ),
-
                                 DefaultTabController(
                                     initialIndex: SelectedIndex,
                                     length: 3,
@@ -309,69 +318,76 @@ class _OilDetailsState extends State<OilDetails> {
                                       ),
                                     )),
                                 SelectedIndex == 0
-                                    ? SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height,
-                                        child: health != null?
-                                        ListView.builder(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 10),
-                                            physics: NeverScrollableScrollPhysics(),
-                                            shrinkWrap: true,
-                                            itemCount: health!.toMap().entries.toList().length,
-                                            scrollDirection: Axis.vertical,
-                                            itemBuilder: (context, index) {
-                                              var entryList = health!.toMap().entries.toList();
-                                              print(index);
-                                              return !entryList[index].value.toString().contains("null")
-                                                  ? PrimaryPropertyDescriptionCard(
-                                                      title: entryList[index].key,
-                                                      description: entryList[index].value ,
-                                                    )
-                                                  : const SizedBox(
-                                                      height: 0,
-                                                    );
-                                            }):const SizedBox(
-                                          height: 0,
-                                        ))
+                                    ? ConstrainedBox(
+                                    constraints: const BoxConstraints(maxHeight: 200, minHeight: 56.0),
+                                        child: health != null
+                                            ? ListView.builder(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 10),
+                                                shrinkWrap: true,
+                                                itemCount: health!
+                                                    .toMap()
+                                                    .entries
+                                                    .toList()
+                                                    .length,
+                                                scrollDirection: Axis.vertical,
+                                                itemBuilder: (context, index) {
+                                                  var entryList = health!
+                                                      .toMap()
+                                                      .entries
+                                                      .toList();
+                                                  return entryList[
+                                                  index]
+                                                      .value != null
+                                                      ? PrimaryPropertyDescriptionCard(
+                                                          title:
+                                                              entryList[index]
+                                                                  .key,
+                                                          description:
+                                                              entryList[index]
+                                                                  .value,
+                                                        )
+                                                      : const SizedBox(
+                                                          height: 0,
+                                                        );
+                                                })
+                                            : const SizedBox(
+                                                height: 0,
+                                              ))
                                     : SelectedIndex == 1
-                                        ? SizedBox(
-                                            height: MediaQuery.of(context)
-                                                .size
-                                                .height,
+                                        ? ConstrainedBox(
+                                    constraints: const BoxConstraints(maxHeight: 200, minHeight: 56.0),
                                             child: beauty != null
                                                 ? ListView.builder(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 10),
-                                                    physics: NeverScrollableScrollPhysics(),
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                            vertical: 10),
                                                     shrinkWrap: true,
-                                                    itemCount: beauty
-                                                        .toString()
-                                                        .split(",")
+                                                    itemCount: beauty!
+                                                        .toMap()
+                                                        .entries
+                                                        .toList()
                                                         .length,
                                                     scrollDirection:
                                                         Axis.vertical,
                                                     itemBuilder:
                                                         (context, index) {
-                                                      return !beauty
-                                                              .toString()
-                                                              .split(",")[index]
-                                                              .split(":")[1]
-                                                              .contains("null")
+                                                      var entryList = beauty!
+                                                          .toMap()
+                                                          .entries
+                                                          .toList();
+                                                      return entryList[
+                                                      index]
+                                                          .value != null
                                                           ? PrimaryPropertyDescriptionCard(
-                                                              title: beauty
-                                                                  .toString()
-                                                                  .split(",")[
+                                                              title: entryList[
                                                                       index]
-                                                                  .split(
-                                                                      ":")[0],
-                                                              description: beauty
-                                                                  .toString()
-                                                                  .split(",")[
-                                                                      index]
-                                                                  .split(
-                                                                      ":")[1],
+                                                                  .key,
+                                                              description:
+                                                                  entryList[
+                                                                          index]
+                                                                      .value,
                                                             )
                                                           : const SizedBox(
                                                               height: 0,
@@ -381,49 +397,47 @@ class _OilDetailsState extends State<OilDetails> {
                                                     height: 0,
                                                   ))
                                         : SelectedIndex == 2
-                                            ? SizedBox(
-                                                height: MediaQuery.of(context)
-                                                    .size
-                                                    .height,
-                                                child:wellBeing!=null? ListView.builder(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 10),
-                                                    physics: NeverScrollableScrollPhysics(),
-                                                    shrinkWrap: true,
-                                                    itemCount: wellBeing
-                                                        .toString()
-                                                        .split(",")
-                                                        .length,
-                                                    scrollDirection:
-                                                        Axis.vertical,
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      return !wellBeing
-                                                              .toString()
-                                                              .split(",")[index]
-                                                              .split(":")[1]
-                                                              .contains("null")
-                                                          ? PrimaryPropertyDescriptionCard(
-                                                              title: wellBeing
-                                                                  .toString()
-                                                                  .split(",")[
-                                                                      index]
-                                                                  .split(
-                                                                      ":")[0],
-                                                              description: wellBeing
-                                                                  .toString()
-                                                                  .split(",")[
-                                                                      index]
-                                                                  .split(
-                                                                      ":")[1],
-                                                            )
-                                                          : const SizedBox(
-                                                              height: 0,
-                                                            );
-                                                    }):
-                                const SizedBox(height: 0,)
-                                )
+                                            ? ConstrainedBox(
+                                             constraints: const BoxConstraints(maxHeight: 200, minHeight: 56.0),
+                                                child: wellBeing != null
+                                                    ? ListView.builder(
+                                                        padding: const EdgeInsets
+                                                                .symmetric(
+                                                            vertical: 10),
+                                                        shrinkWrap: true,
+                                                        itemCount: wellBeing!
+                                                            .toMap()
+                                                            .entries
+                                                            .toList()
+                                                            .length,
+                                                        scrollDirection:
+                                                            Axis.vertical,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          var entryList =
+                                                              wellBeing!
+                                                                  .toMap()
+                                                                  .entries
+                                                                  .toList();
+                                                          return entryList[
+                                                          index]
+                                                              .value != null
+                                                              ? PrimaryPropertyDescriptionCard(
+                                                                  title: entryList[
+                                                                          index]
+                                                                      .key,
+                                                                  description:
+                                                                      entryList[
+                                                                              index]
+                                                                          .value,
+                                                                )
+                                                              : const SizedBox(
+                                                                  height: 0,
+                                                                );
+                                                        })
+                                                    : const SizedBox(
+                                                        height: 0,
+                                                      ))
                                             : const SizedBox(
                                                 height: 0,
                                               )
