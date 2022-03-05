@@ -312,37 +312,28 @@ class _OilDetailsState extends State<OilDetails> {
                                     ? SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height,
-                                        child: ListView.builder(
+                                        child: health != null?
+                                        ListView.builder(
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 10),
                                             physics: NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
-                                            itemCount: health
-                                                .toString()
-                                                .split(",")
-                                                .length,
+                                            itemCount: health!.toMap().entries.toList().length,
                                             scrollDirection: Axis.vertical,
                                             itemBuilder: (context, index) {
-
-                                              return !health
-                                                      .toString()
-                                                      .split(",")[index]
-                                                      .split(':')[1]
-                                                      .contains("null")
+                                              var entryList = health!.toMap().entries.toList();
+                                              print(index);
+                                              return !entryList[index].value.toString().contains("null")
                                                   ? PrimaryPropertyDescriptionCard(
-                                                      title: health
-                                                          .toString()
-                                                          .split(",")[index]
-                                                          .split(":")[0],
-                                                      description: health
-                                                          .toString()
-                                                          .split(",")[index]
-                                                          .split(":")[1],
+                                                      title: entryList[index].key,
+                                                      description: entryList[index].value ,
                                                     )
                                                   : const SizedBox(
                                                       height: 0,
                                                     );
-                                            }))
+                                            }):const SizedBox(
+                                          height: 0,
+                                        ))
                                     : SelectedIndex == 1
                                         ? SizedBox(
                                             height: MediaQuery.of(context)
