@@ -3,8 +3,75 @@ import 'package:aromatherapy/components/secondary_item_cardRecipes.dart';
 import 'package:aromatherapy/models/recipe/recipe.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../home_screen.dart';
+import '../oils/oils_list_screen.dart';
+class HomeRecipes extends StatefulWidget {
+  const HomeRecipes({Key? key}) : super(key: key);
+
+  @override
+  _HomeRecipesState createState() => _HomeRecipesState();
+}
+
+class _HomeRecipesState extends State<HomeRecipes> {
+
+  final _Screens = [
+    const OilListScreen(),
+    const HomeScreen(),
+    const RecipesListScreen()
+  ];
+  int SelectedIndex = 2; //TODO :: enumeration
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBody: true,
+      bottomNavigationBar: CurvedNavigationBar(
+        onTap: (int index) {
+          setState(() {
+            SelectedIndex = index;
+          });
+        },
+        color: kSecondaryBackgroundColor,
+        backgroundColor: Colors.transparent,
+        buttonBackgroundColor: kPrimaryColor,
+        index: SelectedIndex,
+        items: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/images/whiteoil.png',
+              color: SelectedIndex == 0
+                  ? kSecondaryBackgroundColor
+                  : kSecondaryTextColor,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/images/home.png',
+              color: SelectedIndex == 1
+                  ? kSecondaryBackgroundColor
+                  : kSecondaryTextColor,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/images/recipe.png',
+              color: SelectedIndex == 2
+                  ? kSecondaryBackgroundColor
+                  : kSecondaryTextColor,
+            ),
+          ),
+        ],
+      ),
+      body: _Screens[SelectedIndex],
+    );
+  }
+}
 class RecipesListScreen extends StatefulWidget {
   const RecipesListScreen({Key? key}) : super(key: key);
 
@@ -209,7 +276,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                                             text: _foundUsers[index]["name"]
                                                 .toString(),
                                             subText: _foundUsers[index]
-                                                    ["sciName"]
+                                                    ["reference"]
                                                 .toString(),
                                             imagePath:
                                                 'assets/images/whiteoil.png',

@@ -168,23 +168,18 @@ class _RecipesDetailsState extends State<RecipesDetails> {
                                 ),
 
                                 SelectedIndex == 0
-                                    ? SizedBox(
-                                    height:
-                                    MediaQuery
-                                        .of(context)
-                                        .size
-                                        .height,
+                                    ? ConstrainedBox(
+                                    constraints: const BoxConstraints(maxHeight: 500, minHeight: 56.0),
                                     child: ListView.builder(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 10),
-                                        physics:
-                                        const NeverScrollableScrollPhysics(),
+
                                         shrinkWrap: true,
-                                        itemCount: odor.length,
+                                        itemCount: 1,
                                         scrollDirection: Axis.vertical,
                                         itemBuilder: (context, index) {
                                           return PrimaryPropertyDescriptionCard(
-                                            title: odor[index],
+                                            title: "odor[index]",
                                             description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
                                                 "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
                                                 "When an unknown printer took a galley of type Scrambled it to make a type specimen book." +

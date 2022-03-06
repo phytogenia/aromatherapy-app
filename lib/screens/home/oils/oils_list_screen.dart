@@ -1,10 +1,76 @@
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import '../../../components/primary_top_item_card.dart';
 import '../../../components/secondary_item_card.dart';
 import '../../../models/oil/oil.dart';
+import '../home_screen.dart';
+import '../recipes/recipes_list_screen.dart';
+class HomeOil extends StatefulWidget {
+  const HomeOil({Key? key}) : super(key: key);
 
+  @override
+  _HomeOilState createState() => _HomeOilState();
+}
+
+class _HomeOilState extends State<HomeOil> {
+
+  final _Screens = [
+    const OilListScreen(),
+    const HomeScreen(),
+    const RecipesListScreen()
+  ];
+  int SelectedIndex = 0; //TODO :: enumeration
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBody: true,
+      bottomNavigationBar: CurvedNavigationBar(
+        onTap: (int index) {
+          setState(() {
+            SelectedIndex = index;
+          });
+        },
+        color: kSecondaryBackgroundColor,
+        backgroundColor: Colors.transparent,
+        buttonBackgroundColor: kPrimaryColor,
+        index: SelectedIndex,
+        items: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/images/whiteoil.png',
+              color: SelectedIndex == 0
+                  ? kSecondaryBackgroundColor
+                  : kSecondaryTextColor,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/images/home.png',
+              color: SelectedIndex == 1
+                  ? kSecondaryBackgroundColor
+                  : kSecondaryTextColor,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/images/recipe.png',
+              color: SelectedIndex == 2
+                  ? kSecondaryBackgroundColor
+                  : kSecondaryTextColor,
+            ),
+          ),
+        ],
+      ),
+      body: _Screens[SelectedIndex],
+    );
+  }
+}
 class OilListScreen extends StatefulWidget {
   const OilListScreen({Key? key}) : super(key: key);
 
@@ -13,6 +79,8 @@ class OilListScreen extends StatefulWidget {
 }
 
 class _OilListScreenState extends State<OilListScreen> {
+  GlobalKey<_PrimaryListOilsState> _myKey = GlobalKey();// We declare a key here
+
   List oils = [];
   CollectionReference oilss = FirebaseFirestore.instance.collection('oils');
   List<DocumentSnapshot> data = [];
@@ -46,9 +114,17 @@ class _OilListScreenState extends State<OilListScreen> {
     }
 
     // Refresh the UI
-    setState(() {
+    /*setState(() {
       _foundoils= results;
+
+    });*/
+    _foundoils= results;
+
+    _myKey.currentState?.setState(() {
+      data=results;
     });
+    //This is how we call the function
+
   }
 
   @override
@@ -194,23 +270,8 @@ class _OilListScreenState extends State<OilListScreen> {
                                   SizedBox(
                                     height: MediaQuery.of(context).size.height,
                                     child: _foundoils.isNotEmpty
-                                                ? ListView.builder(
-                                        shrinkWrap: true,
-                                        physics: const NeverScrollableScrollPhysics(),
-                                                padding: const EdgeInsets.symmetric(horizontal: 15),
-                                                itemCount: _foundoils.length,
-                                                scrollDirection: Axis.vertical,
-                                                itemBuilder: (context, index) {
-                                                  Oil oil =Oil.fromMap(Map<String, dynamic>.from(_foundoils[index].data() as Map), _foundoils[index].id);
-
-                                                  return SecondaryItemCard(
-                                                      text: _foundoils[index]["name"].toString(),
-                                                      subText: _foundoils[index]["sciName"].toString(),
-                                                      imagePath: 'assets/images/whiteoil.png',
-                                                      oil: oil,
-                                                      backgroundColor: kPrimaryColor);
-                                                }):
-                                    SizedBox(
+                                                ? PrimaryListOils(data: _foundoils):
+                                   /* SizedBox(
                                       height: 120,
                                       child: FutureBuilder<QuerySnapshot>(
                                           future: oilss.get(),
@@ -223,22 +284,7 @@ class _OilListScreenState extends State<OilListScreen> {
                                             if (snapshot.connectionState == ConnectionState.done) {
                                               data = snapshot.data!.docs;
 
-                                              return ListView.builder(
-                                                shrinkWrap: true,
-                                                physics: const NeverScrollableScrollPhysics(),
-                                                padding: const EdgeInsets.symmetric(horizontal: 15),
-                                                itemCount: data.length,
-                                                scrollDirection: Axis.vertical,
-                                                itemBuilder: (context, index) {
-                                                  Oil oil =Oil.fromMap(Map<String, dynamic>.from(data[index].data() as Map), data[index].id);
-                                                  return SecondaryItemCard(
-                                                    text: oil.name,
-                                                    subText: oil.sciName.toString(),
-                                                    imagePath: 'assets/images/whiteoil.png',
-                                                    oil: oil,
-                                                    backgroundColor: kPrimaryColor,
-                                                  );
-                                                },);
+                                              return PrimaryListOils(data: data,);
 
                                             }
                                             return const Text(
@@ -247,7 +293,7 @@ class _OilListScreenState extends State<OilListScreen> {
                                             );
                                           }
                                       ),
-                                    ),
+                                    ),*/SizedBox(height: 0,)
                                           ),
                                   const SizedBox(
                                     height: 25,
@@ -303,5 +349,48 @@ class _OilListScreenState extends State<OilListScreen> {
         ),
       ),
     );
+  }
+}
+class PrimaryListOils extends StatefulWidget {
+  const PrimaryListOils({Key? key, required this.data}) : super(key: key);
+  final List<DocumentSnapshot> data;
+
+  @override
+  _PrimaryListOilsState createState() => _PrimaryListOilsState();
+}
+
+class _PrimaryListOilsState extends State<PrimaryListOils> {
+  List<DocumentSnapshot> data = [];
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  getData() {
+    setState(() {
+      data = widget.data;
+
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      itemCount: data.length,
+      scrollDirection: Axis.vertical,
+      itemBuilder: (context, index) {
+        Oil oil =Oil.fromMap(Map<String, dynamic>.from(data[index].data() as Map), data[index].id);
+        return SecondaryItemCard(
+          text: oil.name,
+          subText: oil.sciName.toString(),
+          imagePath: 'assets/images/whiteoil.png',
+          oil: oil,
+          backgroundColor: kPrimaryColor,
+        );
+      },);
   }
 }

@@ -185,12 +185,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
+                                      Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               const SettingsScreen(),
                                         ),
+                                            (route) => false,
+
                                       );
                                     },
                                     child: Container(
@@ -225,9 +227,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Center(
                                   child: TextFormField(
                                     onTap: () {
-                                      setState(() {
-                                        SelectedIndex = 0;
-                                      });
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                          const HomeOil(),
+                                        ),
+                                            (route) => false,
+                                      );
                                     },
                                     decoration: const InputDecoration(
                                       suffixIcon: Icon(
