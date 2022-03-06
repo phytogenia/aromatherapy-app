@@ -116,12 +116,12 @@ class _OilDetailsState extends State<OilDetails> {
         ],
       ),
       body: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
+        physics: const ScrollPhysics(),
         child: SafeArea(
           bottom: false,
           top: false,
           child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
+            physics: const ScrollPhysics(),
             child: Container(
               height: MediaQuery.of(context).size.height,
               decoration: const BoxDecoration(
@@ -164,6 +164,7 @@ class _OilDetailsState extends State<OilDetails> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 40),
                           child: SingleChildScrollView(
+                            physics: ScrollPhysics(),
                             child: Column(
                               children: [
                                 const SizedBox(height: 8),
@@ -274,7 +275,7 @@ class _OilDetailsState extends State<OilDetails> {
                                           const SizedBox(height: 10),
                                         ],
                                       )
-                                    : SizedBox(
+                                    : const SizedBox(
                                         height: 0,
                                       ),
                                 colo.isNotEmpty
@@ -346,13 +347,15 @@ class _OilDetailsState extends State<OilDetails> {
                                     )),
                                 SelectedIndex == tabs.indexOf(health)
                                     ? ConstrainedBox(
-                                        constraints: const BoxConstraints(
-                                            maxHeight: 200, minHeight: 56.0),
+                                    constraints:
+                                    const BoxConstraints(
+                                        maxHeight: 200,
+                                        minHeight: 200),
                                         child: health != null
                                             ? ListView.builder(
-                                                padding: const EdgeInsets
+                                            shrinkWrap: true,
+                                            padding: const EdgeInsets
                                                     .symmetric(vertical: 10),
-                                                shrinkWrap: true,
                                                 itemCount: health!
                                                     .toMap()
                                                     .entries
@@ -386,7 +389,7 @@ class _OilDetailsState extends State<OilDetails> {
                                         ? ConstrainedBox(
                                             constraints: const BoxConstraints(
                                                 maxHeight: 200,
-                                                minHeight: 56.0),
+                                                minHeight: 200),
                                             child: beauty != null
                                                 ? ListView.builder(
                                                     padding:
@@ -432,7 +435,7 @@ class _OilDetailsState extends State<OilDetails> {
                                                 constraints:
                                                     const BoxConstraints(
                                                         maxHeight: 200,
-                                                        minHeight: 56.0),
+                                                        minHeight: 100),
                                                 child: wellBeing != null
                                                     ? ListView.builder(
                                                         padding:
