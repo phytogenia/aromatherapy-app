@@ -133,6 +133,8 @@ class _OilListScreenState extends State<OilListScreen> {
         extendBodyBehindAppBar: true,
 
         appBar: AppBar(
+          centerTitle: true, // this is all you need
+
           iconTheme: const IconThemeData(
             color: kPrimaryTextColor, //change your color here
           ),

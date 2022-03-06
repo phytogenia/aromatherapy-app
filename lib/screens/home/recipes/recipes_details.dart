@@ -61,18 +61,27 @@ class _RecipesDetailsState extends State<RecipesDetails> {
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const <Widget>[
+            Text(
+              "Recipes",
+              style: TextStyle(
+                  color: kSecondaryBackgroundColor, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
         iconTheme: const IconThemeData(
           color: kSecondaryBackgroundColor, //change your color here
         ),
+        actions: [
+      IconButton(
+      icon: Image.asset("assets/images/Empty.png"), onPressed: null,
+      )
+        ],
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Center(
-          child: Text(
-            "Recipes",
-            style: TextStyle(
-                color: kSecondaryBackgroundColor, fontWeight: FontWeight.bold),
-          ),
-        ),
+
       ),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),

@@ -76,6 +76,11 @@ class _OilDetailsState extends State<OilDetails> {
                 color: kSecondaryBackgroundColor, fontWeight: FontWeight.bold),
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Image.asset("assets/images/Empty.png"), onPressed: null,
+          )
+        ],
       ),
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
