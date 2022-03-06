@@ -24,6 +24,7 @@ class _OilDetailsState extends State<OilDetails> {
   String? extractionProcess;
 
   int SelectedIndex = 0;
+  int index = 0;
   List<String> aspect = [];
   OilDomain? health;
   OilDomain? beauty;
@@ -33,6 +34,8 @@ class _OilDetailsState extends State<OilDetails> {
   List<String> allergie = [];
   String s = '';
   String p = '';
+  List tabs = [];
+  List<Widget> tabb = [];
 
   @override
   void initState() {
@@ -55,6 +58,35 @@ class _OilDetailsState extends State<OilDetails> {
       health = oil.health;
       beauty = oil.beauty;
       wellBeing = oil.wellBeing;
+
+      if (health != null) {
+        tabs.add(health);
+        tabb.add(const Tab(
+          text: "Health",
+        ));
+      } else {
+        null;
+      }
+
+      if (beauty != null) {
+      tabs.add(beauty);
+        tabb.add(const Tab(
+          text: "Beauty",
+
+        ));
+      } else {
+        null;
+      }
+
+      if(wellBeing != null) {
+        tabs.add(wellBeing);
+        tabb.add(const Tab(
+          text: "Well Being",
+        ));
+
+      } else{
+        null;
+      }
     });
   }
 
@@ -78,7 +110,8 @@ class _OilDetailsState extends State<OilDetails> {
         ),
         actions: [
           IconButton(
-            icon: Image.asset("assets/images/Empty.png"), onPressed: null,
+            icon: Image.asset("assets/images/Empty.png"),
+            onPressed: null,
           )
         ],
       ),
@@ -131,7 +164,6 @@ class _OilDetailsState extends State<OilDetails> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 40),
                           child: SingleChildScrollView(
-
                             child: Column(
                               children: [
                                 const SizedBox(height: 8),
@@ -297,7 +329,7 @@ class _OilDetailsState extends State<OilDetails> {
                                       ),
                                 DefaultTabController(
                                     initialIndex: SelectedIndex,
-                                    length: 3,
+                                    length: tabs.length,
                                     child: Container(
                                       height: 40,
                                       child: TabBar(
@@ -306,30 +338,20 @@ class _OilDetailsState extends State<OilDetails> {
                                           setState(() {});
                                         },
                                         //indicatorColor: kPrimaryColor,
-                                        tabs: const [
-                                          Tab(
-                                            text: "Health",
-                                          ),
-                                          Tab(
-                                            text: "Beauty",
-                                          ),
-                                          Tab(
-                                            text: "Well Being",
-                                          ),
-                                        ],
+                                        tabs: tabb,
                                         unselectedLabelColor: graycolor,
                                         labelColor: kPrimaryColor,
                                         indicatorColor: kPrimaryColor,
                                       ),
                                     )),
-                                SelectedIndex == 0
+                                SelectedIndex == tabs.indexOf(health)
                                     ? ConstrainedBox(
-                                    constraints: const BoxConstraints(maxHeight: 200, minHeight: 56.0),
+                                        constraints: const BoxConstraints(
+                                            maxHeight: 200, minHeight: 56.0),
                                         child: health != null
                                             ? ListView.builder(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 10),
+                                                padding: const EdgeInsets
+                                                    .symmetric(vertical: 10),
                                                 shrinkWrap: true,
                                                 itemCount: health!
                                                     .toMap()
@@ -342,9 +364,9 @@ class _OilDetailsState extends State<OilDetails> {
                                                       .toMap()
                                                       .entries
                                                       .toList();
-                                                  return entryList[
-                                                  index]
-                                                      .value != null
+                                                  return entryList[index]
+                                                              .value !=
+                                                          null
                                                       ? PrimaryPropertyDescriptionCard(
                                                           title:
                                                               entryList[index]
@@ -360,31 +382,35 @@ class _OilDetailsState extends State<OilDetails> {
                                             : const SizedBox(
                                                 height: 0,
                                               ))
-                                    : SelectedIndex == 1
+                                    : SelectedIndex == tabs.indexOf(beauty)
                                         ? ConstrainedBox(
-                                    constraints: const BoxConstraints(maxHeight: 200, minHeight: 56.0),
+                                            constraints: const BoxConstraints(
+                                                maxHeight: 200,
+                                                minHeight: 56.0),
                                             child: beauty != null
                                                 ? ListView.builder(
                                                     padding:
-                                                        const EdgeInsets.symmetric(
+                                                        const EdgeInsets
+                                                                .symmetric(
                                                             vertical: 10),
                                                     shrinkWrap: true,
-                                                    itemCount: beauty!
-                                                        .toMap()
-                                                        .entries
-                                                        .toList()
-                                                        .length,
-                                                    scrollDirection:
-                                                        Axis.vertical,
-                                                    itemBuilder:
-                                                        (context, index) {
+                                                    itemCount:
+                                                        beauty!
+                                                            .toMap()
+                                                            .entries
+                                                            .toList()
+                                                            .length,
+                                                    scrollDirection: Axis
+                                                        .vertical,
+                                                    itemBuilder: (context,
+                                                        index) {
                                                       var entryList = beauty!
                                                           .toMap()
                                                           .entries
                                                           .toList();
-                                                      return entryList[
-                                                      index]
-                                                          .value != null
+                                                      return entryList[index]
+                                                                  .value !=
+                                                              null
                                                           ? PrimaryPropertyDescriptionCard(
                                                               title: entryList[
                                                                       index]
@@ -401,20 +427,25 @@ class _OilDetailsState extends State<OilDetails> {
                                                 : const SizedBox(
                                                     height: 0,
                                                   ))
-                                        : SelectedIndex == 2
+                                        : SelectedIndex == tabs.indexOf(wellBeing)
                                             ? ConstrainedBox(
-                                             constraints: const BoxConstraints(maxHeight: 200, minHeight: 56.0),
+                                                constraints:
+                                                    const BoxConstraints(
+                                                        maxHeight: 200,
+                                                        minHeight: 56.0),
                                                 child: wellBeing != null
                                                     ? ListView.builder(
-                                                        padding: const EdgeInsets
-                                                                .symmetric(
-                                                            vertical: 10),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                vertical: 10),
                                                         shrinkWrap: true,
-                                                        itemCount: wellBeing!
-                                                            .toMap()
-                                                            .entries
-                                                            .toList()
-                                                            .length,
+                                                        itemCount:
+                                                            wellBeing!
+                                                                .toMap()
+                                                                .entries
+                                                                .toList()
+                                                                .length,
                                                         scrollDirection:
                                                             Axis.vertical,
                                                         itemBuilder:
@@ -425,8 +456,9 @@ class _OilDetailsState extends State<OilDetails> {
                                                                   .entries
                                                                   .toList();
                                                           return entryList[
-                                                          index]
-                                                              .value != null
+                                                                          index]
+                                                                      .value !=
+                                                                  null
                                                               ? PrimaryPropertyDescriptionCard(
                                                                   title: entryList[
                                                                           index]
