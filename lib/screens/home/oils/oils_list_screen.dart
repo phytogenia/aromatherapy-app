@@ -118,12 +118,15 @@ class _OilListScreenState extends State<OilListScreen> {
       _foundoils= results;
 
     });*/
-    _foundoils= results;
 
-    _myKey.currentState?.setState(() {
-      data=results;
+    setState(() {
+      _foundoils= results;
+
     });
-    //This is how we call the function
+
+   /* _myKey.currentState?.setState(() {
+      data=results;
+    });*/
 
   }
 
@@ -273,7 +276,7 @@ class _OilListScreenState extends State<OilListScreen> {
                                     height: MediaQuery.of(context).size.height,
                                     child: _foundoils.isNotEmpty
                                                 ? PrimaryListOils(data: _foundoils):
-                                   /* SizedBox(
+                                    SizedBox(
                                       height: 120,
                                       child: FutureBuilder<QuerySnapshot>(
                                           future: oilss.get(),
@@ -295,7 +298,7 @@ class _OilListScreenState extends State<OilListScreen> {
                                             );
                                           }
                                       ),
-                                    ),*/SizedBox(height: 0,)
+                                    ),
                                           ),
                                   const SizedBox(
                                     height: 25,
