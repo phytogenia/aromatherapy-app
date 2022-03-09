@@ -1,4 +1,5 @@
 import 'package:aromatherapy/models/oil/oil.dart';
+import 'package:aromatherapy/models/recipe/ingredient.dart';
 import 'package:aromatherapy/models/recipe/recipe.dart';
 import 'package:flutter/material.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
@@ -24,7 +25,7 @@ class _RecipesDetailsState extends State<RecipesDetails> {
   String sciName='';
   String? distilledOrgan;
   String? extractionProcess;
-
+  String? usage='';
   int SelectedIndex = 0;
   List<String> aspect =[];
 
@@ -43,7 +44,7 @@ class _RecipesDetailsState extends State<RecipesDetails> {
     setState(() {
       final Recipe recipe = widget.recipe;
       //aspect.addAll(recipe.aspect);
-      //colo.addAll(recipe.color);
+      //colo.addAll(recipe.ingredients as String);
       //odor.addAll(recipe.smell);
       //allergie=recipe.allergies;
       name=recipe.name;
@@ -51,6 +52,7 @@ class _RecipesDetailsState extends State<RecipesDetails> {
       sciName = recipe.reference!;
       s = otherNames.join(', ');
       p = allergie.join(', ');
+      usage=recipe.usage;
     });
   }
 
@@ -81,7 +83,6 @@ class _RecipesDetailsState extends State<RecipesDetails> {
         ],
         backgroundColor: Colors.transparent,
         elevation: 0,
-
       ),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
@@ -175,9 +176,7 @@ class _RecipesDetailsState extends State<RecipesDetails> {
                                   endIndent: 60,
                                   color: kSecondaryColor,
                                 ),
-
-                                SelectedIndex == 0
-                                    ? ConstrainedBox(
+                                ConstrainedBox(
                                     constraints: const BoxConstraints(maxHeight: 500, minHeight: 56.0),
                                     child: ListView.builder(
                                         padding: const EdgeInsets.symmetric(
@@ -188,17 +187,26 @@ class _RecipesDetailsState extends State<RecipesDetails> {
                                         scrollDirection: Axis.vertical,
                                         itemBuilder: (context, index) {
                                           return PrimaryPropertyDescriptionCard(
-                                            title: "odor[index]",
-                                            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
-                                                "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
-                                                "When an unknown printer took a galley of type Scrambled it to make a type specimen book." +
-                                                "It has survived not only five centuries" +
-                                                "When an unknown printer took a galley of type Scrambled it to make a type specimen book.",
+                                            title: "Ingredients",
+                                            description: usage.toString(),
                                           );
-                                        }))
-                                    : const SizedBox(
-                                  height: 0,
-                                )
+                                        })),
+                                ConstrainedBox(
+                                    constraints: const BoxConstraints(maxHeight: 500, minHeight: 56.0),
+                                    child: ListView.builder(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10),
+
+                                        shrinkWrap: true,
+                                        itemCount: 1,
+                                        scrollDirection: Axis.vertical,
+                                        itemBuilder: (context, index) {
+                                          return PrimaryPropertyDescriptionCard(
+                                            title: "Preparation",
+                                            description: usage.toString(),
+                                          );
+                                        })),
+
                               ],
                             ),
                           ),
