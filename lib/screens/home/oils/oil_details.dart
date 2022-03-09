@@ -371,6 +371,7 @@ class _OilDetailsState extends State<OilDetails> {
                                                               .value !=
                                                           null
                                                       ? PrimaryPropertyDescriptionCard(
+                                                          color: kPrimaryColor,
                                                           title:
                                                               entryList[index]
                                                                   .key,
@@ -415,6 +416,7 @@ class _OilDetailsState extends State<OilDetails> {
                                                                   .value !=
                                                               null
                                                           ? PrimaryPropertyDescriptionCard(
+                                                              color: kPrimaryColor,
                                                               title: entryList[
                                                                       index]
                                                                   .key,
@@ -463,6 +465,7 @@ class _OilDetailsState extends State<OilDetails> {
                                                                       .value !=
                                                                   null
                                                               ? PrimaryPropertyDescriptionCard(
+                                                                  color: kPrimaryColor,
                                                                   title: entryList[
                                                                           index]
                                                                       .key,

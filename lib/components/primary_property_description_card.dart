@@ -7,10 +7,12 @@ class PrimaryPropertyDescriptionCard extends StatelessWidget {
     Key? key,
     required this.title,
     required this.description,
+    required this.color,
   }) : super(key: key);
 
   String title;
   String description;
+  Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +41,9 @@ class PrimaryPropertyDescriptionCard extends StatelessWidget {
       Container(
         height: 30,
         width: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(
-            color: kPrimaryColor,
-            borderRadius: BorderRadius.only(
+        decoration:  BoxDecoration(
+            color: color,
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10))),
         child: Row(
           children: [

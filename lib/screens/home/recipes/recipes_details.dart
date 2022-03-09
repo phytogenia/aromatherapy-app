@@ -29,11 +29,12 @@ class _RecipesDetailsState extends State<RecipesDetails> {
   int SelectedIndex = 0;
   List<String> aspect =[];
 
-  List<String> colo = [];
+  List<String?> colo = [];
   List<String> odor = [];
   List<String> allergie = [];
   String s='';
   String p='';
+  String i='';
   @override
   void initState() {
     getData();
@@ -43,8 +44,10 @@ class _RecipesDetailsState extends State<RecipesDetails> {
   getData() {
     setState(() {
       final Recipe recipe = widget.recipe;
+      print(recipe.ingredients);
+
       //aspect.addAll(recipe.aspect);
-      //colo.addAll(recipe.ingredients as String);
+      colo=recipe.ingredients!;
       //odor.addAll(recipe.smell);
       //allergie=recipe.allergies;
       name=recipe.name;
@@ -52,6 +55,7 @@ class _RecipesDetailsState extends State<RecipesDetails> {
       sciName = recipe.reference!;
       s = otherNames.join(', ');
       p = allergie.join(', ');
+      i = colo.join('\n');
       usage=recipe.usage;
     });
   }
@@ -187,8 +191,9 @@ class _RecipesDetailsState extends State<RecipesDetails> {
                                         scrollDirection: Axis.vertical,
                                         itemBuilder: (context, index) {
                                           return PrimaryPropertyDescriptionCard(
+                                            color: kSecondaryColor,
                                             title: "Ingredients",
-                                            description: usage.toString(),
+                                            description: i,
                                           );
                                         })),
                                 ConstrainedBox(
@@ -202,6 +207,7 @@ class _RecipesDetailsState extends State<RecipesDetails> {
                                         scrollDirection: Axis.vertical,
                                         itemBuilder: (context, index) {
                                           return PrimaryPropertyDescriptionCard(
+                                            color: kSecondaryColor,
                                             title: "Preparation",
                                             description: usage.toString(),
                                           );

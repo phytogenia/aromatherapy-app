@@ -1,10 +1,11 @@
 import 'ingredient.dart';
+import 'ingredient.dart';
 
 class Recipe {
   String? id;
   String name;
   String? reference;
-  List<Ingredient?>? ingredients;
+  List<String?>? ingredients;
   String? description;
   String? notes;
   String? usage;
@@ -33,7 +34,7 @@ class Recipe {
   factory Recipe.fromMap(Map<String, dynamic>? data, String documentID) {
     String name = data!['name'].toString();
     String? reference = data['reference'];
-    //List<Ingredient?>? ingredients = List<Ingredient?>.from(data['ingredients']);
+    List<String?>? ingredients = List<String?>.from(data['ingredients']);
     String? description = data['description'];
     String? notes = data['notes'];
     String? usage = data['usage'];
@@ -42,7 +43,7 @@ class Recipe {
       id: documentID,
       name: name,
       reference: reference,
-      //ingredients: ingredients,
+      ingredients: ingredients,
       description: description,
       notes: notes,
       usage: usage,
