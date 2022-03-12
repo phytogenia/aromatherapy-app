@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:aromatherapy/components/primary_top_item_card_rec.dart';
 import 'package:aromatherapy/screens/home/recipes/recipes_list_screen.dart';
 import 'package:aromatherapy/screens/home/settings/settings_screen.dart';
@@ -24,56 +25,53 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+
   final _Screens = [
     const OilListScreen(),
+    const RecipesListScreen(),
     const HomeScreen(),
-    const RecipesListScreen()
-  ];
-  int SelectedIndex = 1; //TODO :: enumeration
 
-  @override
+  ];
+  int SelectedIndex = 2; //TODO :: enumeration
+
+  void setSelectedIndex(int index){
+    setState(() {
+      SelectedIndex = index;
+    });}
+
+
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: CurvedNavigationBar(
+      floatingActionButton: FloatingActionButton(onPressed: () { setState(() {
+        SelectedIndex = 2;
+      }); },
+        backgroundColor: kPrimaryColor,
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Image.asset(
+            'assets/images/home.png',
+            color:kSecondaryBackgroundColor
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+      bottomNavigationBar: AnimatedBottomNavigationBar(
         onTap: (int index) {
           setState(() {
             SelectedIndex = index;
           });
         },
-        color: kSecondaryBackgroundColor,
-        backgroundColor: Colors.transparent,
-        buttonBackgroundColor: kPrimaryColor,
-        index: SelectedIndex,
-        items: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/images/whiteoil.png',
-              color: SelectedIndex == 0
-                  ? kSecondaryBackgroundColor
-                  : kSecondaryTextColor,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/images/home.png',
-              color: SelectedIndex == 1
-                  ? kSecondaryBackgroundColor
-                  : kSecondaryTextColor,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/images/recipe.png',
-              color: SelectedIndex == 2
-                  ? kSecondaryBackgroundColor
-                  : kSecondaryTextColor,
-            ),
-          ),
-        ],
+         icons: const [Icons.water_drop,
+        Icons.soup_kitchen,
+      ], activeIndex: SelectedIndex,
+        rightCornerRadius: 0,
+        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.verySmoothEdge,
+
       ),
       body: _Screens[SelectedIndex],
     );
@@ -88,7 +86,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int SelectedIndex = 1; //TODO :: enumeration
 
   List categories = [];
   List oils = [];
@@ -194,6 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             (route) => false,
 
                                       );
+
                                     },
                                     child: Container(
                                       height: 50,
@@ -227,14 +225,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Center(
                                   child: TextFormField(
                                     onTap: () {
-                                      Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                          const HomeOil(),
-                                        ),
-                                            (route) => false,
-                                      );
+                                      final _HomeState? state = context.findAncestorStateOfType<_HomeState>();
+                                      state?.setSelectedIndex(0);
                                     },
                                     decoration: const InputDecoration(
                                       suffixIcon: Icon(
