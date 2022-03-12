@@ -4,13 +4,9 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:aromatherapy/components/primary_top_item_card_rec.dart';
 import 'package:aromatherapy/screens/home/recipes/recipes_list_screen.dart';
 import 'package:aromatherapy/screens/home/settings/settings_screen.dart';
-import 'package:aromatherapy/services/auth_service.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../components/primary_category_card.dart';
 import '../../components/primary_top_item_card.dart';
-import '../../components/primary_oil_details_item.dart';
 import '../../models/oil/oil.dart';
 import '../../models/recipe/recipe.dart';
 import '../../utils/constants.dart';
@@ -25,53 +21,51 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
-
   final _Screens = [
     const OilListScreen(),
     const RecipesListScreen(),
     const HomeScreen(),
-
   ];
   int SelectedIndex = 2; //TODO :: enumeration
 
-  void setSelectedIndex(int index){
+  void setSelectedIndex(int index) {
     setState(() {
       SelectedIndex = index;
-    });}
+    });
+  }
 
-
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      floatingActionButton: FloatingActionButton(onPressed: () { setState(() {
-        SelectedIndex = 2;
-      }); },
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            SelectedIndex = 2;
+          });
+        },
         backgroundColor: kPrimaryColor,
         child: Padding(
           padding: const EdgeInsets.all(15),
-          child: Image.asset(
-            'assets/images/home.png',
-            color:kSecondaryBackgroundColor
-          ),
+          child: Image.asset('assets/images/home.png',
+              color: kSecondaryBackgroundColor),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
       bottomNavigationBar: AnimatedBottomNavigationBar(
         onTap: (int index) {
           setState(() {
             SelectedIndex = index;
           });
         },
-         icons: const [Icons.water_drop,
-        Icons.soup_kitchen,
-      ], activeIndex: SelectedIndex,
+        icons: const [
+          Icons.water_drop,
+          Icons.soup_kitchen,
+        ],
+        activeIndex: SelectedIndex,
         rightCornerRadius: 0,
         gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.verySmoothEdge,
-
       ),
       body: _Screens[SelectedIndex],
     );
@@ -86,7 +80,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   List categories = [];
   List oils = [];
   List recipes = [];
@@ -182,16 +175,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.pushAndRemoveUntil(
+                                      Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               const SettingsScreen(),
                                         ),
-                                            (route) => false,
-
                                       );
-
                                     },
                                     child: Container(
                                       height: 50,
@@ -225,7 +215,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Center(
                                   child: TextFormField(
                                     onTap: () {
-                                      final _HomeState? state = context.findAncestorStateOfType<_HomeState>();
+                                      final _HomeState? state =
+                                          context.findAncestorStateOfType<
+                                              _HomeState>();
                                       state?.setSelectedIndex(0);
                                     },
                                     decoration: const InputDecoration(

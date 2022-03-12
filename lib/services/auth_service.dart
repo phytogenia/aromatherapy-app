@@ -54,7 +54,7 @@ class FirebaseAuthService extends AuthService {
             .providerId
             .toLowerCase()
             .contains(AuthService.facebookProviderName)) {
-          await FacebookAuth.instance.login();
+          await FacebookAuth.instance.logOut();
         }
       }
       await _auth.signOut();

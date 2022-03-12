@@ -8,6 +8,27 @@ import '../../../utils/constants.dart';
 import '../../../utils/functions.dart';
 
 class SettingsScreen extends StatelessWidget {
+  /* Future<void> _signOut(BuildContext context) async {
+    try {
+      final auth = Provider.of<AuthBase>(context);
+      await auth.signOut();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> _confirmSignOut(BuildContext context) async {
+    final didRequestSignOut = await PlatformAlertDialog(
+      title: 'Logout',
+      content: 'Are you sure that you want to logout?',
+      cancelActionText: 'Cancel',
+      defaultActionText: 'Logout',
+    ).show(context);
+    if (didRequestSignOut == true) {
+      _signOut(context);
+    }
+  }*/
+
   const SettingsScreen({Key? key}) : super(key: key);
 
   @override
@@ -18,6 +39,23 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: _bodyContent(context),
     );
+  }
+
+  void _signOutUser(BuildContext context) async {
+    final authProvider = Provider.of<AuthService>(context, listen: false);
+    try {
+      await authProvider.signOut();
+    } catch (e) {
+      const dialogTitle = 'Logout Error';
+      final dialogContent = 'Cause $e Can you please try later ?';
+      const cancelTextButton = 'Dismiss';
+
+      PlatformAlertDialog(
+        title: dialogTitle,
+        content: dialogContent,
+        cancelTextButton: cancelTextButton,
+      ).show(context);
+    }
   }
 
   void _showDialogToLogout(BuildContext context) async {
@@ -35,24 +73,6 @@ class SettingsScreen extends StatelessWidget {
 
     if (isUserWantToLogout) {
       _signOutUser(context);
-      Navigator.pop(context); // Dismiss settings page
-    }
-  }
-
-  void _signOutUser(BuildContext context) async {
-    final authProvider = context.read<AuthService>();
-    try {
-      await authProvider.signOut();
-    } catch (e) {
-      const dialogTitle = 'Logout Error';
-      final dialogContent = 'Cause $e Can you please try later ?';
-      const cancelTextButton = 'Dismiss';
-
-      PlatformAlertDialog(
-        title: dialogTitle,
-        content: dialogContent,
-        cancelTextButton: cancelTextButton,
-      ).show(context);
     }
   }
 
