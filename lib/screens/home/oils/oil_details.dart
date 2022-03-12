@@ -1,3 +1,6 @@
+import 'package:aromatherapy/components/primary_oil_details_item.dart';
+import 'package:aromatherapy/components/primary_oil_titles_item.dart';
+import 'package:aromatherapy/components/primary_properties_list_item.dart';
 import 'package:aromatherapy/models/oil/oil.dart';
 import 'package:flutter/material.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
@@ -69,22 +72,20 @@ class _OilDetailsState extends State<OilDetails> {
       }
 
       if (beauty != null) {
-      tabs.add(beauty);
+        tabs.add(beauty);
         tabb.add(const Tab(
           text: "Beauty",
-
         ));
       } else {
         null;
       }
 
-      if(wellBeing != null) {
+      if (wellBeing != null) {
         tabs.add(wellBeing);
         tabb.add(const Tab(
           text: "Well Being",
         ));
-
-      } else{
+      } else {
         null;
       }
     });
@@ -149,8 +150,8 @@ class _OilDetailsState extends State<OilDetails> {
                       left: 20,
                       right: 20,
                       top: MediaQuery.of(context).size.height * 0.2,
+                      bottom: -15,
                       child: Container(
-                        height: MediaQuery.of(context).size.height,
                         decoration: const BoxDecoration(
                             color: kSecondaryBackgroundColor,
                             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -164,7 +165,7 @@ class _OilDetailsState extends State<OilDetails> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 40),
                           child: SingleChildScrollView(
-                            physics: ScrollPhysics(),
+                            physics: const AlwaysScrollableScrollPhysics(),
                             child: Column(
                               children: [
                                 const SizedBox(height: 8),
@@ -196,135 +197,36 @@ class _OilDetailsState extends State<OilDetails> {
                                 ),
                                 const SizedBox(height: 5),
                                 !s.isEmpty
-                                    ? Column(
-                                        children: [
-                                          const Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Other denomination',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: kPrimaryTextColor,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              s,
-                                              style: const TextStyle(
-                                                  fontSize: 15,
-                                                  color: kPrimaryTextColor,
-                                                  fontStyle: FontStyle.italic),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 10),
-                                        ],
-                                      )
+                                    ? PrimaryOilTitlesItems(
+                                        title: 'Other denomination',
+                                        subtitle: s,
+                                        color: kPrimaryTextColor)
                                     : const SizedBox(
                                         height: 0,
                                       ),
                                 !p.isEmpty
-                                    ? Column(
-                                        children: [
-                                          const Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Allergies',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: kPrimaryColor,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              p,
-                                              style: const TextStyle(
-                                                  fontSize: 15,
-                                                  color: kPrimaryColor,
-                                                  fontStyle: FontStyle.italic),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 10),
-                                        ],
-                                      )
+                                    ? PrimaryOilTitlesItems(
+                                        title: 'Allergies',
+                                        subtitle: p,
+                                        color: kPrimaryColor)
                                     : const SizedBox(
                                         height: 0,
                                       ),
                                 !aspect.isEmpty
-                                    ? Column(
-                                        children: [
-                                          const Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Aspect',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: kPrimaryTextColor,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 5),
-                                          SizedBox(
-                                            height: 40,
-                                            child: PrimaryListProperties(
-                                                properties: aspect),
-                                          ),
-                                          const SizedBox(height: 10),
-                                        ],
-                                      )
+                                    ? PrimaryOilDetailsItems(
+                                        type: 'Aspect', list: aspect)
                                     : const SizedBox(
                                         height: 0,
                                       ),
                                 colo.isNotEmpty
-                                    ? Column(
-                                        children: [
-                                          const Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Color',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: kPrimaryTextColor,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 5),
-                                          SizedBox(
-                                            height: 40,
-                                            child: PrimaryListProperties(
-                                                properties: colo),
-                                          ),
-                                          const SizedBox(height: 10),
-                                        ],
-                                      )
+                                    ? PrimaryOilDetailsItems(
+                                        type: 'Color', list: colo)
                                     : const SizedBox(
                                         height: 0,
                                       ),
                                 odor.isNotEmpty
-                                    ? Column(
-                                        children: [
-                                          const Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Odor',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: kPrimaryTextColor,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 5),
-                                          SizedBox(
-                                            height: 40,
-                                            child: PrimaryListProperties(
-                                                properties: odor),
-                                          ),
-                                          const SizedBox(height: 20),
-                                        ],
-                                      )
+                                    ? PrimaryOilDetailsItems(
+                                        type: 'Odor', list: odor)
                                     : const SizedBox(
                                         height: 0,
                                       ),
@@ -346,141 +248,11 @@ class _OilDetailsState extends State<OilDetails> {
                                       ),
                                     )),
                                 SelectedIndex == tabs.indexOf(health)
-                                    ? ConstrainedBox(
-                                    constraints:
-                                    const BoxConstraints(
-                                        maxHeight: 200,
-                                        minHeight: 200),
-                                        child: health != null
-                                            ? ListView.builder(
-                                            shrinkWrap: true,
-                                            padding: const EdgeInsets
-                                                    .symmetric(vertical: 10),
-                                                itemCount: health!
-                                                    .toMap()
-                                                    .entries
-                                                    .toList()
-                                                    .length,
-                                                scrollDirection: Axis.vertical,
-                                                itemBuilder: (context, index) {
-                                                  var entryList = health!
-                                                      .toMap()
-                                                      .entries
-                                                      .toList();
-                                                  return entryList[index]
-                                                              .value !=
-                                                          null
-                                                      ? PrimaryPropertyDescriptionCard(
-                                                          color: kPrimaryColor,
-                                                          title:
-                                                              entryList[index]
-                                                                  .key,
-                                                          description:
-                                                              entryList[index]
-                                                                  .value,
-                                                        )
-                                                      : const SizedBox(
-                                                          height: 0,
-                                                        );
-                                                })
-                                            : const SizedBox(
-                                                height: 0,
-                                              ))
+                                    ? PrimaryPropertiesListItems(domain: health)
                                     : SelectedIndex == tabs.indexOf(beauty)
-                                        ? ConstrainedBox(
-                                            constraints: const BoxConstraints(
-                                                maxHeight: 200,
-                                                minHeight: 200),
-                                            child: beauty != null
-                                                ? ListView.builder(
-                                                    padding:
-                                                        const EdgeInsets
-                                                                .symmetric(
-                                                            vertical: 10),
-                                                    shrinkWrap: true,
-                                                    itemCount:
-                                                        beauty!
-                                                            .toMap()
-                                                            .entries
-                                                            .toList()
-                                                            .length,
-                                                    scrollDirection: Axis
-                                                        .vertical,
-                                                    itemBuilder: (context,
-                                                        index) {
-                                                      var entryList = beauty!
-                                                          .toMap()
-                                                          .entries
-                                                          .toList();
-                                                      return entryList[index]
-                                                                  .value !=
-                                                              null
-                                                          ? PrimaryPropertyDescriptionCard(
-                                                              color: kPrimaryColor,
-                                                              title: entryList[
-                                                                      index]
-                                                                  .key,
-                                                              description:
-                                                                  entryList[
-                                                                          index]
-                                                                      .value,
-                                                            )
-                                                          : const SizedBox(
-                                                              height: 0,
-                                                            );
-                                                    })
-                                                : const SizedBox(
-                                                    height: 0,
-                                                  ))
+                                        ? PrimaryPropertiesListItems(domain: beauty)
                                         : SelectedIndex == tabs.indexOf(wellBeing)
-                                            ? ConstrainedBox(
-                                                constraints:
-                                                    const BoxConstraints(
-                                                        maxHeight: 200,
-                                                        minHeight: 100),
-                                                child: wellBeing != null
-                                                    ? ListView.builder(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .symmetric(
-                                                                vertical: 10),
-                                                        shrinkWrap: true,
-                                                        itemCount:
-                                                            wellBeing!
-                                                                .toMap()
-                                                                .entries
-                                                                .toList()
-                                                                .length,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          var entryList =
-                                                              wellBeing!
-                                                                  .toMap()
-                                                                  .entries
-                                                                  .toList();
-                                                          return entryList[
-                                                                          index]
-                                                                      .value !=
-                                                                  null
-                                                              ? PrimaryPropertyDescriptionCard(
-                                                                  color: kPrimaryColor,
-                                                                  title: entryList[
-                                                                          index]
-                                                                      .key,
-                                                                  description:
-                                                                      entryList[
-                                                                              index]
-                                                                          .value,
-                                                                )
-                                                              : const SizedBox(
-                                                                  height: 0,
-                                                                );
-                                                        })
-                                                    : const SizedBox(
-                                                        height: 0,
-                                                      ))
+                                            ? PrimaryPropertiesListItems(domain: wellBeing)
                                             : const SizedBox(
                                                 height: 0,
                                               )

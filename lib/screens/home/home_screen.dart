@@ -9,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../components/primary_category_card.dart';
 import '../../components/primary_top_item_card.dart';
-import '../../components/primary_top_list_item.dart';
+import '../../components/primary_oil_details_item.dart';
 import '../../models/oil/oil.dart';
 import '../../models/recipe/recipe.dart';
 import '../../utils/constants.dart';
