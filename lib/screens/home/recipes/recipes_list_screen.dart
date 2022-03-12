@@ -257,10 +257,11 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height,
+                            Container(
+                              padding: const EdgeInsets.only(bottom: 120),
                               child: _foundUsers.isNotEmpty
                                   ? ListView.builder(
+                                      shrinkWrap: true,
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 15),
                                       itemCount: _foundUsers.length,
@@ -283,13 +284,12 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                                             recipe: recipe,
                                             backgroundColor: kSecondaryColor);
                                       })
-                                  : SizedBox(
-                                      height: 120,
+                                  : Container(
                                       child: FutureBuilder<QuerySnapshot>(
                                           future: rec.get(),
                                           builder: (context, snapshot) {
                                             if (snapshot.hasError) {
-                                              return Text(
+                                              return const Text(
                                                   "Something went wrong");
                                             }
 
@@ -298,6 +298,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                                               data = snapshot.data!.docs;
 
                                               return ListView.builder(
+                                                shrinkWrap: true,
                                                 padding:
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 15),

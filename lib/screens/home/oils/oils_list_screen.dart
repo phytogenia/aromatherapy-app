@@ -272,12 +272,11 @@ class _OilListScreenState extends State<OilListScreen> {
                                     ),
                                   ),
                                   const SizedBox(height: 20),
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height,
+                                  Container(
+                                    padding: const EdgeInsets.only(bottom: 120),
                                     child: _foundoils.isNotEmpty
                                                 ? PrimaryListOils(data: _foundoils):
-                                    SizedBox(
-                                      height: 120,
+                                    Container(
                                       child: FutureBuilder<QuerySnapshot>(
                                           future: oilss.get(),
                                           builder: (context,snapshot) {
