@@ -46,7 +46,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:125064876870:android:d240d3dc00d2146cf38b47",
         "android_client_info": {
-          "package_name": "ga.youcefmegoura.aromatherapy_app"
+          "package_name": "com.phytogenia.aromatherapy"
         }
       },
       "oauth_client": [
@@ -54,7 +54,7 @@
           "client_id": "125064876870-cvhf2il8ebf2m1nalnle83nc0ekkamfn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "ga.youcefmegoura.aromatherapy_app",
+            "package_name": "com.phytogenia.aromatherapy",
             "certificate_hash": "56118aebfd4a6673e2ca61b8fdd25ced6d62b81a"
           }
         },
