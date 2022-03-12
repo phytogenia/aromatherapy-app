@@ -149,7 +149,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   right: 20,
                   top: MediaQuery.of(context).size.height * 0.2,
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.65,
                     decoration: const BoxDecoration(
                         color: kSecondaryBackgroundColor,
                         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -293,29 +292,33 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildFooter() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          Column(children: [
-            const Text(
-              "By segning up, you agree to Aromatherapy's",
-            ),
-            Row(
-              children: [
-                UrlText(
-                  text: 'Terms of Service',
-                  url: 'https://google.com/', //TODO:: to replace
-                ),
-                const Text(
-                  ' and ',
-                ),
-                UrlText(
-                  text: 'Privacy Policy',
-                  url: 'https://google.com/', //TODO:: to replace
-                ),
-              ],
-            )
-          ]),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: Row(
+          children: [
+            Column(children: [
+              const Text(
+                "By segning up, you agree to Aromatherapy's",
+                style: TextStyle(fontSize: 13),
+              ),
+              Row(
+                children: [
+                  UrlText(
+                    text: 'Terms of Service',
+                    url: 'https://google.com/', //TODO:: to replace
+                  ),
+                  const Text(
+                    ' and ',
+                  ),
+                  UrlText(
+                    text: 'Privacy Policy',
+                    url: 'https://google.com/', //TODO:: to replace
+                  ),
+                ],
+              )
+            ]),
+          ],
+        ),
       ),
     );
   }
