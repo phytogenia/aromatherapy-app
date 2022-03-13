@@ -119,9 +119,9 @@ class _RecipesDetailsState extends State<RecipesDetails> {
                                     .of(context)
                                     .size
                                     .width, 130.0)),
-                        image: const DecorationImage(
+                        image: DecorationImage(
                             colorFilter: ColorFilter.mode(
-                                kSecondaryColor, BlendMode.srcOver),
+                                kSecondaryColor.withOpacity(.8), BlendMode.srcOver),
                             image: AssetImage('assets/images/pictop.jpg'),
                             fit: BoxFit.cover)),
                   ), // Picture on top background
