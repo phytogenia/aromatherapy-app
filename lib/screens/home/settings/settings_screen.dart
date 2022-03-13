@@ -8,27 +8,6 @@ import '../../../utils/constants.dart';
 import '../../../utils/functions.dart';
 
 class SettingsScreen extends StatelessWidget {
-  /* Future<void> _signOut(BuildContext context) async {
-    try {
-      final auth = Provider.of<AuthBase>(context);
-      await auth.signOut();
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
-  Future<void> _confirmSignOut(BuildContext context) async {
-    final didRequestSignOut = await PlatformAlertDialog(
-      title: 'Logout',
-      content: 'Are you sure that you want to logout?',
-      cancelActionText: 'Cancel',
-      defaultActionText: 'Logout',
-    ).show(context);
-    if (didRequestSignOut == true) {
-      _signOut(context);
-    }
-  }*/
-
   const SettingsScreen({Key? key}) : super(key: key);
 
   @override
@@ -73,6 +52,7 @@ class SettingsScreen extends StatelessWidget {
 
     if (isUserWantToLogout) {
       _signOutUser(context);
+      Navigator.pop(context);
     }
   }
 
