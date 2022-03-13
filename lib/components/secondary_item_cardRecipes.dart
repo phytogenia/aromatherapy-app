@@ -86,7 +86,7 @@ class SecondaryItemCardRecipes extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(imagePath),
+                    Image.asset(imagePath,color: Colors.white,),
                   ],
                 ),
               ),
