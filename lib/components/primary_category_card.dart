@@ -20,12 +20,11 @@ class PrimaryCategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushAndRemoveUntil(
+        Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) =>
                   text.contains("Oil") ? const HomeOil() : const HomeRecipes()),
-          (route) => false,
         ); //TODO: refactore
       },
       child: Container(
