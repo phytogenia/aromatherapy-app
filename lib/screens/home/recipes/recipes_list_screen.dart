@@ -256,7 +256,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                           ),
                           const SizedBox(height: 20),
                           Container(
-                            padding: const EdgeInsets.only(bottom: 120),
+                            padding: const EdgeInsets.only(bottom: 10),
                             child: _foundUsers.isNotEmpty
                                 ? ListView.builder(
                                     shrinkWrap: true,
