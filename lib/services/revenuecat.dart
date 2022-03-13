@@ -1,11 +1,10 @@
-import 'package:aromatherapy/utils/secret_keys.dart';
 import 'package:flutter/services.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class PurchaseApi {
   static Future init() async {
     await Purchases.setDebugLogsEnabled(true);
-    await Purchases.setup(revenuecatApiKey);
+    await Purchases.setup('goog_arjVzvFkpLztxIsWvhbkVjoJtph');
   }
 
   static Future<List<Offering>> fetchOffers() async {

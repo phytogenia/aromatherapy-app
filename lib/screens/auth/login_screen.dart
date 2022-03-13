@@ -148,6 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   left: 20,
                   right: 20,
                   top: MediaQuery.of(context).size.height * 0.2,
+                  bottom: 20,
                   child: Container(
                     decoration: const BoxDecoration(
                         color: kSecondaryBackgroundColor,

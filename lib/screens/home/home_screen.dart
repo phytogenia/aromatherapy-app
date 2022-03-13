@@ -102,23 +102,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   getData() {
     setState(() {
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    fetchoffers(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       extendBody: true,
-      body: oils.isEmpty || recipes.isEmpty || categories.isEmpty
-          ? const Center(
-              child: CircularProgressIndicator(
-                color: kPrimaryColor,
-              ),
-            )
-          : SingleChildScrollView(
+      body:SingleChildScrollView(
               child: SafeArea(
                 bottom: false,
                 child: Container(
@@ -358,25 +350,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Future fetchoffers(BuildContext context) async {
-    final offering = await PurchaseApi.fetchOffers();
-    if (offering.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          (const SnackBar(content: Text('No Plans Found'),
-
-          )));
-    } else {
-      final packages = offering
-          .map((offer) => offer.availablePackages)
-          .expand((pair) => pair)
-          .toList();
-
-      showModalBottomSheet(context: context,
-          builder: (context) => PayWallWidget(title: 'Upgrade Your Plan', description: 'Upgrade to a new plan to get access to all features', packages: packages,
-              onClickedPackage: (package) async {
-                await PurchaseApi.PurchasePackage(package);
-                Navigator.pop(context);
-              }),backgroundColor: Colors.transparent);}
-  }
 
 }
