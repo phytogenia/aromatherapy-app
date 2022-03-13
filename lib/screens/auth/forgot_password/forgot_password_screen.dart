@@ -1,5 +1,7 @@
 import 'package:aromatherapy/components/main_card_widget.dart';
+import 'package:aromatherapy/screens/auth/forgot_password/password_reset_screen.dart';
 import 'package:aromatherapy/utils/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'confirm_phone_number_screen.dart';
@@ -12,17 +14,47 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final emailController = TextEditingController();
+  @override
+  void dispose(){
+    emailController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      body: Maincardwidget(columnWidget: _forgotpassword(context),), // type 0 = forgot password
+      body: Maincardwidget(columnWidget: _forgotpassword(context,emailController),), // type 0 = forgot password
     );
   }
 }
 
-Widget _forgotpassword(BuildContext context) {
+Widget _forgotpassword(BuildContext context, TextEditingController emailController) {
+  Future verifyEmail() async{
+    showDialog(context: context,barrierDismissible: false,
+        builder: (context) => const Center(child: CircularProgressIndicator(),));
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+          email: emailController.text.trim());
+      ScaffoldMessenger.of(context).showSnackBar(
+          (SnackBar(content: Text("Password Reset Email Sent",))));
+
+      /*Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const PasswordResetScreen()));*/
+
+      Navigator.of(context).popUntil((rout) => rout.isFirst);
+    } on FirebaseAuthException catch (e){
+      print(e);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+          (SnackBar(content: Text(e.message.toString()))));
+      Navigator.of(context).pop();
+
+    }
+  }
   return Column(children: [
     const Align(
       alignment: Alignment.center,
@@ -44,6 +76,8 @@ Widget _forgotpassword(BuildContext context) {
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       height: 40,
       child: TextFormField(
+        keyboardType: TextInputType.emailAddress,
+        controller: emailController,
         decoration: InputDecoration(
             focusColor: kPrimaryColor,
             hintText: 'Enter you Email',
@@ -54,11 +88,8 @@ Widget _forgotpassword(BuildContext context) {
     const SizedBox(height: 100),
     GestureDetector(
       onTap: () {
-        // Sigup method
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const ConfirmPhoneNumberScreen()));
+
+        verifyEmail();
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
@@ -75,5 +106,6 @@ Widget _forgotpassword(BuildContext context) {
       ),
     ),
   ]);
+
 }
 

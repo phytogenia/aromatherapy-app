@@ -1,5 +1,5 @@
 import 'package:aromatherapy/screens/landing_screen.dart';
-import 'package:aromatherapy/screens/revenuecat.dart';
+import 'package:aromatherapy/services/revenuecat.dart';
 import 'package:aromatherapy/services/auth_service.dart';
 import 'package:aromatherapy/utils/theme.dart';
 import 'package:firebase_core/firebase_core.dart';

@@ -5,9 +5,10 @@ import 'package:aromatherapy/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
 import '../home_screen.dart';
 import '../oils/oils_list_screen.dart';
+
+
 class HomeRecipes extends StatefulWidget {
   const HomeRecipes({Key? key}) : super(key: key);
 
@@ -36,13 +37,13 @@ class _HomeRecipesState extends State<HomeRecipes> {
         },
         color: kSecondaryBackgroundColor,
         backgroundColor: Colors.transparent,
-        buttonBackgroundColor: kPrimaryColor,
+        buttonBackgroundColor: kSecondaryColor,
         index: SelectedIndex,
         items: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(
-              'assets/images/whiteoil.png',
+              'assets/images/recipe.png',
               color: SelectedIndex == 0
                   ? kSecondaryBackgroundColor
                   : kSecondaryTextColor,
@@ -80,11 +81,12 @@ class RecipesListScreen extends StatefulWidget {
 }
 
 class _RecipesListScreenState extends State<RecipesListScreen> {
-  CollectionReference rec = FirebaseFirestore.instance.collection('recipes');
+  List oils = [];
+  CollectionReference oilss = FirebaseFirestore.instance.collection('recipes');
   List<DocumentSnapshot> data = [];
 
   // This list holds the data for the list view
-  List<DocumentSnapshot> _foundUsers = [];
+  late final _PrimaryListOilsState? state;
 
   @override
   void initState() {
@@ -98,40 +100,22 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
   }
 
   // This function is called whenever the text field changes
-  void _runFilter(String enteredKeyword) {
-    List<DocumentSnapshot> results = [];
-    if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
-      results = data;
-    } else {
-      results = data
-          .where((user) =>
-              user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
-          .toList();
-      // we use the toLowerCase() method to make it case-insensitive
-    }
-
-    // Refresh the UI
-    setState(() {
-      _foundUsers = results;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
         resizeToAvoidBottomInset: true,
-
         appBar: AppBar(
+          centerTitle: true, // this is all you need
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: const Center(
               child: Text(
-            "Essential recipes",
-            style: TextStyle(
-                color: kPrimaryTextColor, fontWeight: FontWeight.bold),
-          )),
+                "Essential recipes",
+                style: TextStyle(
+                    color: kPrimaryTextColor, fontWeight: FontWeight.bold),
+              )),
         ),
         body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
@@ -151,8 +135,8 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                       height: 50,
                     ),
                     const Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 40.0, vertical: 10),
+                      padding:
+                      EdgeInsets.symmetric(horizontal: 40.0, vertical: 10),
                       child: Text(
                         'Popular Essential recipes',
                         style: TextStyle(fontWeight: FontWeight.bold),
@@ -161,7 +145,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                     SizedBox(
                       height: 120,
                       child: FutureBuilder<QuerySnapshot>(
-                          future: rec.get(),
+                          future: oilss.get(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
                               return Text("Something went wrong");
@@ -172,20 +156,20 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                               data = snapshot.data!.docs;
 
                               return ListView.builder(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 15),
+                                padding:
+                                const EdgeInsets.symmetric(horizontal: 15),
                                 itemCount: data.length,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) {
-                                  Recipe recipe = Recipe.fromMap(
+                                  Recipe rec = Recipe.fromMap(
                                       Map<String, dynamic>.from(
                                           data[index].data() as Map),
                                       data[index].id);
                                   return PrimaryTopItemCardRecipe(
-                                    text: recipe.name,
-                                    subText: recipe.reference.toString(),
-                                    imagePath: 'assets/images/whiteoil.png',
-                                    recipe: recipe,
+                                    text: rec.name,
+                                    subText: rec.reference.toString(),
+                                    imagePath: 'assets/images/recipe.png',
+                                    recipe: rec,
                                     backgroundColor: kSecondaryColor,
                                   );
                                 },
@@ -196,11 +180,6 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                               style: TextStyle(fontSize: 24),
                             );
                           }),
-                      /* child: PrimaryTopListItems(
-                              list: data,
-                              backgroundColor: kPrimaryColor,
-                              imagePath: 'assets/images/whiteoil.png',
-                            ),*/
                     ),
                     Padding(
                       padding: const EdgeInsets.all(30.0),
@@ -212,125 +191,16 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                             children: const [
                               Text('Find your favorite'),
                               Text(
-                                'Recipe',
+                                'Essential Recipes',
                                 style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 20, fontWeight: FontWeight.bold),
                               )
                             ],
                           ),
                           const SizedBox(
                             height: 30,
                           ),
-                          Container(
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30)),
-                              color: kSecondaryBackgroundColor,
-                            ),
-                            height: 40,
-                            child: Center(
-                              child: TextFormField(
-                                onChanged: (value) => _runFilter(value),
-                                decoration: const InputDecoration(
-                                  suffixIcon: Icon(
-                                    Icons.search,
-                                    color: kSecondaryTextColor,
-                                  ),
-                                  hintText: 'Quick search for recipes ...',
-                                  hintStyle: TextStyle(fontSize: 12),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 1,
-                                          color: kSecondaryTextColor),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(30))),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 1, color: kSecondaryColor),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(30))),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Container(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: _foundUsers.isNotEmpty
-                                ? ListView.builder(
-                                    shrinkWrap: true,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15),
-                                    itemCount: _foundUsers.length,
-                                    scrollDirection: Axis.vertical,
-                                    itemBuilder: (context, index) {
-                                      Recipe recipe = Recipe.fromMap(
-                                          Map<String, dynamic>.from(
-                                              _foundUsers[index].data()
-                                                  as Map),
-                                          _foundUsers[index].id);
-
-                                      return SecondaryItemCardRecipes(
-                                          text: _foundUsers[index]["name"]
-                                              .toString(),
-                                          subText: _foundUsers[index]
-                                                  ["reference"]
-                                              .toString(),
-                                          imagePath:
-                                              'assets/images/whiteoil.png',
-                                          recipe: recipe,
-                                          backgroundColor: kSecondaryColor);
-                                    })
-                                : Container(
-                                    child: FutureBuilder<QuerySnapshot>(
-                                        future: rec.get(),
-                                        builder: (context, snapshot) {
-                                          if (snapshot.hasError) {
-                                            return const Text(
-                                                "Something went wrong");
-                                          }
-
-                                          if (snapshot.connectionState ==
-                                              ConnectionState.done) {
-                                            data = snapshot.data!.docs;
-
-                                            return ListView.builder(
-                                              shrinkWrap: true,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 15),
-                                              itemCount: data.length,
-                                              scrollDirection: Axis.vertical,
-                                              itemBuilder: (context, index) {
-                                                Recipe recipe = Recipe.fromMap(
-                                                    Map<String, dynamic>.from(
-                                                        data[index].data()
-                                                            as Map),
-                                                    data[index].id);
-                                                return SecondaryItemCardRecipes(
-                                                  text: recipe.name,
-                                                  subText:
-                                                      recipe.reference.toString(),
-                                                  imagePath:
-                                                      'assets/images/whiteoil.png',
-                                                  recipe: recipe,
-                                                  backgroundColor:
-                                                      kSecondaryColor,
-                                                );
-                                              },
-                                            );
-                                          }
-                                          return const Text(
-                                            'No results found',
-                                            style: TextStyle(fontSize: 24),
-                                          );
-                                        }),
-                                  ),
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
+                          PrimaryListOils(),
                         ],
                       ),
                     ),
@@ -360,7 +230,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
               children: [
                 Container(),
                 // Empty Container to align the icon on the right with spacebetween
-                Image.asset('assets/images/whiteoil.png')
+                Image.asset('assets/images/recipe.png')
               ],
             ),
             const SizedBox(
@@ -380,6 +250,139 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class PrimaryListOils extends StatefulWidget {
+  const PrimaryListOils({Key? key}) : super(key: key);
+
+  @override
+  _PrimaryListOilsState createState() => _PrimaryListOilsState();
+}
+
+class _PrimaryListOilsState extends State<PrimaryListOils> {
+  List<DocumentSnapshot> data = [];
+  List<DocumentSnapshot> _foundoils = [];
+  CollectionReference oilss = FirebaseFirestore.instance.collection('recipes');
+
+  void _runFilter(String enteredKeyword) {
+    List<DocumentSnapshot> results = [];
+    if (enteredKeyword.isEmpty) {
+      // if the search field is empty or only contains white-space, we'll display all users
+      results = data;
+    } else {
+      results = data
+          .where((user) =>
+          user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+      // we use the toLowerCase() method to make it case-insensitive
+    }
+
+    setState(() {
+      _foundoils = results;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+            color: kSecondaryBackgroundColor,
+          ),
+          height: 40,
+          child: Center(
+            child: TextFormField(
+              onChanged: (value) async {
+                _runFilter(value);
+                // cartKey.currentState?._runFilter(value);
+              },
+              decoration: const InputDecoration(
+                suffixIcon: Icon(
+                  Icons.search,
+                  color: kSecondaryTextColor,
+                ),
+                hintText: 'Quick search for recipes ...',
+                hintStyle: TextStyle(fontSize: 12),
+                enabledBorder: OutlineInputBorder(
+                    borderSide:
+                    BorderSide(width: 1, color: kSecondaryTextColor),
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 1, color: kSecondaryColor),
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+        Container(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: _foundoils.isNotEmpty
+              ? ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            itemCount: _foundoils.length,
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              Recipe rec = Recipe.fromMap(
+                  Map<String, dynamic>.from(
+                      _foundoils[index].data() as Map),
+                  _foundoils[index].id);
+              return SecondaryItemCardRecipes(
+                text: rec.name,
+                subText: rec.reference.toString(),
+                imagePath: 'assets/images/recipe.png',
+                recipe: rec,
+                backgroundColor: kSecondaryColor,
+              );
+            },)
+
+              : FutureBuilder<QuerySnapshot>(
+              future: oilss.get(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text("Something went wrong");
+                }
+
+                if (snapshot.connectionState == ConnectionState.done) {
+                  data = snapshot.data!.docs;
+
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    itemCount: data.length,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (context, index) {
+                      Recipe rec = Recipe.fromMap(
+                          Map<String, dynamic>.from(
+                              data[index].data() as Map),
+                          data[index].id);
+                      return SecondaryItemCardRecipes(
+                        text: rec.name,
+                        subText: rec.reference.toString(),
+                        imagePath: 'assets/images/recipe.png',
+                        recipe: rec,
+                        backgroundColor: kSecondaryColor,
+                      );
+                    },
+                  );
+                }
+                return const Text(
+                  'No results found',
+                  style: TextStyle(fontSize: 24),
+                );
+              }),
+        ),
+        const SizedBox(
+          height: 25,
+        ),
+      ],
     );
   }
 }
