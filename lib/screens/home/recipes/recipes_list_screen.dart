@@ -121,10 +121,9 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset: true,
+
         appBar: AppBar(
-          iconTheme: const IconThemeData(
-            color: kPrimaryTextColor, //change your color here
-          ),
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: const Center(
@@ -135,209 +134,207 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
           )),
         ),
         body: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
-          child: SafeArea(
-            bottom: false,
-            child: SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/bg.png'),
-                        fit: BoxFit.fill)),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 50,
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(top: 90),
+              height: MediaQuery.of(context).size.height,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/bg.png'),
+                      fit: BoxFit.fill)),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 40.0, vertical: 10),
+                      child: Text(
+                        'Popular Essential recipes',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 40.0, vertical: 10),
-                        child: Text(
-                          'Popular Essential recipes',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 120,
-                        child: FutureBuilder<QuerySnapshot>(
-                            future: rec.get(),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasError) {
-                                return Text("Something went wrong");
-                              }
+                    ),
+                    SizedBox(
+                      height: 120,
+                      child: FutureBuilder<QuerySnapshot>(
+                          future: rec.get(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return Text("Something went wrong");
+                            }
 
-                              if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                data = snapshot.data!.docs;
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              data = snapshot.data!.docs;
 
-                                return ListView.builder(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  itemCount: data.length,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    Recipe recipe = Recipe.fromMap(
-                                        Map<String, dynamic>.from(
-                                            data[index].data() as Map),
-                                        data[index].id);
-                                    return PrimaryTopItemCardRecipe(
-                                      text: recipe.name,
-                                      subText: recipe.reference.toString(),
-                                      imagePath: 'assets/images/whiteoil.png',
-                                      recipe: recipe,
-                                      backgroundColor: kSecondaryColor,
-                                    );
-                                  },
-                                );
-                              }
-                              return const Text(
-                                'No results found',
-                                style: TextStyle(fontSize: 24),
+                              return ListView.builder(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15),
+                                itemCount: data.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  Recipe recipe = Recipe.fromMap(
+                                      Map<String, dynamic>.from(
+                                          data[index].data() as Map),
+                                      data[index].id);
+                                  return PrimaryTopItemCardRecipe(
+                                    text: recipe.name,
+                                    subText: recipe.reference.toString(),
+                                    imagePath: 'assets/images/whiteoil.png',
+                                    recipe: recipe,
+                                    backgroundColor: kSecondaryColor,
+                                  );
+                                },
                               );
-                            }),
-                        /* child: PrimaryTopListItems(
-                                list: data,
-                                backgroundColor: kPrimaryColor,
-                                imagePath: 'assets/images/whiteoil.png',
-                              ),*/
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text('Find your favorite'),
-                                Text(
-                                  'Recipe',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
+                            }
+                            return const Text(
+                              'No results found',
+                              style: TextStyle(fontSize: 24),
+                            );
+                          }),
+                      /* child: PrimaryTopListItems(
+                              list: data,
+                              backgroundColor: kPrimaryColor,
+                              imagePath: 'assets/images/whiteoil.png',
+                            ),*/
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text('Find your favorite'),
+                              Text(
+                                'Recipe',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Container(
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30)),
+                              color: kSecondaryBackgroundColor,
                             ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            Container(
-                              decoration: const BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30)),
-                                color: kSecondaryBackgroundColor,
-                              ),
-                              height: 40,
-                              child: Center(
-                                child: TextFormField(
-                                  onChanged: (value) => _runFilter(value),
-                                  decoration: const InputDecoration(
-                                    suffixIcon: Icon(
-                                      Icons.search,
-                                      color: kSecondaryTextColor,
-                                    ),
-                                    hintText: 'Quick search for recipes ...',
-                                    hintStyle: TextStyle(fontSize: 12),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1,
-                                            color: kSecondaryTextColor),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30))),
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1, color: kSecondaryColor),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(30))),
+                            height: 40,
+                            child: Center(
+                              child: TextFormField(
+                                onChanged: (value) => _runFilter(value),
+                                decoration: const InputDecoration(
+                                  suffixIcon: Icon(
+                                    Icons.search,
+                                    color: kSecondaryTextColor,
                                   ),
+                                  hintText: 'Quick search for recipes ...',
+                                  hintStyle: TextStyle(fontSize: 12),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1,
+                                          color: kSecondaryTextColor),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(30))),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          width: 1, color: kSecondaryColor),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(30))),
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 20),
-                            Container(
-                              padding: const EdgeInsets.only(bottom: 120),
-                              child: _foundUsers.isNotEmpty
-                                  ? ListView.builder(
-                                      shrinkWrap: true,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 15),
-                                      itemCount: _foundUsers.length,
-                                      scrollDirection: Axis.vertical,
-                                      itemBuilder: (context, index) {
-                                        Recipe recipe = Recipe.fromMap(
-                                            Map<String, dynamic>.from(
-                                                _foundUsers[index].data()
-                                                    as Map),
-                                            _foundUsers[index].id);
+                          ),
+                          const SizedBox(height: 20),
+                          Container(
+                            padding: const EdgeInsets.only(bottom: 120),
+                            child: _foundUsers.isNotEmpty
+                                ? ListView.builder(
+                                    shrinkWrap: true,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15),
+                                    itemCount: _foundUsers.length,
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (context, index) {
+                                      Recipe recipe = Recipe.fromMap(
+                                          Map<String, dynamic>.from(
+                                              _foundUsers[index].data()
+                                                  as Map),
+                                          _foundUsers[index].id);
 
-                                        return SecondaryItemCardRecipes(
-                                            text: _foundUsers[index]["name"]
-                                                .toString(),
-                                            subText: _foundUsers[index]
-                                                    ["reference"]
-                                                .toString(),
-                                            imagePath:
-                                                'assets/images/whiteoil.png',
-                                            recipe: recipe,
-                                            backgroundColor: kSecondaryColor);
-                                      })
-                                  : Container(
-                                      child: FutureBuilder<QuerySnapshot>(
-                                          future: rec.get(),
-                                          builder: (context, snapshot) {
-                                            if (snapshot.hasError) {
-                                              return const Text(
-                                                  "Something went wrong");
-                                            }
-
-                                            if (snapshot.connectionState ==
-                                                ConnectionState.done) {
-                                              data = snapshot.data!.docs;
-
-                                              return ListView.builder(
-                                                shrinkWrap: true,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 15),
-                                                itemCount: data.length,
-                                                scrollDirection: Axis.vertical,
-                                                itemBuilder: (context, index) {
-                                                  Recipe recipe = Recipe.fromMap(
-                                                      Map<String, dynamic>.from(
-                                                          data[index].data()
-                                                              as Map),
-                                                      data[index].id);
-                                                  return SecondaryItemCardRecipes(
-                                                    text: recipe.name,
-                                                    subText:
-                                                        recipe.reference.toString(),
-                                                    imagePath:
-                                                        'assets/images/whiteoil.png',
-                                                    recipe: recipe,
-                                                    backgroundColor:
-                                                        kSecondaryColor,
-                                                  );
-                                                },
-                                              );
-                                            }
+                                      return SecondaryItemCardRecipes(
+                                          text: _foundUsers[index]["name"]
+                                              .toString(),
+                                          subText: _foundUsers[index]
+                                                  ["reference"]
+                                              .toString(),
+                                          imagePath:
+                                              'assets/images/whiteoil.png',
+                                          recipe: recipe,
+                                          backgroundColor: kSecondaryColor);
+                                    })
+                                : Container(
+                                    child: FutureBuilder<QuerySnapshot>(
+                                        future: rec.get(),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasError) {
                                             return const Text(
-                                              'No results found',
-                                              style: TextStyle(fontSize: 24),
+                                                "Something went wrong");
+                                          }
+
+                                          if (snapshot.connectionState ==
+                                              ConnectionState.done) {
+                                            data = snapshot.data!.docs;
+
+                                            return ListView.builder(
+                                              shrinkWrap: true,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 15),
+                                              itemCount: data.length,
+                                              scrollDirection: Axis.vertical,
+                                              itemBuilder: (context, index) {
+                                                Recipe recipe = Recipe.fromMap(
+                                                    Map<String, dynamic>.from(
+                                                        data[index].data()
+                                                            as Map),
+                                                    data[index].id);
+                                                return SecondaryItemCardRecipes(
+                                                  text: recipe.name,
+                                                  subText:
+                                                      recipe.reference.toString(),
+                                                  imagePath:
+                                                      'assets/images/whiteoil.png',
+                                                  recipe: recipe,
+                                                  backgroundColor:
+                                                      kSecondaryColor,
+                                                );
+                                              },
                                             );
-                                          }),
-                                    ),
-                            ),
-                            const SizedBox(
-                              height: 25,
-                            ),
-                          ],
-                        ),
+                                          }
+                                          return const Text(
+                                            'No results found',
+                                            style: TextStyle(fontSize: 24),
+                                          );
+                                        }),
+                                  ),
+                          ),
+                          const SizedBox(
+                            height: 25,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
