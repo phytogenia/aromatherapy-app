@@ -139,10 +139,10 @@ class _OilDetailsState extends State<OilDetails> {
                         borderRadius: BorderRadius.vertical(
                             bottom: Radius.elliptical(
                                 MediaQuery.of(context).size.width, 130.0)),
-                        image: const DecorationImage(
+                        image: DecorationImage(
                             colorFilter: ColorFilter.mode(
-                                kPrimaryColor, BlendMode.srcOver),
-                            image: AssetImage('assets/images/pictop.jpg'),
+                                kPrimaryColor.withOpacity(.8), BlendMode.srcOver),
+                            image: const AssetImage('assets/images/pictop.jpg'),
                             fit: BoxFit.cover)),
                   ), // Picture on top background
 
