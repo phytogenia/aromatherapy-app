@@ -1,3 +1,4 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -27,45 +28,35 @@ class _HomeOilState extends State<HomeOil> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: CurvedNavigationBar(
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            SelectedIndex = 2;
+          });
+        },
+        backgroundColor: kPrimaryColor,
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Image.asset('assets/images/home.png',
+              color: kSecondaryBackgroundColor),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar(
         onTap: (int index) {
           setState(() {
             SelectedIndex = index;
           });
         },
-        color: kSecondaryBackgroundColor,
-        backgroundColor: Colors.transparent,
-        buttonBackgroundColor: kPrimaryColor,
-        index: SelectedIndex,
-        items: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/images/whiteoil.png',
-              color: SelectedIndex == 0
-                  ? kSecondaryBackgroundColor
-                  : kSecondaryTextColor,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/images/home.png',
-              color: SelectedIndex == 1
-                  ? kSecondaryBackgroundColor
-                  : kSecondaryTextColor,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/images/recipe.png',
-              color: SelectedIndex == 2
-                  ? kSecondaryBackgroundColor
-                  : kSecondaryTextColor,
-            ),
-          ),
+        icons: const [
+          Icons.water_drop,
+          Icons.soup_kitchen,
         ],
+        activeIndex: SelectedIndex,
+        rightCornerRadius: 0,
+        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.verySmoothEdge,
       ),
       body: _Screens[SelectedIndex],
     );

@@ -1,3 +1,4 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:aromatherapy/components/primary_top_item_card_rec.dart';
 import 'package:aromatherapy/components/secondary_item_cardRecipes.dart';
 import 'package:aromatherapy/models/recipe/recipe.dart';
@@ -29,47 +30,36 @@ class _HomeRecipesState extends State<HomeRecipes> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: CurvedNavigationBar(
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            SelectedIndex = 2;
+          });
+        },
+        backgroundColor: kPrimaryColor,
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Image.asset('assets/images/home.png',
+              color: kSecondaryBackgroundColor),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: AnimatedBottomNavigationBar(
         onTap: (int index) {
           setState(() {
             SelectedIndex = index;
           });
         },
-        color: kSecondaryBackgroundColor,
-        backgroundColor: Colors.transparent,
-        buttonBackgroundColor: kSecondaryColor,
-        index: SelectedIndex,
-        items: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/images/recipe.png',
-              color: SelectedIndex == 0
-                  ? kSecondaryBackgroundColor
-                  : kSecondaryTextColor,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/images/home.png',
-              color: SelectedIndex == 1
-                  ? kSecondaryBackgroundColor
-                  : kSecondaryTextColor,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              'assets/images/recipe.png',
-              color: SelectedIndex == 2
-                  ? kSecondaryBackgroundColor
-                  : kSecondaryTextColor,
-            ),
-          ),
+        icons: const [
+          Icons.water_drop,
+          Icons.soup_kitchen,
         ],
-      ),
-      body: _Screens[SelectedIndex],
+        activeIndex: SelectedIndex,
+        rightCornerRadius: 0,
+        gapLocation: GapLocation.center,
+        notchSmoothness: NotchSmoothness.verySmoothEdge,
+      ),      body: _Screens[SelectedIndex],
     );
   }
 }

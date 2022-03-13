@@ -5,10 +5,12 @@ import 'package:aromatherapy/components/primary_top_item_card_rec.dart';
 import 'package:aromatherapy/screens/home/recipes/recipes_list_screen.dart';
 import 'package:aromatherapy/screens/home/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
+import '../../components/PayWallWidget.dart';
 import '../../components/primary_category_card.dart';
 import '../../components/primary_top_item_card.dart';
 import '../../models/oil/oil.dart';
 import '../../models/recipe/recipe.dart';
+import '../../services/revenuecat.dart';
 import '../../utils/constants.dart';
 import 'oils/oils_list_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -100,35 +102,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   getData() {
     setState(() {
-      categories.addAll(["Category One", "Category Two"]);
-      oils.addAll(['Oil 1', 'Oil 2', 'Oil 3', 'Oil 4', 'Oil 5']);
-      recipes
-          .addAll(['Recipe 1', 'Recipe 3', 'Recipe 3', 'Recipe 5', 'Recipe 5']);
-    });
-  }
 
-  // This function is called whenever the text field changes
-  void _runFilter(String enteredKeyword) {
-    List<DocumentSnapshot> results = [];
-    if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
-      results = data;
-    } else {
-      results = data
-          .where((user) =>
-              user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
-          .toList();
-      // we use the toLowerCase() method to make it case-insensitive
-    }
-
-    // Refresh the UI
-    setState(() {
-      _foundUsers = results;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    fetchoffers(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       extendBody: true,
@@ -377,4 +357,26 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
     );
   }
+
+  Future fetchoffers(BuildContext context) async {
+    final offering = await PurchaseApi.fetchOffers();
+    if (offering.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          (const SnackBar(content: Text('No Plans Found'),
+
+          )));
+    } else {
+      final packages = offering
+          .map((offer) => offer.availablePackages)
+          .expand((pair) => pair)
+          .toList();
+
+      showModalBottomSheet(context: context,
+          builder: (context) => PayWallWidget(title: 'Upgrade Your Plan', description: 'Upgrade to a new plan to get access to all features', packages: packages,
+              onClickedPackage: (package) async {
+                await PurchaseApi.PurchasePackage(package);
+                Navigator.pop(context);
+              }),backgroundColor: Colors.transparent);}
+  }
+
 }

@@ -59,7 +59,6 @@ Widget _passwordreset(BuildContext context) {
     const SizedBox(height: 100),
     GestureDetector(
       onTap: () {
-        fetchoffers(context);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
@@ -78,26 +77,6 @@ Widget _passwordreset(BuildContext context) {
   ]);
 }
 
-Future fetchoffers(BuildContext context) async {
-  final offering = await PurchaseApi.fetchOffers();
-  if (offering.isEmpty) {
-    ScaffoldMessenger.of(context).showSnackBar(
-        (const SnackBar(content: Text('No Plans Found'),
-
-        )));
-  } else {
-  final packages = offering
-      .map((offer) => offer.availablePackages)
-      .expand((pair) => pair)
-      .toList();
-
-  showModalBottomSheet(context: context,
-      builder: (context) => PayWallWidget(title: 'Upgrade Your Plan', description: 'Upgrade to a new plan', packages: packages,
-      onClickedPackage: (package) async {
-        await PurchaseApi.PurchasePackage(package);
-        Navigator.pop(context);
-      }));}
-}
 
 
 
