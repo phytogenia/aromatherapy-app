@@ -220,26 +220,9 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         const SizedBox(height: 30),
-        selectedSignType == SignType.login
+        (selectedSignType == SignType.login)
             ? _buildLoginForm()
             : _buildSignupForm(),
-        const SizedBox(height: 20),
-        Align(
-          alignment: Alignment.topRight,
-          child: InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ForgotPasswordScreen()));
-            },
-            child: const Text(
-              'Forgot your password ?',
-              style:
-                  TextStyle(color: kPrimaryColor, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
         const SizedBox(height: 20),
         PrimarySignButton(
           onTap: _submit,
@@ -273,11 +256,7 @@ class _LoginScreenState extends State<LoginScreen> {
               imagePath: 'assets/images/facebook.png',
               onTap: () => _onAuth(context, _facebookAuth), //TODO: facebook
             ),
-            const SizedBox(width: 15),
-            PrimarySocialMediaButton(
-              imagePath: 'assets/images/apple.png',
-              onTap: () => _onAuth(context, _googleAuth), //TODO: facebook
-            ),
+            //TODO :: add apple sign
             const SizedBox(width: 15),
             PrimarySocialMediaButton(
               imagePath: 'assets/images/google.png',
@@ -348,6 +327,23 @@ class _LoginScreenState extends State<LoginScreen> {
             onEditingComplete: _onCompletePasswordEditing,
             controller: _passwordController,
             keyboardType: TextInputType.visiblePassword,
+          ),
+          const SizedBox(height: 20),
+          Align(
+            alignment: Alignment.topRight,
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ForgotPasswordScreen()));
+              },
+              child: const Text(
+                'Forgot your password ?',
+                style: TextStyle(
+                    color: kPrimaryColor, fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
         ],
       ),
