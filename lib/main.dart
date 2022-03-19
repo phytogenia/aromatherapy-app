@@ -10,10 +10,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   PurchaseService.init();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(AromatherapyApp());
 }
 
-class MyApp extends StatelessWidget {
+class AromatherapyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
