@@ -362,10 +362,7 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
                         },
                       );
                     }
-                    return const Text(
-                      'No results found',
-                      style: TextStyle(fontSize: 24),
-                    );
+                    return const SizedBox.shrink();
                   }),
         ),
         const SizedBox(

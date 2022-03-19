@@ -1,8 +1,13 @@
+import 'package:aromatherapy/screens/home/settings/settings_screen.dart';
+import 'package:aromatherapy/screens/home/settings/test_revenuecat.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../models/entitlement.dart';
 import '../models/oil/oil.dart';
 import '../screens/home/oils/oil_details.dart';
+import '../services/revenuecat_provider.dart';
 
 class SecondaryItemCard extends StatelessWidget {
   const SecondaryItemCard({
@@ -22,13 +27,24 @@ class SecondaryItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final entitlement = context.read<RevenueCatProvider>();
+
     return GestureDetector(
       onTap: () {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => OilDetails(oil: oil,))); //TODO: refactore
-    },
+        if (entitlement != Entitlement.allContent) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const TestRevenueCat()));
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => OilDetails(
+                oil: oil,
+              ),
+            ),
+          ); //TODO: refactore
+        }
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Stack(clipBehavior: Clip.none, children: [
@@ -55,14 +71,17 @@ class SecondaryItemCard extends StatelessWidget {
                     Text(
                       text,
                       style: const TextStyle(
-                          color: kPrimaryTextColor, fontWeight: FontWeight.bold),
+                          color: kPrimaryTextColor,
+                          fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       subText,
                       style: const TextStyle(color: kPrimaryTextColor),
                     ),
-                    SizedBox(height: 5,)
+                    SizedBox(
+                      height: 5,
+                    )
                   ],
                 ),
               ],
