@@ -3,8 +3,12 @@ import 'package:aromatherapy/screens/home/oils/oil_details.dart';
 import 'package:aromatherapy/screens/home/recipes/recipes_details.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../models/entitlement.dart';
 import '../models/oil/oil.dart';
+import '../screens/home/settings/test_revenuecat.dart';
+import '../services/revenuecat_provider.dart';
 
 class PrimaryTopItemCardRecipe extends StatelessWidget {
   const PrimaryTopItemCardRecipe({
@@ -24,12 +28,23 @@ class PrimaryTopItemCardRecipe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final entitlement = context.read<RevenueCatProvider>();
+
     return GestureDetector(
       onTap: () {
-        Navigator.push(
+        if (entitlement != Entitlement.allContent) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const TestRevenueCat()));
+        } else {
+          Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => RecipesDetails(recipe: recipe,))); //TODO: refactore
+              builder: (context) => RecipesDetails(
+                recipe: recipe,
+              ),
+            ),
+          );
+        }
       },
       child: Container(
         margin: const EdgeInsets.all(5),
@@ -48,7 +63,10 @@ class PrimaryTopItemCardRecipe extends StatelessWidget {
                 children: [
                   Container(),
                   // Empty Container to align the icon on the right with spacebetween
-                  Image.asset(imagePath,color: whitecolor,)
+                  Image.asset(
+                    imagePath,
+                    color: whitecolor,
+                  )
                 ],
               ),
               const SizedBox(
@@ -64,7 +82,8 @@ class PrimaryTopItemCardRecipe extends StatelessWidget {
               Flexible(
                 child: Text(
                   subText,
-                  style: const TextStyle(color: kSecondaryBackgroundColor,fontSize: 10),
+                  style: const TextStyle(
+                      color: kSecondaryBackgroundColor, fontSize: 10),
                 ),
               ),
             ],
