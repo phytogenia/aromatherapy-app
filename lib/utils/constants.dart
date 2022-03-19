@@ -1,8 +1,9 @@
 import 'package:aromatherapy/utils/size_config.dart';
 import 'package:flutter/material.dart';
 
-const String urlTermOfUse = 'https://google.com/';
-const String urlPrivacyPolicy = 'https://google.com/';
+const String urlTermOfUse = 'https://aromatherapy-68a74.web.app/terms-of-use';
+const String urlPrivacyPolicy =
+    'https://aromatherapy-68a74.web.app/privacy-policy';
 
 const kPrimaryColor = Color(0xFF15CA4D);
 const kSecondaryColor = Color(0xFFE88B00);

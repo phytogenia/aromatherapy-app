@@ -16,29 +16,39 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final emailController = TextEditingController();
   @override
-  void dispose(){
+  void dispose() {
     emailController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      body: Maincardwidget(columnWidget: _forgotpassword(context,emailController),), // type 0 = forgot password
+      body: Maincardwidget(
+        columnWidget: _forgotpassword(context, emailController),
+      ), // type 0 = forgot password
     );
   }
 }
 
-Widget _forgotpassword(BuildContext context, TextEditingController emailController) {
-  Future verifyEmail() async{
-    showDialog(context: context,barrierDismissible: false,
-        builder: (context) => const Center(child: CircularProgressIndicator(),));
+Widget _forgotpassword(
+    BuildContext context, TextEditingController emailController) {
+  Future verifyEmail() async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(
-          email: emailController.text.trim());
-      ScaffoldMessenger.of(context).showSnackBar(
-          (SnackBar(content: Text("Password Reset Email Sent",))));
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: emailController.text.trim());
+      ScaffoldMessenger.of(context).showSnackBar((SnackBar(
+          content: Text(
+        "Password Reset Email Sent",
+      ))));
 
       /*Navigator.push(
             context,
@@ -46,15 +56,15 @@ Widget _forgotpassword(BuildContext context, TextEditingController emailControll
                 builder: (context) => const PasswordResetScreen()));*/
 
       Navigator.of(context).popUntil((rout) => rout.isFirst);
-    } on FirebaseAuthException catch (e){
+    } on FirebaseAuthException catch (e) {
       print(e);
 
-      ScaffoldMessenger.of(context).showSnackBar(
-          (SnackBar(content: Text(e.message.toString()))));
+      ScaffoldMessenger.of(context)
+          .showSnackBar((SnackBar(content: Text(e.message.toString()))));
       Navigator.of(context).pop();
-
     }
   }
+
   return Column(children: [
     const Align(
       alignment: Alignment.center,
@@ -82,13 +92,12 @@ Widget _forgotpassword(BuildContext context, TextEditingController emailControll
             focusColor: kPrimaryColor,
             hintText: 'Enter you Email',
             hintStyle:
-            TextStyle(fontSize: 15, color: Colors.grey.withOpacity(.7))),
+                TextStyle(fontSize: 15, color: Colors.grey.withOpacity(.7))),
       ),
     ),
     const SizedBox(height: 100),
     GestureDetector(
       onTap: () {
-
         verifyEmail();
       },
       child: Container(
@@ -106,6 +115,4 @@ Widget _forgotpassword(BuildContext context, TextEditingController emailControll
       ),
     ),
   ]);
-
 }
-

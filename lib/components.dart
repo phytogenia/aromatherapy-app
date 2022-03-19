@@ -4,11 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-
 class AppData {
   static final AppData _appData = new AppData._internal();
 
-  bool isPro=false;
+  bool isPro = false;
 
   factory AppData() {
     return _appData;

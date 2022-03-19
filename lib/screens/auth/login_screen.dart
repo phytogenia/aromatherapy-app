@@ -162,7 +162,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 30),
-                      child: SingleChildScrollView(child: _bodyContent(context)),
+                      child:
+                          SingleChildScrollView(child: _bodyContent(context)),
                     ),
                   ),
                 ),
@@ -270,12 +271,12 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             PrimarySocialMediaButton(
               imagePath: 'assets/images/facebook.png',
-              onTap: () => () => _onAuth(context, _googleAuth), //TODO: facebook
+              onTap: () => _onAuth(context, _facebookAuth), //TODO: facebook
             ),
             const SizedBox(width: 15),
             PrimarySocialMediaButton(
               imagePath: 'assets/images/apple.png',
-              onTap: () => () => _onAuth(context, _googleAuth), //TODO: facebook
+              onTap: () => _onAuth(context, _googleAuth), //TODO: facebook
             ),
             const SizedBox(width: 15),
             PrimarySocialMediaButton(
@@ -336,7 +337,9 @@ class _LoginScreenState extends State<LoginScreen> {
             onEditingComplete: _onCompleteEmailEditing,
             controller: _emailController,
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           PrimaryTextFormField(
             isPasswordField: true,
             labelText: 'Password',

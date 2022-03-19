@@ -4,11 +4,9 @@ import 'package:aromatherapy/components/secondary_item_cardRecipes.dart';
 import 'package:aromatherapy/models/recipe/recipe.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import '../home_screen.dart';
 import '../oils/oils_list_screen.dart';
-
 
 class HomeRecipes extends StatefulWidget {
   const HomeRecipes({Key? key}) : super(key: key);
@@ -18,7 +16,6 @@ class HomeRecipes extends StatefulWidget {
 }
 
 class _HomeRecipesState extends State<HomeRecipes> {
-
   final _Screens = [
     const OilListScreen(),
     const HomeScreen(),
@@ -30,7 +27,6 @@ class _HomeRecipesState extends State<HomeRecipes> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
@@ -59,10 +55,12 @@ class _HomeRecipesState extends State<HomeRecipes> {
         rightCornerRadius: 0,
         gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.verySmoothEdge,
-      ),      body: _Screens[SelectedIndex],
+      ),
+      body: _Screens[SelectedIndex],
     );
   }
 }
+
 class RecipesListScreen extends StatefulWidget {
   const RecipesListScreen({Key? key}) : super(key: key);
 
@@ -85,8 +83,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
   }
 
   getData() {
-    setState(() {
-    });
+    setState(() {});
   }
 
   // This function is called whenever the text field changes
@@ -102,10 +99,10 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
           elevation: 0,
           title: const Center(
               child: Text(
-                "Essential recipes",
-                style: TextStyle(
-                    color: kPrimaryTextColor, fontWeight: FontWeight.bold),
-              )),
+            "Essential recipes",
+            style: TextStyle(
+                color: kPrimaryTextColor, fontWeight: FontWeight.bold),
+          )),
         ),
         body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
@@ -126,7 +123,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
                     ),
                     const Padding(
                       padding:
-                      EdgeInsets.symmetric(horizontal: 40.0, vertical: 10),
+                          EdgeInsets.symmetric(horizontal: 40.0, vertical: 10),
                       child: Text(
                         'Popular Essential recipes',
                         style: TextStyle(fontWeight: FontWeight.bold),
@@ -147,7 +144,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
 
                               return ListView.builder(
                                 padding:
-                                const EdgeInsets.symmetric(horizontal: 15),
+                                    const EdgeInsets.symmetric(horizontal: 15),
                                 itemCount: data.length,
                                 scrollDirection: Axis.horizontal,
                                 itemBuilder: (context, index) {
@@ -264,7 +261,7 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
     } else {
       results = data
           .where((user) =>
-          user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+              user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       // we use the toLowerCase() method to make it case-insensitive
     }
@@ -299,7 +296,7 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
                 hintStyle: TextStyle(fontSize: 12),
                 enabledBorder: OutlineInputBorder(
                     borderSide:
-                    BorderSide(width: 1, color: kSecondaryTextColor),
+                        BorderSide(width: 1, color: kSecondaryTextColor),
                     borderRadius: BorderRadius.all(Radius.circular(30))),
                 focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(width: 1, color: kSecondaryColor),
@@ -313,61 +310,61 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
           padding: const EdgeInsets.only(bottom: 10),
           child: _foundoils.isNotEmpty
               ? ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            itemCount: _foundoils.length,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) {
-              Recipe rec = Recipe.fromMap(
-                  Map<String, dynamic>.from(
-                      _foundoils[index].data() as Map),
-                  _foundoils[index].id);
-              return SecondaryItemCardRecipes(
-                text: rec.name,
-                subText: rec.reference.toString(),
-                imagePath: 'assets/images/recipe.png',
-                recipe: rec,
-                backgroundColor: kSecondaryColor,
-              );
-            },)
-
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  itemCount: _foundoils.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    Recipe rec = Recipe.fromMap(
+                        Map<String, dynamic>.from(
+                            _foundoils[index].data() as Map),
+                        _foundoils[index].id);
+                    return SecondaryItemCardRecipes(
+                      text: rec.name,
+                      subText: rec.reference.toString(),
+                      imagePath: 'assets/images/recipe.png',
+                      recipe: rec,
+                      backgroundColor: kSecondaryColor,
+                    );
+                  },
+                )
               : FutureBuilder<QuerySnapshot>(
-              future: oilss.get(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text("Something went wrong");
-                }
+                  future: oilss.get(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text("Something went wrong");
+                    }
 
-                if (snapshot.connectionState == ConnectionState.done) {
-                  data = snapshot.data!.docs;
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      data = snapshot.data!.docs;
 
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    itemCount: data.length,
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) {
-                      Recipe rec = Recipe.fromMap(
-                          Map<String, dynamic>.from(
-                              data[index].data() as Map),
-                          data[index].id);
-                      return SecondaryItemCardRecipes(
-                        text: rec.name,
-                        subText: rec.reference.toString(),
-                        imagePath: 'assets/images/recipe.png',
-                        recipe: rec,
-                        backgroundColor: kSecondaryColor,
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        itemCount: data.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          Recipe rec = Recipe.fromMap(
+                              Map<String, dynamic>.from(
+                                  data[index].data() as Map),
+                              data[index].id);
+                          return SecondaryItemCardRecipes(
+                            text: rec.name,
+                            subText: rec.reference.toString(),
+                            imagePath: 'assets/images/recipe.png',
+                            recipe: rec,
+                            backgroundColor: kSecondaryColor,
+                          );
+                        },
                       );
-                    },
-                  );
-                }
-                return const Text(
-                  'No results found',
-                  style: TextStyle(fontSize: 24),
-                );
-              }),
+                    }
+                    return const Text(
+                      'No results found',
+                      style: TextStyle(fontSize: 24),
+                    );
+                  }),
         ),
         const SizedBox(
           height: 25,
