@@ -286,14 +286,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   UrlText(
                     text: 'Terms of Service',
-                    url: 'https://google.com/', //TODO:: to replace
+                    url: urlTermOfUse,
                   ),
                   const Text(
                     ' and ',
                   ),
                   UrlText(
                     text: 'Privacy Policy',
-                    url: 'https://google.com/', //TODO:: to replace
+                    url: urlPrivacyPolicy,
                   ),
                 ],
               )
