@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 import '../models/entitlement.dart';
 import '../models/oil/oil.dart';
 import '../screens/home/settings/test_revenuecat.dart';
+import '../screens/paywall_screen.dart';
+import '../services/purchase_service.dart';
 import '../services/revenuecat_provider.dart';
 
 class PrimaryTopItemCardRecipe extends StatelessWidget {
@@ -28,14 +30,10 @@ class PrimaryTopItemCardRecipe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final entitlement = context.read<RevenueCatProvider>();
-
     return GestureDetector(
-      onTap: () {
-        if (entitlement != Entitlement.allContent) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const TestRevenueCat()));
-        } else {
+      onTap: () async {
+        bool isUserProMember = await PurchaseService.isProMember();
+        if (isUserProMember) {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -44,6 +42,12 @@ class PrimaryTopItemCardRecipe extends StatelessWidget {
               ),
             ),
           );
+        } else {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const PayWallScreen(),
+              ));
         }
       },
       child: Container(

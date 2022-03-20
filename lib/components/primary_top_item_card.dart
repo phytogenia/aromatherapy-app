@@ -26,38 +26,24 @@ class PrimaryTopItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final entitlement = context.read<RevenueCatProvider>();
-
     return GestureDetector(
       onTap: () async {
-        final offering = await PurchaseService.fetchOffers();
-        if (offering.isEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
-            content: Text('No Plans Found'),
-          )));
-        } else {
-          final packages = offering
-              .map((offer) => offer.availablePackages)
-              .expand((pair) => pair)
-              .toList();
-
-          if (entitlement == Entitlement.allContent) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => OilDetails(
-                  oil: oil,
-                ),
+        bool isUserProMember = await PurchaseService.isProMember();
+        if (isUserProMember) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => OilDetails(
+                oil: oil,
               ),
-            ); //TODO: refactore
-          } else {
-            Navigator.push(
+            ),
+          );
+        } else {
+          Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const PayWallScreen(),
-              ),
-            );
-          }
+              ));
         }
       },
       child: Container(

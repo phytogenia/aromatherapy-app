@@ -29,7 +29,6 @@ class SecondaryItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final entitlement = context.read<RevenueCatProvider>();
     return GestureDetector(
       onTap: () async {
         bool isUserProMember = await PurchaseService.isProMember();
@@ -49,36 +48,6 @@ class SecondaryItemCard extends StatelessWidget {
                 builder: (context) => const PayWallScreen(),
               ));
         }
-
-        // final offering = await PurchaseService.fetchOffers();
-        // if (offering.isEmpty) {
-        //   ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
-        //     content: Text('No Plans Found'),
-        //   )));
-        // } else {
-        //   final packages = offering
-        //       .map((offer) => offer.availablePackages)
-        //       .expand((pair) => pair)
-        //       .toList();
-        //
-        //   if (entitlement.entitlement == Entitlement.allContent) {
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //         builder: (context) => OilDetails(
-        //           oil: oil,
-        //         ),
-        //       ),
-        //     ); //TODO: refactore
-        //   } else {
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //         builder: (context) => const PayWallScreen(),
-        //       ),
-        //     );
-        //   }
-        // }
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
