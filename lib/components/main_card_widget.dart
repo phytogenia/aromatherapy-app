@@ -1,13 +1,10 @@
-import 'package:aromatherapy/screens/auth/forgot_password/confirm_phone_number_screen.dart';
-import 'package:aromatherapy/screens/auth/forgot_password/password_reset_screen.dart';
 import 'package:flutter/material.dart';
 import '../utils/constants.dart';
 
 class Maincardwidget extends StatelessWidget {
-
   const Maincardwidget({
     Key? key,
-     required this.columnWidget,
+    required this.columnWidget,
   }) : super(key: key);
 
   final Widget columnWidget;
@@ -80,4 +77,3 @@ class Maincardwidget extends StatelessWidget {
     );
   }
 }
-

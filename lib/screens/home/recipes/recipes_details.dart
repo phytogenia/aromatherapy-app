@@ -1,18 +1,11 @@
-import 'package:aromatherapy/models/oil/oil.dart';
-import 'package:aromatherapy/models/recipe/ingredient.dart';
 import 'package:aromatherapy/models/recipe/recipe.dart';
 import 'package:flutter/material.dart';
-import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
-import '../../../components/primary_list_properties.dart';
 import '../../../components/primary_property_description_card.dart';
-import '../../../components/primary_property_item.dart';
 import '../../../utils/constants.dart';
 
 class RecipesDetails extends StatefulWidget {
-  const RecipesDetails(
-      {Key? key, required this.recipe}
-      ) : super(key: key);
+  const RecipesDetails({Key? key, required this.recipe}) : super(key: key);
   final Recipe recipe;
 
   @override
@@ -20,21 +13,21 @@ class RecipesDetails extends StatefulWidget {
 }
 
 class _RecipesDetailsState extends State<RecipesDetails> {
-  String name='';
-  List<String> otherNames=[];
-  String sciName='';
+  String name = '';
+  List<String> otherNames = [];
+  String sciName = '';
   String? distilledOrgan;
   String? extractionProcess;
-  String? usage='';
+  String? usage = '';
   int SelectedIndex = 0;
-  List<String> aspect =[];
+  List<String> aspect = [];
 
   List<String?> colo = [];
   List<String> odor = [];
   List<String> allergie = [];
-  String s='';
-  String p='';
-  String i='';
+  String s = '';
+  String p = '';
+  String i = '';
   @override
   void initState() {
     getData();
@@ -47,22 +40,21 @@ class _RecipesDetailsState extends State<RecipesDetails> {
       print(recipe.ingredients);
 
       //aspect.addAll(recipe.aspect);
-      colo=recipe.ingredients!;
+      colo = recipe.ingredients!;
       //odor.addAll(recipe.smell);
       //allergie=recipe.allergies;
-      name=recipe.name;
+      name = recipe.name;
       //otherNames=recipe.otherNames;
       sciName = recipe.reference!;
       s = otherNames.join(', ');
       p = allergie.join(', ');
       i = colo.join('\n');
-      usage=recipe.usage;
+      usage = recipe.usage;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: true,
@@ -73,7 +65,8 @@ class _RecipesDetailsState extends State<RecipesDetails> {
             Text(
               "Recipes",
               style: TextStyle(
-                  color: kSecondaryBackgroundColor, fontWeight: FontWeight.bold),
+                  color: kSecondaryBackgroundColor,
+                  fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -81,9 +74,10 @@ class _RecipesDetailsState extends State<RecipesDetails> {
           color: kSecondaryBackgroundColor, //change your color here
         ),
         actions: [
-      IconButton(
-      icon: Image.asset("assets/images/Empty.png"), onPressed: null,
-      )
+          IconButton(
+            icon: Image.asset("assets/images/Empty.png"),
+            onPressed: null,
+          )
         ],
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -95,10 +89,7 @@ class _RecipesDetailsState extends State<RecipesDetails> {
           top: false,
           child: SingleChildScrollView(
             child: Container(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height,
+              height: MediaQuery.of(context).size.height,
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/images/bg.png'),
@@ -108,20 +99,15 @@ class _RecipesDetailsState extends State<RecipesDetails> {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: MediaQuery
-                        .of(context)
-                        .size
-                        .height * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.3,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.vertical(
                             bottom: Radius.elliptical(
-                                MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width, 130.0)),
+                                MediaQuery.of(context).size.width, 130.0)),
                         image: DecorationImage(
                             colorFilter: ColorFilter.mode(
-                                kSecondaryColor.withOpacity(.8), BlendMode.srcOver),
+                                kSecondaryColor.withOpacity(.8),
+                                BlendMode.srcOver),
                             image: AssetImage('assets/images/pictop.jpg'),
                             fit: BoxFit.cover)),
                   ), // Picture on top background
@@ -129,15 +115,9 @@ class _RecipesDetailsState extends State<RecipesDetails> {
                   Positioned(
                       left: 20,
                       right: 20,
-                      top: MediaQuery
-                          .of(context)
-                          .size
-                          .height * 0.2,
+                      top: MediaQuery.of(context).size.height * 0.2,
                       child: Container(
-                        height: MediaQuery
-                            .of(context)
-                            .size
-                            .height,
+                        height: MediaQuery.of(context).size.height,
                         decoration: const BoxDecoration(
                             color: kSecondaryBackgroundColor,
                             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -181,11 +161,11 @@ class _RecipesDetailsState extends State<RecipesDetails> {
                                   color: kSecondaryColor,
                                 ),
                                 ConstrainedBox(
-                                    constraints: const BoxConstraints(maxHeight: 500, minHeight: 56.0),
+                                    constraints: const BoxConstraints(
+                                        maxHeight: 500, minHeight: 56.0),
                                     child: ListView.builder(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 10),
-
                                         shrinkWrap: true,
                                         itemCount: 1,
                                         scrollDirection: Axis.vertical,
@@ -197,11 +177,11 @@ class _RecipesDetailsState extends State<RecipesDetails> {
                                           );
                                         })),
                                 ConstrainedBox(
-                                    constraints: const BoxConstraints(maxHeight: 500, minHeight: 56.0),
+                                    constraints: const BoxConstraints(
+                                        maxHeight: 500, minHeight: 56.0),
                                     child: ListView.builder(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 10),
-
                                         shrinkWrap: true,
                                         itemCount: 1,
                                         scrollDirection: Axis.vertical,
@@ -212,7 +192,6 @@ class _RecipesDetailsState extends State<RecipesDetails> {
                                             description: usage.toString(),
                                           );
                                         })),
-
                               ],
                             ),
                           ),

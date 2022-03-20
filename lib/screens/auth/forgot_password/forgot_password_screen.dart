@@ -1,5 +1,4 @@
 import 'package:aromatherapy/components/main_card_widget.dart';
-import 'package:aromatherapy/screens/auth/forgot_password/password_reset_screen.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

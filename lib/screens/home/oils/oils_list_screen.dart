@@ -4,7 +4,6 @@ import 'package:aromatherapy/components/primary_listview_builder.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../../../components/primary_top_item_card.dart';
 import '../../../components/secondary_item_card.dart';
 import '../../../models/oil/oil.dart';
 import '../home_screen.dart';
@@ -82,9 +81,9 @@ class _OilListScreenState extends State<OilListScreen> {
   }
 
   getData() {
-    setState(() {
-    });
+    setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

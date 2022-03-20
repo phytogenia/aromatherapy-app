@@ -1,16 +1,9 @@
 import 'package:aromatherapy/screens/home/recipes/recipes_details.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../models/entitlement.dart';
-import '../models/oil/oil.dart';
 import '../models/recipe/recipe.dart';
-import '../screens/home/oils/oil_details.dart';
-import '../screens/home/settings/test_revenuecat.dart';
 import '../screens/paywall_screen.dart';
 import '../services/purchase_service.dart';
-import '../services/revenuecat_provider.dart';
 
 class SecondaryItemCardRecipes extends StatelessWidget {
   const SecondaryItemCardRecipes({

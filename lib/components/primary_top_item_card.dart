@@ -3,10 +3,7 @@ import 'package:aromatherapy/screens/paywall_screen.dart';
 import 'package:aromatherapy/services/purchase_service.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../models/entitlement.dart';
 import '../models/oil/oil.dart';
-import '../services/revenuecat_provider.dart';
 
 class PrimaryTopItemCard extends StatelessWidget {
   const PrimaryTopItemCard({

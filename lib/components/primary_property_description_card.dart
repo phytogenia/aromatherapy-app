@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../utils/constants.dart';
 
 class PrimaryPropertyDescriptionCard extends StatelessWidget {
@@ -41,7 +40,7 @@ class PrimaryPropertyDescriptionCard extends StatelessWidget {
       Container(
         height: 30,
         width: MediaQuery.of(context).size.height,
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
             color: color,
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10))),

@@ -1,12 +1,5 @@
-import 'dart:ffi';
-
-import 'package:aromatherapy/services/purchase_service.dart';
-import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
-
-import 'paywall_screen.dart';
 import '../models/user.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';

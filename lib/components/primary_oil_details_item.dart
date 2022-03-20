@@ -1,8 +1,5 @@
 import 'package:aromatherapy/components/primary_list_properties.dart';
-import 'package:aromatherapy/components/primary_top_item_card.dart';
 import 'package:flutter/material.dart';
-
-import '../models/oil/oil.dart';
 import '../utils/constants.dart';
 
 class PrimaryOilDetailsItems extends StatelessWidget {
@@ -10,7 +7,6 @@ class PrimaryOilDetailsItems extends StatelessWidget {
     Key? key,
     required this.type,
     required this.list,
-
   }) : super(key: key);
 
   final String type;
@@ -20,7 +16,7 @@ class PrimaryOilDetailsItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-         Align(
+        Align(
           alignment: Alignment.topLeft,
           child: Text(
             type,
@@ -33,8 +29,7 @@ class PrimaryOilDetailsItems extends StatelessWidget {
         const SizedBox(height: 5),
         SizedBox(
           height: 40,
-          child: PrimaryListProperties(
-              properties: list),
+          child: PrimaryListProperties(properties: list),
         ),
         const SizedBox(height: 20),
       ],

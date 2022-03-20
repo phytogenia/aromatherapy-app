@@ -1,9 +1,6 @@
 import 'package:aromatherapy/components/main_card_widget.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:purchases_flutter/models/package_wrapper.dart';
-import '../../../services/purchase_service.dart';
-import '../../paywall_screen.dart';
 
 class PasswordResetScreen extends StatefulWidget {
   const PasswordResetScreen({Key? key}) : super(key: key);

@@ -1,5 +1,4 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/home/oils/oils_list_screen.dart';
@@ -18,7 +17,6 @@ class _HomeRecipesState extends State<HomeRecipes> {
     const OilListScreen(),
     const RecipesListScreen(),
     const HomeScreen(),
-
   ];
   int SelectedIndex = 2; //TODO :: enumeration
 

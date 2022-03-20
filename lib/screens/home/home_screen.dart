@@ -1,17 +1,9 @@
-import 'dart:math';
-
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:aromatherapy/components/primary_future_builder.dart';
-import 'package:aromatherapy/components/primary_top_item_card_rec.dart';
 import 'package:aromatherapy/screens/home/recipes/recipes_list_screen.dart';
 import 'package:aromatherapy/screens/home/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
-import '../paywall_screen.dart';
 import '../../components/primary_category_card.dart';
-import '../../components/primary_top_item_card.dart';
-import '../../models/oil/oil.dart';
-import '../../models/recipe/recipe.dart';
-import '../../services/purchase_service.dart';
 import '../../utils/constants.dart';
 import 'oils/oils_list_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -156,13 +148,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                     shape: BoxShape.circle,
                                     color: kPrimaryColor),
                                 child: const Center(
-                                  child: Icon(Icons.account_circle_rounded,color: Colors.white,)/*Text(
+                                  child: Icon(
+                                    Icons.account_circle_rounded,
+                                    color: Colors.white,
+                                  ) /*Text(
                                     'Y',
                                     style: TextStyle(
                                         color: kSecondaryBackgroundColor,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
-                                  )*/,
+                                  )*/
+                                  ,
                                 ),
                               ),
                             )
@@ -243,7 +239,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  FutureBuilderHome(future: oilss,type: 1,),
+                  FutureBuilderHome(
+                    future: oilss,
+                    type: 1,
+                  ),
                   const Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
@@ -252,7 +251,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  FutureBuilderHome(future: rcp,type: 2,),
+                  FutureBuilderHome(
+                    future: rcp,
+                    type: 2,
+                  ),
                 ],
               ),
             ),
