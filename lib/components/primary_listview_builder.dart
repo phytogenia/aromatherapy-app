@@ -20,7 +20,6 @@ class ListBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
    return ListView.builder(
      shrinkWrap: true,
-     physics: const NeverScrollableScrollPhysics(),
      padding: const EdgeInsets.symmetric(horizontal: 15),
      itemCount: list.length,
      scrollDirection: Axis.vertical,

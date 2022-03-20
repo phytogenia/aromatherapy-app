@@ -1,16 +1,9 @@
 import 'package:aromatherapy/components/primary_oil_details_item.dart';
 import 'package:aromatherapy/components/primary_oil_titles_item.dart';
 import 'package:aromatherapy/components/primary_properties_list_item.dart';
-import 'package:aromatherapy/models/entitlement.dart';
 import 'package:aromatherapy/models/oil/oil.dart';
-import 'package:aromatherapy/services/revenuecat_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
-import '../../../components/primary_list_properties.dart';
-import '../../../components/primary_property_description_card.dart';
-import '../../../components/primary_property_item.dart';
 import '../../../models/oil/oil_domain.dart';
 import '../../../utils/constants.dart';
 

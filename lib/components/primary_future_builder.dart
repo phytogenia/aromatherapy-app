@@ -31,6 +31,7 @@ class FutureBuilderHome extends StatelessWidget {
               data = snapshot.data!.docs;
 
               return ListView.builder(
+                physics: ScrollPhysics(),
                   padding:
                   const EdgeInsets.symmetric(horizontal: 15),
                   itemCount: data.length,

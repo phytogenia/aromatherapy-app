@@ -1,10 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:aromatherapy/components/primary_future_builder.dart';
 import 'package:aromatherapy/components/primary_listview_builder.dart';
-import 'package:aromatherapy/components/primary_top_item_card_rec.dart';
 import 'package:aromatherapy/components/secondary_future_builder.dart';
-import 'package:aromatherapy/components/secondary_item_cardRecipes.dart';
-import 'package:aromatherapy/models/recipe/recipe.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
