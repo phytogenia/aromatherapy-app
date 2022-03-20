@@ -1,4 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:aromatherapy/components/primary_future_builder.dart';
+import 'package:aromatherapy/components/secondary_future_builder.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -82,12 +84,8 @@ class _OilListScreenState extends State<OilListScreen> {
 
   getData() {
     setState(() {
-      //oils.addAll(['Oil 1', 'Oil 2', 'Oil 3', 'Oil 4', 'Oil 5', 'Oil 6']);
     });
   }
-
-  // This function is called whenever the text field changes
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,45 +127,7 @@ class _OilListScreenState extends State<OilListScreen> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    SizedBox(
-                      height: 120,
-                      child: FutureBuilder<QuerySnapshot>(
-                          future: oilss.get(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return const Text("Something went wrong");
-                            }
-
-                            if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              data = snapshot.data!.docs;
-
-                              return ListView.builder(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                itemCount: data.length,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  Oil oil = Oil.fromMap(
-                                      Map<String, dynamic>.from(
-                                          data[index].data() as Map),
-                                      data[index].id);
-                                  return PrimaryTopItemCard(
-                                    text: oil.name,
-                                    subText: oil.sciName.toString(),
-                                    imagePath: 'assets/images/whiteoil.png',
-                                    oil: oil,
-                                    backgroundColor: kPrimaryColor,
-                                  );
-                                },
-                              );
-                            }
-                            return const Text(
-                              'No results found',
-                              style: TextStyle(fontSize: 24),
-                            );
-                          }),
-                    ),
+                    FutureBuilderHome(future: oilss, type: 1),
                     Padding(
                       padding: const EdgeInsets.all(30.0),
                       child: Column(
@@ -326,39 +286,7 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
                     );
                   },
                 )
-              : FutureBuilder<QuerySnapshot>(
-                  future: oilss.get(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Text("Something went wrong");
-                    }
-
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      data = snapshot.data!.docs;
-
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        itemCount: data.length,
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) {
-                          Oil oil = Oil.fromMap(
-                              Map<String, dynamic>.from(
-                                  data[index].data() as Map),
-                              data[index].id);
-                          return SecondaryItemCard(
-                            text: oil.name,
-                            subText: oil.sciName.toString(),
-                            imagePath: 'assets/images/whiteoil.png',
-                            oil: oil,
-                            backgroundColor: kPrimaryColor,
-                          );
-                        },
-                      );
-                    }
-                    return const SizedBox.shrink();
-                  }),
+              : FutureBuilderSecond(future: oilss, type: 1),
         ),
         const SizedBox(
           height: 25,
