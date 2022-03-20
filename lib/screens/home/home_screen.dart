@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:aromatherapy/components/primary_future_builder.dart';
 import 'package:aromatherapy/components/primary_top_item_card_rec.dart';
 import 'package:aromatherapy/screens/home/recipes/recipes_list_screen.dart';
 import 'package:aromatherapy/screens/home/settings/settings_screen.dart';
@@ -242,45 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
-                    height: 120,
-                    child: FutureBuilder<QuerySnapshot>(
-                        future: oilss.get(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return Text("Something went wrong");
-                          }
-
-                          if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            data = snapshot.data!.docs;
-
-                            return ListView.builder(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                itemCount: data.length,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  Oil oil = Oil.fromMap(
-                                      Map<String, dynamic>.from(
-                                          data[index].data() as Map),
-                                      data[index].id);
-                                  return PrimaryTopItemCard(
-                                    text: oil.name,
-                                    subText: oil.sciName.toString(),
-                                    imagePath: 'assets/images/whiteoil.png',
-                                    oil: oil,
-                                    backgroundColor: kPrimaryColor,
-                                  );
-                                });
-                          }
-                          return const Center(
-                            child: CircularProgressIndicator(
-                              color: kPrimaryColor,
-                            ),
-                          );
-                        }),
-                  ),
+                  FutureBuilderHome(future: oilss,type: 1,),
                   const Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
@@ -289,45 +252,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
-                      height: 120,
-                      child: FutureBuilder<QuerySnapshot>(
-                          future: rcp.get(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return const Text("Something went wrong");
-                            }
-
-                            if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              List<DocumentSnapshot> data2 =
-                                  snapshot.data!.docs;
-
-                              return ListView.builder(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  itemCount: data2.length,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    Recipe recipe = Recipe.fromMap(
-                                        Map<String, dynamic>.from(
-                                            data2[index].data() as Map),
-                                        data2[index].id);
-                                    return PrimaryTopItemCardRecipe(
-                                      text: recipe.name,
-                                      subText: recipe.reference.toString(),
-                                      imagePath: 'assets/images/whiteoil.png',
-                                      recipe: recipe,
-                                      backgroundColor: kSecondaryColor,
-                                    );
-                                  });
-                            }
-                            return const Center(
-                              child: CircularProgressIndicator(
-                                color: kPrimaryColor,
-                              ),
-                            );
-                          })),
+                  FutureBuilderHome(future: rcp,type: 2,),
                 ],
               ),
             ),

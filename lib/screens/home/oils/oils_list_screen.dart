@@ -72,8 +72,6 @@ class _OilListScreenState extends State<OilListScreen> {
   List oils = [];
   CollectionReference oilss = FirebaseFirestore.instance.collection('oils');
   List<DocumentSnapshot> data = [];
-
-  // This list holds the data for the list view
   late final _PrimaryListOilsState? state;
 
   @override
@@ -110,7 +108,7 @@ class _OilListScreenState extends State<OilListScreen> {
           physics: const AlwaysScrollableScrollPhysics(),
           child: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.only(top: 90),
+              padding: const EdgeInsets.only(top: 90),
               height: MediaQuery.of(context).size.height,
               decoration: const BoxDecoration(
                   image: DecorationImage(
@@ -137,7 +135,7 @@ class _OilListScreenState extends State<OilListScreen> {
                           future: oilss.get(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
-                              return Text("Something went wrong");
+                              return const Text("Something went wrong");
                             }
 
                             if (snapshot.connectionState ==
@@ -258,16 +256,13 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
   void _runFilter(String enteredKeyword) {
     List<DocumentSnapshot> results = [];
     if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
       results = data;
     } else {
       results = data
           .where((user) =>
               user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
-      // we use the toLowerCase() method to make it case-insensitive
     }
-
     setState(() {
       _foundoils = results;
     });
