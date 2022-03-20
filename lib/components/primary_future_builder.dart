@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:aromatherapy/components/primary_top_item_card.dart';
 import 'package:aromatherapy/components/primary_top_item_card_rec.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
