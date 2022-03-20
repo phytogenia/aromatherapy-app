@@ -88,11 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   CollectionReference oilss = FirebaseFirestore.instance.collection('oils');
   CollectionReference rcp = FirebaseFirestore.instance.collection('recipes');
-
   List<DocumentSnapshot> data = [];
-
-  // This list holds the data for the list view
-  List<DocumentSnapshot> _foundUsers = [];
 
   @override
   void initState() {
@@ -159,13 +155,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     shape: BoxShape.circle,
                                     color: kPrimaryColor),
                                 child: const Center(
-                                  child: Text(
+                                  child: Icon(Icons.account_circle_rounded,color: Colors.white,)/*Text(
                                     'Y',
                                     style: TextStyle(
                                         color: kSecondaryBackgroundColor,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
-                                  ),
+                                  )*/,
                                 ),
                               ),
                             )
