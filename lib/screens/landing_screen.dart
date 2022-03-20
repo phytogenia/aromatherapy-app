@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -66,17 +67,18 @@ class LandingScreen extends StatelessWidget {
           .toList();
 
       showModalBottomSheet(
+          isScrollControlled:true,
           context: context,
           builder: (context) => PayWallWidget(
-              title: 'Upgrade Your Plan',
+              title: 'Unlock Everything',
               description:
-                  'Upgrade to a new plan to get access to all features',
+                  'Unlock all essential oils and there recipes and much more !',
               packages: packages,
               onClickedPackage: (package) async {
                 await PurchaseApi.PurchasePackage(package);
                 Navigator.pop(context);
               }),
-          backgroundColor: Colors.transparent);
+          backgroundColor: kPrimaryColor);
     }
   }
 

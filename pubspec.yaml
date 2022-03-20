@@ -54,6 +54,7 @@ dependencies:
   #Revenflutter pub add purchase_paywallucat
   rflutter_alert: ^2.0.0
   animated_bottom_navigation_bar: ^0.3.2
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:
