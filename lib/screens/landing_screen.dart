@@ -1,15 +1,15 @@
 import 'dart:ffi';
 
+import 'package:aromatherapy/services/purchase_service.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
-import '../components/PayWallWidget.dart';
+import 'paywall_screen.dart';
 import '../models/user.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
-import '../services/revenuecat.dart';
 import 'auth/login_screen.dart';
 import 'home/home_screen.dart';
 
@@ -18,21 +18,21 @@ class LandingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool subs = false;
-    void isSubs() async {
-      PurchaserInfo purchaserInfo = await Purchases.getPurchaserInfo();
-      if (purchaserInfo.entitlements.active.isNotEmpty) {
-        subs=true;
-      } else {
-        subs=false;
-      }
-    }
+    // bool subs = false;
+    // void isSubs() async {
+    //   PurchaserInfo purchaserInfo = await Purchases.getPurchaserInfo();
+    //   if (purchaserInfo.entitlements.active.isNotEmpty) {
+    //     subs=true;
+    //   } else {
+    //     subs=false;
+    //   }
+    // }
     final authProvider = context.read<AuthService>();
-    isSubs();
-    if (subs) {
-    } else {
-      fetchoffers(context);
-    }
+    // isSubs();
+    // if (subs) {
+    // } else {
+    //   fetchoffers(context);
+    // }
     return StreamBuilder<MyUser?>(
         stream: authProvider.onChangeUser,
         builder: (context, snapshot) {
@@ -43,7 +43,8 @@ class LandingScreen extends StatelessWidget {
             }
             return Provider<DatabaseService>(
               create: (_) => FirebaseDatabaseService(uid: user.uid),
-              child: subs?const Home():Container(),
+              // child: subs ? const Home() : Container(),
+              child: const Home(),
             );
           }
           return const Scaffold(
@@ -53,33 +54,4 @@ class LandingScreen extends StatelessWidget {
           );
         });
   }
-
-  Future fetchoffers(BuildContext context) async {
-    final offering = await PurchaseApi.fetchOffers();
-    if (offering.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
-        content: Text('No Plans Found'),
-      )));
-    } else {
-      final packages = offering
-          .map((offer) => offer.availablePackages)
-          .expand((pair) => pair)
-          .toList();
-
-      showModalBottomSheet(
-          isScrollControlled:true,
-          context: context,
-          builder: (context) => PayWallWidget(
-              title: 'Unlock Everything',
-              description:
-                  'Unlock all essential oils and there recipes and much more !',
-              packages: packages,
-              onClickedPackage: (package) async {
-                await PurchaseApi.PurchasePackage(package);
-                Navigator.pop(context);
-              }),
-          backgroundColor: kPrimaryColor);
-    }
-  }
-
 }

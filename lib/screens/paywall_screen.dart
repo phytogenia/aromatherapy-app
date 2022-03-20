@@ -2,28 +2,30 @@ import 'package:aromatherapy/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:purchases_flutter/models/package_wrapper.dart';
 
+import '../services/purchase_service.dart';
 import '../utils/constants.dart';
 
-class PayWallWidget extends StatefulWidget {
+class PayWallScreen extends StatefulWidget {
   final String title;
   final String description;
   final List<Package> packages;
   final ValueChanged<Package> onClickedPackage;
 
-  const PayWallWidget({Key? key,
-    required this.title,
-    required this.description,
-    required this.packages,
-    required this.onClickedPackage})
+  const PayWallScreen(
+      {Key? key,
+      required this.title,
+      required this.description,
+      required this.packages,
+      required this.onClickedPackage})
       : super(key: key);
 
   @override
-  _PayWallWidgetState createState() => _PayWallWidgetState();
+  _PayWallScreenState createState() => _PayWallScreenState();
 }
 
-class _PayWallWidgetState extends State<PayWallWidget> {
-  double redm=0;
-  double redy=0;
+class _PayWallScreenState extends State<PayWallScreen> {
+  double redm = 0;
+  double redy = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +36,7 @@ class _PayWallWidgetState extends State<PayWallWidget> {
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30), topRight: Radius.circular(30)),
         ),
-        height: MediaQuery
-            .of(context)
-            .size
-            .height,
+        height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -83,7 +82,7 @@ class _PayWallWidgetState extends State<PayWallWidget> {
                 child: Container(
                   width: double.infinity,
                   padding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
                   decoration: const BoxDecoration(
                       boxShadow: [
                         BoxShadow(
@@ -102,7 +101,9 @@ class _PayWallWidgetState extends State<PayWallWidget> {
                   ),
                 ),
               ),
-              const SizedBox(height: 50,),
+              const SizedBox(
+                height: 50,
+              ),
               const Text(
                 'By continuing, you agree to Aromatherapy’s Terms of Service and Privacy Policy',
                 textAlign: TextAlign.center,
@@ -136,7 +137,9 @@ class _PayWallWidgetState extends State<PayWallWidget> {
 
   Widget buildPackage(BuildContext context, Package package) {
     final product = package.product;
-    product.title.contains("Month")? redm=product.price:redy=product.price/12;
+    product.title.contains("Month")
+        ? redm = product.price
+        : redy = product.price / 12;
 
     return GestureDetector(
       onTap: () => widget.onClickedPackage(package),
@@ -157,22 +160,31 @@ class _PayWallWidgetState extends State<PayWallWidget> {
                       blurRadius: 16)
                 ]),
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 10, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Column(
                 children: [
-                  const SizedBox(height: 100,),
-                  Text(product.priceString, style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 12),),
-                  const SizedBox(height: 10,),
-
-                  product.title.contains("Month") ? Text(
-                    product.priceString + " / mo",
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  Text(
+                    product.priceString,
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 12),) :
-                  Text((product.price / 12).toString() + " / mo",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 12),)
+                        fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  product.title.contains("Month")
+                      ? Text(
+                          product.priceString + " / mo",
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 12),
+                        )
+                      : Text(
+                          (product.price / 12).toString() + " / mo",
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 12),
+                        )
                 ],
               ),
             ),
@@ -189,40 +201,48 @@ class _PayWallWidgetState extends State<PayWallWidget> {
                     topLeft: Radius.circular(20)),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 10, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: product.title.contains("Month")
-                    ? const Text("1\nMONTH", textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20))
-                    : const Text("1\nYEAR", textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20)),
+                    ? const Text("1\nMONTH",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20))
+                    : const Text("1\nYEAR",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
               ),
             ),
           ),
-
-          !product.title.contains("Month") ? Positioned(
-            top: -15,
-            child: Container(
-              margin: EdgeInsets.only(left: 40),
-              decoration: const BoxDecoration(
-                color: kSecondaryColor,
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child:Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 3, horizontal: 6),
-                child:Text("SAVE "+((redm-redy)*100/redm).round().toString()+"%", textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 12,color: Colors.white))
-              ),
-            ),
-          ): const SizedBox(),
-
-        ],)
-      ,
-
+          !product.title.contains("Month")
+              ? Positioned(
+                  top: -15,
+                  child: Container(
+                    margin: EdgeInsets.only(left: 40),
+                    decoration: const BoxDecoration(
+                      color: kSecondaryColor,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 3, horizontal: 6),
+                        child: Text(
+                            "SAVE " +
+                                ((redm - redy) * 100 / redm)
+                                    .round()
+                                    .toString() +
+                                "%",
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                                color: Colors.white))),
+                  ),
+                )
+              : const SizedBox(),
+        ],
+      ),
     );
   }
 }

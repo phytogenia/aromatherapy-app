@@ -1,4 +1,6 @@
 import 'package:aromatherapy/screens/home/oils/oil_details.dart';
+import 'package:aromatherapy/screens/paywall_screen.dart';
+import 'package:aromatherapy/services/purchase_service.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,19 +31,42 @@ class PrimaryTopItemCard extends StatelessWidget {
     final entitlement = context.read<RevenueCatProvider>();
 
     return GestureDetector(
-      onTap: () {
-        if (entitlement != Entitlement.allContent) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const TestRevenueCat()));
+      onTap: () async {
+        final offering = await PurchaseService.fetchOffers();
+        if (offering.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
+            content: Text('No Plans Found'),
+          )));
         } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => OilDetails(
-                oil: oil,
+          final packages = offering
+              .map((offer) => offer.availablePackages)
+              .expand((pair) => pair)
+              .toList();
+
+          if (entitlement == Entitlement.allContent) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => OilDetails(
+                  oil: oil,
+                ),
               ),
-            ),
-          ); //TODO: refactore
+            ); //TODO: refactore
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PayWallScreen(
+                    title: 'Unlock Everything',
+                    description:
+                        'Unlock all essential oils and there recipes and much more !',
+                    packages: packages,
+                    onClickedPackage: (package) async {
+                      await PurchaseService.purchasePackage(package);
+                    }),
+              ),
+            );
+          }
         }
       },
       child: Container(

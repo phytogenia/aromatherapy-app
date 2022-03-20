@@ -5,7 +5,7 @@ import 'package:aromatherapy/components/primary_top_item_card_rec.dart';
 import 'package:aromatherapy/screens/home/recipes/recipes_list_screen.dart';
 import 'package:aromatherapy/screens/home/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
-import '../../components/PayWallWidget.dart';
+import '../paywall_screen.dart';
 import '../../components/primary_category_card.dart';
 import '../../components/primary_top_item_card.dart';
 import '../../models/oil/oil.dart';

@@ -26,13 +26,45 @@ class PurchaseService {
     }
   }
 
-  static Future<bool> PurchasePackage(Package package) async {
+  static Future<bool> purchasePackage(Package package) async {
     try {
       await Purchases.purchasePackage(package);
-
       return true;
     } catch (e) {
       return false;
     }
   }
+
+  static Future<bool> isProMember() async {
+    PurchaserInfo purchaserInfo = await Purchases.getPurchaserInfo();
+    return (purchaserInfo.entitlements.active.isNotEmpty);
+  }
+  //
+  // Future fetchoffers(BuildContext context) async {
+  //   final offering = await PurchaseService.fetchOffers();
+  //   if (offering.isEmpty) {
+  //     ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
+  //       content: Text('No Plans Found'),
+  //     )));
+  //   } else {
+  //     final packages = offering
+  //         .map((offer) => offer.availablePackages)
+  //         .expand((pair) => pair)
+  //         .toList();
+  //
+  //     showModalBottomSheet(
+  //         isScrollControlled: true,
+  //         context: context,
+  //         builder: (context) => PayWallScreen(
+  //             title: 'Unlock Everything',
+  //             description:
+  //                 'Unlock all essential oils and there recipes and much more !',
+  //             packages: packages,
+  //             onClickedPackage: (package) async {
+  //               await PurchaseService.purchasePackage(package);
+  //               Navigator.pop(context);
+  //             }),
+  //         backgroundColor: kPrimaryColor);
+  //   }
+  // }
 }

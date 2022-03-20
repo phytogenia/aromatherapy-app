@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import '../models/entitlement.dart';
 import '../models/oil/oil.dart';
 import '../screens/home/oils/oil_details.dart';
+import '../screens/paywall_screen.dart';
+import '../services/purchase_service.dart';
 import '../services/revenuecat_provider.dart';
 
 class SecondaryItemCard extends StatelessWidget {
@@ -30,19 +32,42 @@ class SecondaryItemCard extends StatelessWidget {
     final entitlement = context.read<RevenueCatProvider>();
 
     return GestureDetector(
-      onTap: () {
-        if (entitlement != Entitlement.allContent) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const TestRevenueCat()));
+      onTap: () async {
+        final offering = await PurchaseService.fetchOffers();
+        if (offering.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
+            content: Text('No Plans Found'),
+          )));
         } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => OilDetails(
-                oil: oil,
+          final packages = offering
+              .map((offer) => offer.availablePackages)
+              .expand((pair) => pair)
+              .toList();
+
+          if (entitlement == Entitlement.allContent) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => OilDetails(
+                  oil: oil,
+                ),
               ),
-            ),
-          ); //TODO: refactore
+            ); //TODO: refactore
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PayWallScreen(
+                    title: 'Unlock Everything',
+                    description:
+                        'Unlock all essential oils and there recipes and much more !',
+                    packages: packages,
+                    onClickedPackage: (package) async {
+                      await PurchaseService.purchasePackage(package);
+                    }),
+              ),
+            );
+          }
         }
       },
       child: Padding(
