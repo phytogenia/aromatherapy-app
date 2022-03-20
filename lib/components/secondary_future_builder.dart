@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:aromatherapy/components/primary_top_item_card.dart';
 import 'package:aromatherapy/components/primary_top_item_card_rec.dart';
 import 'package:aromatherapy/components/secondary_item_card.dart';
+import 'package:aromatherapy/components/secondary_item_cardRecipes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class FutureBuilderSecond extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               itemCount: data.length,
               scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
+              itemBuilder: type==1? (context, index) {
                 Oil oil = Oil.fromMap(
                     Map<String, dynamic>.from(
                         data[index].data() as Map),
@@ -47,6 +48,18 @@ class FutureBuilderSecond extends StatelessWidget {
                   imagePath: 'assets/images/whiteoil.png',
                   oil: oil,
                   backgroundColor: kPrimaryColor,
+                );
+              }:(context, index) {
+                Recipe rec = Recipe.fromMap(
+                    Map<String, dynamic>.from(
+                        data[index].data() as Map),
+                    data[index].id);
+                return SecondaryItemCardRecipes(
+                  text: rec.name,
+                  subText: rec.reference.toString(),
+                  imagePath: 'assets/images/recipe.png',
+                  recipe: rec,
+                  backgroundColor: kSecondaryColor,
                 );
               },
             );
