@@ -1,23 +1,13 @@
 import 'package:aromatherapy/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:purchases_flutter/models/package_wrapper.dart';
-
 import '../services/purchase_service.dart';
 import '../utils/constants.dart';
 
 class PayWallScreen extends StatefulWidget {
-  final String title;
-  final String description;
-  final List<Package> packages;
-  final ValueChanged<Package> onClickedPackage;
-
-  const PayWallScreen(
-      {Key? key,
-      required this.title,
-      required this.description,
-      required this.packages,
-      required this.onClickedPackage})
-      : super(key: key);
+  const PayWallScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _PayWallScreenState createState() => _PayWallScreenState();
@@ -29,24 +19,23 @@ class _PayWallScreenState extends State<PayWallScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        decoration: const BoxDecoration(
-          color: kPrimaryColor,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+    return Scaffold(
+      backgroundColor: kPrimaryColor,
+      appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: whitecolor, //change your color here
         ),
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(20),
           child: Column(
-            children: <Widget>[
-              const SizedBox(
-                height: 150,
-              ),
-              Text(
-                widget.title,
-                style: const TextStyle(
+            children: [
+              const Text(
+                'Unlock Everything',
+                style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
@@ -54,15 +43,23 @@ class _PayWallScreenState extends State<PayWallScreen> {
               const SizedBox(
                 height: 50,
               ),
-              Text(
-                widget.description,
+              const Text(
+                'Unlock all essential oils and there recipes and much more !',
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 15, color: Colors.white),
+                style: TextStyle(fontSize: 15, color: Colors.white),
               ),
               const SizedBox(
                 height: 50,
               ),
-              buildPackages(),
+              FutureBuilder(
+                  future: _buildPackages(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                    if (snapshot.hasData) {
+                      return snapshot.data!;
+                    }
+                    return const CircularProgressIndicator();
+                  }),
               const SizedBox(
                 height: 50,
               ),
@@ -116,7 +113,14 @@ class _PayWallScreenState extends State<PayWallScreen> {
     );
   }
 
-  Widget buildPackages() {
+  Future<Widget> _buildPackages() async {
+    final offering = await PurchaseService.fetchOffers();
+
+    final packages = offering
+        .map((offer) => offer.availablePackages)
+        .expand((pair) => pair)
+        .toList();
+
     return SizedBox(
       height: 180,
       child: Align(
@@ -125,24 +129,25 @@ class _PayWallScreenState extends State<PayWallScreen> {
           shrinkWrap: true,
           padding: EdgeInsets.zero,
           scrollDirection: Axis.horizontal,
-          itemCount: widget.packages.length,
+          itemCount: packages.length,
           itemBuilder: (context, index) {
-            final package = widget.packages[index];
-            return buildPackage(context, package);
+            return _buildPackage(context, packages[index]);
           },
         ),
       ),
     );
   }
 
-  Widget buildPackage(BuildContext context, Package package) {
+  Widget _buildPackage(BuildContext context, Package package) {
     final product = package.product;
     product.title.contains("Month")
         ? redm = product.price
         : redy = product.price / 12;
 
     return GestureDetector(
-      onTap: () => widget.onClickedPackage(package),
+      onTap: () async {
+        await PurchaseService.purchasePackage(package);
+      },
       child: Stack(
         clipBehavior: Clip.none,
         children: [

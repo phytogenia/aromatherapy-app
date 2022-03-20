@@ -11,7 +11,7 @@ class RevenueCatProvider extends ChangeNotifier {
   Entitlement _entitlement = Entitlement.free;
   Entitlement get entitlement => _entitlement;
 
-  Future init() async {
+  init() {
     Purchases.addPurchaserInfoUpdateListener((purchaserInfo) {
       updatePurchasesStatus();
     });
@@ -22,7 +22,6 @@ class RevenueCatProvider extends ChangeNotifier {
     final entitlement = purchasesInfo.entitlements.active.values.toList();
     _entitlement =
         entitlement.isEmpty ? Entitlement.free : Entitlement.allContent;
-
     notifyListeners();
   }
 }

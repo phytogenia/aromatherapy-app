@@ -39,6 +39,7 @@ class PurchaseService {
     PurchaserInfo purchaserInfo = await Purchases.getPurchaserInfo();
     return (purchaserInfo.entitlements.active.isNotEmpty);
   }
+
   //
   // Future fetchoffers(BuildContext context) async {
   //   final offering = await PurchaseService.fetchOffers();

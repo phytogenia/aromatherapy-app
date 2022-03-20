@@ -54,14 +54,7 @@ class PrimaryTopItemCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => PayWallScreen(
-                    title: 'Unlock Everything',
-                    description:
-                        'Unlock all essential oils and there recipes and much more !',
-                    packages: packages,
-                    onClickedPackage: (package) async {
-                      await PurchaseService.purchasePackage(package);
-                    }),
+                builder: (context) => const PayWallScreen(),
               ),
             );
           }
