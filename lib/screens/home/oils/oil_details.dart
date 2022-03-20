@@ -1,8 +1,11 @@
 import 'package:aromatherapy/components/primary_oil_details_item.dart';
 import 'package:aromatherapy/components/primary_oil_titles_item.dart';
 import 'package:aromatherapy/components/primary_properties_list_item.dart';
+import 'package:aromatherapy/models/entitlement.dart';
 import 'package:aromatherapy/models/oil/oil.dart';
+import 'package:aromatherapy/services/revenuecat_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 import '../../../components/primary_list_properties.dart';
@@ -141,7 +144,8 @@ class _OilDetailsState extends State<OilDetails> {
                                 MediaQuery.of(context).size.width, 130.0)),
                         image: DecorationImage(
                             colorFilter: ColorFilter.mode(
-                                kPrimaryColor.withOpacity(.8), BlendMode.srcOver),
+                                kPrimaryColor.withOpacity(.8),
+                                BlendMode.srcOver),
                             image: const AssetImage('assets/images/pictop.jpg'),
                             fit: BoxFit.cover)),
                   ), // Picture on top background
@@ -250,9 +254,12 @@ class _OilDetailsState extends State<OilDetails> {
                                 SelectedIndex == tabs.indexOf(health)
                                     ? PrimaryPropertiesListItems(domain: health)
                                     : SelectedIndex == tabs.indexOf(beauty)
-                                        ? PrimaryPropertiesListItems(domain: beauty)
-                                        : SelectedIndex == tabs.indexOf(wellBeing)
-                                            ? PrimaryPropertiesListItems(domain: wellBeing)
+                                        ? PrimaryPropertiesListItems(
+                                            domain: beauty)
+                                        : SelectedIndex ==
+                                                tabs.indexOf(wellBeing)
+                                            ? PrimaryPropertiesListItems(
+                                                domain: wellBeing)
                                             : const SizedBox(
                                                 height: 0,
                                               )

@@ -14,7 +14,24 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        iconTheme: const IconThemeData(
+          color: kPrimaryTextColor, //change your color here
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Center(
+          child: Text(
+            "Settings",
+            style: TextStyle(
+                color: kPrimaryTextColor, fontWeight: FontWeight.bold),
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: Image.asset("assets/images/Empty.png"),
+            onPressed: null,
+          )
+        ],
       ),
       body: _bodyContent(context),
     );

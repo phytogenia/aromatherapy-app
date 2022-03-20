@@ -14,12 +14,10 @@ class PrimarySocialMediaButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 30,
-        width: 30,
+        padding: const EdgeInsets.all(25),
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(imagePath),
-            fit: BoxFit.scaleDown,
           ),
           shape: BoxShape.circle,
           border:

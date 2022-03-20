@@ -2,7 +2,7 @@ import 'package:aromatherapy/components/main_card_widget.dart';
 import 'package:aromatherapy/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:purchases_flutter/models/package_wrapper.dart';
-import '../../../services/revenuecat.dart';
+import '../../../services/purchase_service.dart';
 import '../../../components/PayWallWidget.dart';
 
 class PasswordResetScreen extends StatefulWidget {
@@ -18,7 +18,9 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
-      body: Maincardwidget(columnWidget: _passwordreset(context),),
+      body: Maincardwidget(
+        columnWidget: _passwordreset(context),
+      ),
     );
   }
 }
@@ -41,7 +43,7 @@ Widget _passwordreset(BuildContext context) {
             focusColor: kPrimaryColor,
             hintText: 'New password',
             hintStyle:
-            TextStyle(fontSize: 15, color: Colors.grey.withOpacity(.7))),
+                TextStyle(fontSize: 15, color: Colors.grey.withOpacity(.7))),
       ),
     ),
     const SizedBox(height: 10),
@@ -53,13 +55,12 @@ Widget _passwordreset(BuildContext context) {
             focusColor: kPrimaryColor,
             hintText: 'Confirm new password',
             hintStyle:
-            TextStyle(fontSize: 15, color: Colors.grey.withOpacity(.7))),
+                TextStyle(fontSize: 15, color: Colors.grey.withOpacity(.7))),
       ),
     ),
     const SizedBox(height: 100),
     GestureDetector(
-      onTap: () {
-      },
+      onTap: () {},
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
         decoration: const BoxDecoration(
@@ -76,7 +77,3 @@ Widget _passwordreset(BuildContext context) {
     ),
   ]);
 }
-
-
-
-
