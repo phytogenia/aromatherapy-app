@@ -261,7 +261,7 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 20),
         Container(
           height: MediaQuery.of(context).size.shortestSide,
           padding: const EdgeInsets.only(bottom: 40),
