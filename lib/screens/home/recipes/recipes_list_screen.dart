@@ -1,5 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:aromatherapy/components/primary_future_builder.dart';
+import 'package:aromatherapy/components/primary_listview_builder.dart';
 import 'package:aromatherapy/components/primary_top_item_card_rec.dart';
 import 'package:aromatherapy/components/secondary_future_builder.dart';
 import 'package:aromatherapy/components/secondary_item_cardRecipes.dart';
@@ -273,26 +274,7 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
         Container(
           padding: const EdgeInsets.only(bottom: 10),
           child: _foundoils.isNotEmpty
-              ? ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  itemCount: _foundoils.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    Recipe rec = Recipe.fromMap(
-                        Map<String, dynamic>.from(
-                            _foundoils[index].data() as Map),
-                        _foundoils[index].id);
-                    return SecondaryItemCardRecipes(
-                      text: rec.name,
-                      subText: rec.reference.toString(),
-                      imagePath: 'assets/images/recipe.png',
-                      recipe: rec,
-                      backgroundColor: kSecondaryColor,
-                    );
-                  },
-                )
+              ? ListBuilder(list: _foundoils, type: 2)
               : FutureBuilderSecond(future: oilss, type: 2),
         ),
         const SizedBox(
