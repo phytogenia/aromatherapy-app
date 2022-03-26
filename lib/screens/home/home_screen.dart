@@ -165,44 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                         const SizedBox(
-                          height: 50,
-                        ),
-                        Container(
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
-                            color: kSecondaryBackgroundColor,
-                          ),
-                          height: 40,
-                          child: Center(
-                            child: TextFormField(
-                              onTap: () {
-                                final _HomeState? state = context
-                                    .findAncestorStateOfType<_HomeState>();
-                                state?.setSelectedIndex(0);
-                              },
-                              decoration: const InputDecoration(
-                                suffixIcon: Icon(
-                                  Icons.search,
-                                  color: kSecondaryTextColor,
-                                ),
-                                hintText: 'Find your Essential oil',
-                                hintStyle: TextStyle(fontSize: 12),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1, color: kSecondaryTextColor),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(30))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1, color: kPrimaryColor),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(30))),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 25,
+                          height: 30,
                         ),
                         const Text(
                           'Categories',
