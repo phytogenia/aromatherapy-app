@@ -91,8 +91,7 @@ class _OilListScreenState extends State<OilListScreen> {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           centerTitle: true, // this is all you need
-          backgroundColor: Colors.transparent,
-          elevation: 0,
+          backgroundColor: kSecondaryBackgroundColor,
           title: const Center(
               child: Text(
             "Essential oils",
@@ -101,102 +100,86 @@ class _OilListScreenState extends State<OilListScreen> {
           )),
         ),
         body: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.only(top: 90),
-              height: MediaQuery.of(context).size.height,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/bg.png'),
-                      fit: BoxFit.fill)),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 40.0, vertical: 10),
-                      child: Text(
-                        'Popular Essential oils',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    FutureBuilderHome(future: oilss, type: 1),
-                    Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text('Find your favorite'),
-                              Text(
-                                'Essential Oil',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          PrimaryListOils(),
-                        ],
-                      ),
-                    ),
-                  ],
+          reverse: true,
+          child: Container(
+            padding:
+                const EdgeInsets.only(top: 30, bottom: 10, right: 10, left: 10),
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/bg.png'),
+                    fit: BoxFit.fill)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 40,
                 ),
-              ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 10),
+                  child: Text(
+                    'Popular Essential oils',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                FutureBuilderHome(future: oilss, type: 1),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text('Find your favorite'),
+                const Text(
+                  'Essential Oil',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const PrimaryListOils(),
+              ],
             ),
           ),
         ));
   }
 
-  Widget BuildOils(BuildContext context, String oilname) {
-    return Container(
-      margin: const EdgeInsets.all(5),
-      padding: const EdgeInsets.all(8),
-      width: 130,
-      decoration: const BoxDecoration(
-          color: kPrimaryColor,
-          borderRadius: BorderRadius.all(Radius.circular(15))),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(),
-                // Empty Container to align the icon on the right with spacebetween
-                Image.asset('assets/images/whiteoil.png')
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              oilname,
-              style: const TextStyle(
-                  color: kSecondaryBackgroundColor,
-                  fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 2),
-            const Text(
-              'Scientific name',
-              style: TextStyle(color: kSecondaryBackgroundColor),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget BuildOils(BuildContext context, String oilname) {
+  //   return Container(
+  //     margin: const EdgeInsets.all(5),
+  //     padding: const EdgeInsets.all(8),
+  //     width: 130,
+  //     decoration: const BoxDecoration(
+  //         color: kPrimaryColor,
+  //         borderRadius: BorderRadius.all(Radius.circular(15))),
+  //     child: Center(
+  //       child: Column(
+  //         mainAxisSize: MainAxisSize.min,
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               Container(),
+  //               // Empty Container to align the icon on the right with spacebetween
+  //               Image.asset('assets/images/whiteoil.png')
+  //             ],
+  //           ),
+  //           const SizedBox(
+  //             height: 10,
+  //           ),
+  //           Text(
+  //             oilname,
+  //             style: const TextStyle(
+  //                 color: kSecondaryBackgroundColor,
+  //                 fontWeight: FontWeight.bold),
+  //           ),
+  //           const SizedBox(height: 2),
+  //           const Text(
+  //             'Scientific name',
+  //             style: TextStyle(color: kSecondaryBackgroundColor),
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 
 class PrimaryListOils extends StatefulWidget {
@@ -261,9 +244,8 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
           ),
         ),
         const SizedBox(height: 20),
-        Container(
-          height: MediaQuery.of(context).size.shortestSide,
-          padding: const EdgeInsets.only(bottom: 40),
+        SizedBox(
+          height: MediaQuery.of(context).size.height / 2.5,
           child: _foundoils.isNotEmpty
               ? ListBuilder(list: _foundoils, type: 1)
               : FutureBuilder<QuerySnapshot>(
@@ -298,9 +280,6 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
                     }
                     return const SizedBox.shrink();
                   }),
-        ),
-        const SizedBox(
-          height: 25,
         ),
       ],
     );
