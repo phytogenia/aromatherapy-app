@@ -34,7 +34,11 @@ class Recipe {
   factory Recipe.fromMap(Map<String, dynamic>? data, String documentID) {
     String name = data!['name'].toString();
     String? reference = data['reference'];
-    List<String?>? ingredients = List<String?>.from(data['ingredients']);
+    List<String?>? ingredients;
+    for (var ingredient in data['ingredients']) {
+      ingredients?.add(ingredient['name']);
+    }
+
     String? description = data['description'];
     String? notes = data['notes'];
     String? usage = data['usage'];

@@ -39,12 +39,10 @@ class _RecipesDetailsState extends State<RecipesDetails> {
       final Recipe recipe = widget.recipe;
       print(recipe.ingredients);
 
-      //aspect.addAll(recipe.aspect);
-      colo = recipe.ingredients!;
-      //odor.addAll(recipe.smell);
-      //allergie=recipe.allergies;
+      if (recipe.ingredients != null) {
+        colo = recipe.ingredients!;
+      }
       name = recipe.name;
-      //otherNames=recipe.otherNames;
       sciName = recipe.reference!;
       s = otherNames.join(', ');
       p = allergie.join(', ');
