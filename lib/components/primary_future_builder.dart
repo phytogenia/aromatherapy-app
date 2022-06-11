@@ -19,7 +19,7 @@ class FutureBuilderHome extends StatelessWidget {
     return SizedBox(
       height: 120,
       child: FutureBuilder<QuerySnapshot>(
-          future: future.get(),
+          future: future.orderBy("name").get(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Text("Something went wrong");

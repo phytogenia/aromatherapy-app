@@ -139,47 +139,6 @@ class _OilListScreenState extends State<OilListScreen> {
           ),
         ));
   }
-
-  // Widget BuildOils(BuildContext context, String oilname) {
-  //   return Container(
-  //     margin: const EdgeInsets.all(5),
-  //     padding: const EdgeInsets.all(8),
-  //     width: 130,
-  //     decoration: const BoxDecoration(
-  //         color: kPrimaryColor,
-  //         borderRadius: BorderRadius.all(Radius.circular(15))),
-  //     child: Center(
-  //       child: Column(
-  //         mainAxisSize: MainAxisSize.min,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               Container(),
-  //               // Empty Container to align the icon on the right with spacebetween
-  //               Image.asset('assets/images/whiteoil.png')
-  //             ],
-  //           ),
-  //           const SizedBox(
-  //             height: 10,
-  //           ),
-  //           Text(
-  //             oilname,
-  //             style: const TextStyle(
-  //                 color: kSecondaryBackgroundColor,
-  //                 fontWeight: FontWeight.bold),
-  //           ),
-  //           const SizedBox(height: 2),
-  //           const Text(
-  //             'Scientific name',
-  //             style: TextStyle(color: kSecondaryBackgroundColor),
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }
 
 class PrimaryListOils extends StatefulWidget {
@@ -249,7 +208,7 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
           child: _foundoils.isNotEmpty
               ? ListBuilder(list: _foundoils, type: 1)
               : FutureBuilder<QuerySnapshot>(
-                  future: oilss.get(),
+                  future: oilss.orderBy("name").get(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Text("Something went wrong");
