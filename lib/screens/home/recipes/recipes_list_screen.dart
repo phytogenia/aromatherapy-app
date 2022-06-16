@@ -27,7 +27,6 @@ class _HomeRecipesState extends State<HomeRecipes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
@@ -70,12 +69,10 @@ class RecipesListScreen extends StatefulWidget {
 }
 
 class _RecipesListScreenState extends State<RecipesListScreen> {
-  List oils = [];
-  CollectionReference oilss = FirebaseFirestore.instance.collection('recipes');
+  CollectionReference recipes =
+      FirebaseFirestore.instance.collection('recipes');
   List<DocumentSnapshot> data = [];
-
-  // This list holds the data for the list view
-  late final _PrimaryListOilsState? state;
+  late final _PrimaryListRecipesState? state;
 
   @override
   void initState() {
@@ -87,8 +84,6 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
     setState(() {});
   }
 
-  // This function is called whenever the text field changes
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,8 +91,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           centerTitle: true, // this is all you need
-          backgroundColor: Colors.transparent,
-          elevation: 0,
+          backgroundColor: kSecondaryBackgroundColor,
           title: const Center(
               child: Text(
             "Essential recipes",
@@ -106,63 +100,47 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
           )),
         ),
         body: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(top: 90),
-              height: MediaQuery.of(context).size.height,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/images/bg.png'),
-                      fit: BoxFit.fill)),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 40.0, vertical: 10),
-                      child: Text(
-                        'Popular Essential recipes',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    FutureBuilderHome(future: oilss, type: 2),
-                    Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text('Find your favorite'),
-                              Text(
-                                'Essential Recipes',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          PrimaryListOils(),
-                        ],
-                      ),
-                    ),
-                  ],
+          reverse: true,
+          child: Container(
+            padding:
+                const EdgeInsets.only(top: 30, bottom: 10, right: 10, left: 10),
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/bg.png'),
+                    fit: BoxFit.fill)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 40,
                 ),
-              ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 10),
+                  child: Text(
+                    'Popular Essential recipes',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                FutureBuilderHome(future: recipes, type: 2),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text('Find your favorite'),
+                const Text(
+                  'Essential Recipes',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const PrimaryListRecipes(),
+              ],
             ),
           ),
         ));
   }
 
-  Widget BuildOils(BuildContext context, String oilname) {
+  Widget BuildRecipes(BuildContext context, String recipeName) {
     return Container(
       margin: const EdgeInsets.all(5),
       padding: const EdgeInsets.all(8),
@@ -187,7 +165,7 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
               height: 10,
             ),
             Text(
-              oilname,
+              recipeName,
               style: const TextStyle(
                   color: kSecondaryBackgroundColor,
                   fontWeight: FontWeight.bold),
@@ -204,33 +182,31 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
   }
 }
 
-class PrimaryListOils extends StatefulWidget {
-  const PrimaryListOils({Key? key}) : super(key: key);
+class PrimaryListRecipes extends StatefulWidget {
+  const PrimaryListRecipes({Key? key}) : super(key: key);
 
   @override
-  _PrimaryListOilsState createState() => _PrimaryListOilsState();
+  _PrimaryListRecipesState createState() => _PrimaryListRecipesState();
 }
 
-class _PrimaryListOilsState extends State<PrimaryListOils> {
+class _PrimaryListRecipesState extends State<PrimaryListRecipes> {
   List<DocumentSnapshot> data = [];
-  List<DocumentSnapshot> _foundoils = [];
-  CollectionReference oilss = FirebaseFirestore.instance.collection('recipes');
+  List<DocumentSnapshot> _foundRecipes = [];
+  CollectionReference recipes =
+      FirebaseFirestore.instance.collection('recipes');
 
   void _runFilter(String enteredKeyword) {
     List<DocumentSnapshot> results = [];
     if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
       results = data;
     } else {
       results = data
           .where((user) =>
               user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
-      // we use the toLowerCase() method to make it case-insensitive
     }
-
     setState(() {
-      _foundoils = results;
+      _foundRecipes = results;
     });
   }
 
@@ -269,12 +245,12 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
           ),
         ),
         const SizedBox(height: 20),
-        Container(
-          padding: const EdgeInsets.only(bottom: 40),
-          child: _foundoils.isNotEmpty
-              ? ListBuilder(list: _foundoils, type: 2)
+        SizedBox(
+          height: MediaQuery.of(context).size.height / 2.5,
+          child: _foundRecipes.isNotEmpty
+              ? ListBuilder(list: _foundRecipes, type: 2)
               : FutureBuilder<QuerySnapshot>(
-                  future: oilss.get(),
+                  future: recipes.orderBy("name").get(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Text("Something went wrong");
@@ -305,9 +281,6 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
                     }
                     return const SizedBox.shrink();
                   }),
-        ),
-        const SizedBox(
-          height: 25,
         ),
       ],
     );
