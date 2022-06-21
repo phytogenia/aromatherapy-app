@@ -71,6 +71,7 @@ class PrimaryTopItemCard extends StatelessWidget {
               ),
               Text(
                 text,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                     color: kSecondaryBackgroundColor,
                     fontWeight: FontWeight.bold),
@@ -79,6 +80,7 @@ class PrimaryTopItemCard extends StatelessWidget {
               Flexible(
                 child: Text(
                   subText,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                       color: kSecondaryBackgroundColor, fontSize: 10),
                 ),
