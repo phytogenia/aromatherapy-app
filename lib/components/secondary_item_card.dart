@@ -61,28 +61,31 @@ class SecondaryItemCard extends StatelessWidget {
                 const SizedBox(
                   width: 70,
                 ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      text,
-                      style: const TextStyle(
-                          color: kPrimaryTextColor,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      subText,
-                      style: const TextStyle(color: kPrimaryTextColor),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    )
-                  ],
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        text,
+                        style: const TextStyle(
+                            color: kPrimaryTextColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        subText,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(color: kPrimaryTextColor),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),
