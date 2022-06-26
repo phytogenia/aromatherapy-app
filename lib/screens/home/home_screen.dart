@@ -40,10 +40,9 @@ class _HomeState extends State<Home> {
           });
         },
         backgroundColor: kPrimaryColor,
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Image.asset('assets/images/home.png',
-              color: kSecondaryBackgroundColor),
+        child: const Padding(
+          padding: EdgeInsets.all(15),
+          child: Icon(Icons.home_filled, color: kSecondaryBackgroundColor),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -57,6 +56,7 @@ class _HomeState extends State<Home> {
           Icons.water_drop,
           Icons.soup_kitchen,
         ],
+        inactiveColor: kSecondaryTextColor,
         activeIndex: SelectedIndex,
         rightCornerRadius: 0,
         gapLocation: GapLocation.center,
@@ -182,12 +182,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             PrimaryCategoryCard(
                               text: 'Oil',
                               backgroundColor: kPrimaryColor,
-                              iconImagePath: 'assets/images/greenoil.png',
+                              iconColor: kPrimaryColor,
+                              iconData: Icons.water_drop,
                             ),
                             PrimaryCategoryCard(
                               text: 'Recipe',
                               backgroundColor: kSecondaryColor,
-                              iconImagePath: 'assets/images/recipe.png',
+                              iconColor: kSecondaryColor,
+                              iconData: Icons.soup_kitchen,
                             ),
                           ],
                         ),

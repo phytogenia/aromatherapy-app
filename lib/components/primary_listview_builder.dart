@@ -30,7 +30,8 @@ class ListBuilder extends StatelessWidget {
                 return SecondaryItemCard(
                   text: oil.name,
                   subText: oil.sciName.toString(),
-                  imagePath: 'assets/images/whiteoil.png',
+                  iconColor: kSecondaryBackgroundColor,
+                  iconData: Icons.water_drop,
                   oil: oil,
                   backgroundColor: kPrimaryColor,
                 );
@@ -42,7 +43,8 @@ class ListBuilder extends StatelessWidget {
                 return SecondaryItemCardRecipes(
                   text: rec.name,
                   subText: rec.reference.toString(),
-                  imagePath: 'assets/images/recipe.png',
+                  iconData: Icons.soup_kitchen,
+                  iconColor: kSecondaryBackgroundColor,
                   recipe: rec,
                   backgroundColor: kSecondaryColor,
                 );

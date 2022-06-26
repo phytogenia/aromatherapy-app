@@ -33,8 +33,7 @@ class _HomeRecipesState extends State<HomeRecipes> {
         backgroundColor: kPrimaryColor,
         child: Padding(
           padding: const EdgeInsets.all(15),
-          child: Image.asset('assets/images/home.png',
-              color: kSecondaryBackgroundColor),
+          child: Icon(Icons.home_filled, color: kSecondaryBackgroundColor),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

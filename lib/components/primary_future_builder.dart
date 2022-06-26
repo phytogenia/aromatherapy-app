@@ -42,7 +42,8 @@ class FutureBuilderHome extends StatelessWidget {
                           return PrimaryTopItemCard(
                             text: oil.name,
                             subText: oil.sciName.toString(),
-                            imagePath: 'assets/images/whiteoil.png',
+                            iconColor: kSecondaryBackgroundColor,
+                            iconData: Icons.water_drop,
                             oil: oil,
                             backgroundColor: kPrimaryColor,
                           );
@@ -55,7 +56,8 @@ class FutureBuilderHome extends StatelessWidget {
                           return PrimaryTopItemCardRecipe(
                             text: recipe.name,
                             subText: recipe.reference.toString(),
-                            imagePath: 'assets/images/whiteoil.png',
+                            iconData: Icons.soup_kitchen,
+                            iconColor: kSecondaryBackgroundColor,
                             recipe: recipe,
                             backgroundColor: kSecondaryColor,
                           );

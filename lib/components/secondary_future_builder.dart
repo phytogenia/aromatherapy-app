@@ -1,7 +1,6 @@
 import 'package:aromatherapy/components/secondary_item_card.dart';
 import 'package:aromatherapy/components/secondary_item_cardRecipes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../models/oil/oil.dart';
 import '../models/recipe/recipe.dart';
@@ -42,7 +41,8 @@ class FutureBuilderSecond extends StatelessWidget {
                       return SecondaryItemCard(
                         text: oil.name,
                         subText: oil.sciName.toString(),
-                        imagePath: 'assets/images/whiteoil.png',
+                        iconColor: kSecondaryBackgroundColor,
+                        iconData: Icons.water_drop,
                         oil: oil,
                         backgroundColor: kPrimaryColor,
                       );
@@ -54,7 +54,8 @@ class FutureBuilderSecond extends StatelessWidget {
                       return SecondaryItemCardRecipes(
                         text: rec.name,
                         subText: rec.reference.toString(),
-                        imagePath: 'assets/images/recipe.png',
+                        iconData: Icons.soup_kitchen,
+                        iconColor: kSecondaryBackgroundColor,
                         recipe: rec,
                         backgroundColor: kSecondaryColor,
                       );
