@@ -1,6 +1,6 @@
 {
-    "name": "aromatherapy_vtest_app",
-    "short_name": "aromatherapy_vtest_app",
+    "name": "aromatherapy",
+    "short_name": "aromatherapy",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
