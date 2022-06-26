@@ -8,13 +8,15 @@ class PrimaryTopListItems extends StatelessWidget {
   const PrimaryTopListItems({
     Key? key,
     required this.list,
-    required this.imagePath,
+    required this.iconData,
+    required this.iconColor,
     required this.oil,
     this.backgroundColor = kPrimaryColor,
   }) : super(key: key);
 
   final List<dynamic> list;
-  final String imagePath;
+  final IconData iconData;
+  final Color iconColor;
   final Color backgroundColor;
   final Oil oil;
 
@@ -28,7 +30,8 @@ class PrimaryTopListItems extends StatelessWidget {
           return PrimaryTopItemCard(
             text: list[index],
             subText: '${list[index]} Scientific name',
-            imagePath: imagePath,
+            iconData: iconData,
+            iconColor: iconColor,
             oil: oil,
             backgroundColor: backgroundColor,
           );

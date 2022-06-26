@@ -27,11 +27,13 @@ class SecondaryListItems extends StatelessWidget {
       scrollDirection: Axis.vertical,
       itemBuilder: (context, index) {
         return SecondaryItemCard(
-            text: list[index],
-            subText: '${list[index]} Scientific name',
-            oil: oil,
-            imagePath: imagePath,
-            backgroundColor: kPrimaryColor);
+          text: oil.name,
+          subText: oil.sciName.toString(),
+          iconColor: kSecondaryBackgroundColor,
+          iconData: Icons.water_drop,
+          oil: oil,
+          backgroundColor: kPrimaryColor,
+        );
       },
     );
   }

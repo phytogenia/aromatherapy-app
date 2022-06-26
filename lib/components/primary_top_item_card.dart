@@ -10,14 +10,16 @@ class PrimaryTopItemCard extends StatelessWidget {
     Key? key,
     required this.text,
     required this.subText,
-    required this.imagePath,
+    required this.iconData,
+    required this.iconColor,
     required this.oil,
     this.backgroundColor = kPrimaryColor,
   }) : super(key: key);
 
   final String text;
   final String subText;
-  final String imagePath;
+  final IconData iconData;
+  final Color iconColor;
   final Color backgroundColor;
   final Oil oil;
 
@@ -60,10 +62,7 @@ class PrimaryTopItemCard extends StatelessWidget {
                 children: [
                   Container(),
                   // Empty Container to align the icon on the right with spacebetween
-                  Image.asset(
-                    imagePath,
-                    color: whitecolor,
-                  )
+                  Icon(iconData, size: 30, color: iconColor),
                 ],
               ),
               const SizedBox(

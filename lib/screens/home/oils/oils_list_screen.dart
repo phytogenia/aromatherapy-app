@@ -34,10 +34,9 @@ class _HomeOilState extends State<HomeOil> {
           });
         },
         backgroundColor: kPrimaryColor,
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Image.asset('assets/images/home.png',
-              color: kSecondaryBackgroundColor),
+        child: const Padding(
+          padding: EdgeInsets.all(15),
+          child: Icon(Icons.home_filled, color: kSecondaryBackgroundColor),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -230,7 +229,8 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
                           return SecondaryItemCard(
                             text: oil.name,
                             subText: oil.sciName.toString(),
-                            imagePath: 'assets/images/whiteoil.png',
+                            iconColor: kSecondaryBackgroundColor,
+                            iconData: Icons.water_drop,
                             oil: oil,
                             backgroundColor: kPrimaryColor,
                           );

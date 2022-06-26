@@ -34,10 +34,9 @@ class _HomeRecipesState extends State<HomeRecipes> {
           });
         },
         backgroundColor: kPrimaryColor,
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Image.asset('assets/images/home.png',
-              color: kSecondaryBackgroundColor),
+        child: const Padding(
+          padding: EdgeInsets.all(15),
+          child: Icon(Icons.home_filled, color: kSecondaryBackgroundColor),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -158,7 +157,10 @@ class _RecipesListScreenState extends State<RecipesListScreen> {
               children: [
                 Container(),
                 // Empty Container to align the icon on the right with spacebetween
-                Image.asset('assets/images/recipe.png')
+                const Icon(
+                  Icons.soup_kitchen,
+                  color: kSecondaryColor,
+                )
               ],
             ),
             const SizedBox(
@@ -253,7 +255,7 @@ class _PrimaryListRecipesState extends State<PrimaryListRecipes> {
                   future: recipes.orderBy("name").get(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
-                      return Text("Something went wrong");
+                      return const Text("Something went wrong");
                     }
 
                     if (snapshot.connectionState == ConnectionState.done) {
@@ -272,7 +274,8 @@ class _PrimaryListRecipesState extends State<PrimaryListRecipes> {
                           return SecondaryItemCardRecipes(
                             text: rec.name,
                             subText: rec.reference.toString(),
-                            imagePath: 'assets/images/recipe.png',
+                            iconData: Icons.soup_kitchen,
+                            iconColor: kSecondaryBackgroundColor,
                             recipe: rec,
                             backgroundColor: kSecondaryColor,
                           );

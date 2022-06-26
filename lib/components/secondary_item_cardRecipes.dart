@@ -10,14 +10,16 @@ class SecondaryItemCardRecipes extends StatelessWidget {
     Key? key,
     required this.text,
     required this.subText,
-    required this.imagePath,
+    required this.iconData,
+    required this.iconColor,
     required this.recipe,
     this.backgroundColor = kSecondaryColor,
   }) : super(key: key);
 
   final String text;
   final String subText;
-  final String imagePath;
+  final IconData iconData;
+  final Color iconColor;
   final Recipe recipe;
   final Color backgroundColor;
 
@@ -77,7 +79,7 @@ class SecondaryItemCardRecipes extends StatelessWidget {
                       subText,
                       style: const TextStyle(color: kPrimaryTextColor),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     )
                   ],
@@ -101,9 +103,9 @@ class SecondaryItemCardRecipes extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(
-                      imagePath,
-                      color: Colors.white,
+                    Icon(
+                      iconData,
+                      color: iconColor,
                     ),
                   ],
                 ),

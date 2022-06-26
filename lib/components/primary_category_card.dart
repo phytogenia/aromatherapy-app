@@ -9,12 +9,14 @@ class PrimaryCategoryCard extends StatelessWidget {
       {Key? key,
       required this.text,
       this.backgroundColor = kPrimaryColor,
-      required this.iconImagePath})
+      required this.iconData,
+      required this.iconColor})
       : super(key: key);
 
   final Color backgroundColor;
   final String text;
-  final String iconImagePath;
+  final IconData iconData;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +44,7 @@ class PrimaryCategoryCard extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset(
-                iconImagePath,
-                height: 30,
-                width: 30,
-              ),
+              Icon(iconData, size: 30, color: iconColor),
               const SizedBox(height: 5),
               Text(
                 text,
