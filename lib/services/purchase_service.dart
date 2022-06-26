@@ -6,7 +6,7 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 
 class PurchaseService {
   static Future init() async {
-    await Purchases.setDebugLogsEnabled(true);
+    await Purchases.setDebugLogsEnabled(false);
 
     if (Platform.isAndroid) {
       await Purchases.setup(revenuecatApiKey);
