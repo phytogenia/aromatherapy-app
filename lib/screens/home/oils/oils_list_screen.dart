@@ -99,7 +99,10 @@ class _OilListScreenState extends State<OilListScreen> {
           )),
         ),
         body: SingleChildScrollView(
-          reverse: true,
+          controller: ScrollController(
+            initialScrollOffset: 0.0,
+            keepScrollOffset: true,
+          ),
           child: Container(
             padding:
                 const EdgeInsets.only(top: 30, bottom: 10, right: 10, left: 10),
