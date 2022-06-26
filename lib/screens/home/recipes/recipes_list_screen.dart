@@ -22,7 +22,7 @@ class _HomeRecipesState extends State<HomeRecipes> {
     const RecipesListScreen(),
     const HomeScreen(),
   ];
-  int SelectedIndex = 2; //TODO :: enumeration
+  int SelectedIndex = 1; //TODO :: enumeration
 
   @override
   Widget build(BuildContext context) {
