@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:125064876870:android:65d0cda1eee31db3f38b47",
+        "mobilesdk_app_id": "1:125064876870:android:2dcc721db8a5557ff38b47",
         "android_client_info": {
           "package_name": "com.phytogenia.aromatherapy"
         }
       },
       "oauth_client": [
         {
-          "client_id": "125064876870-q6o4m7bimde17cc9amcnfkimf3gbcp9v.apps.googleusercontent.com",
+          "client_id": "125064876870-0r7b6flp9n80tnqmndr1poqs7mtsmpcc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.phytogenia.aromatherapy",
-            "certificate_hash": "56118aebfd4a6673e2ca61b8fdd25ced6d62b81a"
+            "certificate_hash": "85f98882d68623baa071422c6602f50c974ebb66"
           }
         },
         {
@@ -37,6 +37,13 @@
             {
               "client_id": "125064876870-36p1j7pee7qsu64hatdkek0fporgke2j.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "125064876870-6lrhi2npgpk5q0n4ampbes31lea5p8nb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "android"
+              }
             }
           ]
         }
@@ -46,7 +53,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:125064876870:android:d240d3dc00d2146cf38b47",
         "android_client_info": {
-          "package_name": "com.phytogenia.aromatherapy"
+          "package_name": "ga.youcefmegoura.aromatherapy_app"
         }
       },
       "oauth_client": [
@@ -54,7 +61,7 @@
           "client_id": "125064876870-cvhf2il8ebf2m1nalnle83nc0ekkamfn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.phytogenia.aromatherapy",
+            "package_name": "ga.youcefmegoura.aromatherapy_app",
             "certificate_hash": "56118aebfd4a6673e2ca61b8fdd25ced6d62b81a"
           }
         },
@@ -74,6 +81,13 @@
             {
               "client_id": "125064876870-36p1j7pee7qsu64hatdkek0fporgke2j.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "125064876870-6lrhi2npgpk5q0n4ampbes31lea5p8nb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "android"
+              }
             }
           ]
         }
