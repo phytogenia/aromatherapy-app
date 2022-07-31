@@ -46,7 +46,7 @@ class SecondaryItemCardRecipes extends StatelessWidget {
         }
       },
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Stack(clipBehavior: Clip.none, children: [
           Container(
             padding: const EdgeInsets.all(8),
@@ -71,6 +71,7 @@ class SecondaryItemCardRecipes extends StatelessWidget {
                       ),
                       Text(
                         text,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                             color: kPrimaryTextColor,
                             fontWeight: FontWeight.bold),
