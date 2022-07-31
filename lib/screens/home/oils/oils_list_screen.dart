@@ -206,7 +206,7 @@ class _PrimaryListOilsState extends State<PrimaryListOils> {
         ),
         const SizedBox(height: 20),
         SizedBox(
-          height: MediaQuery.of(context).size.height / 2.5,
+          height: MediaQuery.of(context).size.height / 2,
           child: _foundoils.isNotEmpty
               ? ListBuilder(list: _foundoils, type: 1)
               : FutureBuilder<QuerySnapshot>(

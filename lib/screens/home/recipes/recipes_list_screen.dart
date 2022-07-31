@@ -251,7 +251,7 @@ class _PrimaryListRecipesState extends State<PrimaryListRecipes> {
         ),
         const SizedBox(height: 20),
         SizedBox(
-          height: MediaQuery.of(context).size.height / 2.5,
+          height: MediaQuery.of(context).size.height / 2,
           child: _foundRecipes.isNotEmpty
               ? ListBuilder(list: _foundRecipes, type: 2)
               : FutureBuilder<QuerySnapshot>(
